@@ -4,43 +4,53 @@ public class PlayerController : MonoBehaviour
 {
     // 플레이어의 속도
     [SerializeField]
-    private float walkSpeed; // 걷기 속도
+    float walkSpeed; // 걷기 속도
     [SerializeField]
-    private float runSpeed; // 달리기 속도
-    private float applySpeed; // 적용 속도
+    float runSpeed; // 달리기 속도
+    float applySpeed; // 적용 속도
 
     // 플레이어의 점프 강도
     [SerializeField]
-    private float jumpForce;
+    float jumpForce;
 
     //플레이어의 체력
     [SerializeField]
-    private float hp; // 최대 체력
-    private float currentHp; // 현재 체력
+    float hp; // 최대 체력
+    float currentHp; // 현재 체력
 
     // 플레이어의 스테미나
     [SerializeField]
-    private float sp; // 최대 스테미나 (5일경우 5초동안 사용 가능)
-    private float currentSp; // 현재 스테미나
+    float sp; // 최대 스테미나 (5일경우 5초동안 사용 가능)
+    float currentSp; // 현재 스테미나
 
     // 스테미나 회복 쿨타임
     [SerializeField]
-    private float spCooldown;
-    private float currentSpCooldown;
+    float spCooldown;
+    float currentSpCooldown;
+
+    // 시야 관련 변수
+    [SerializeField]
+    float lookSensitivity; // 카메라 민감도
+    [SerializeField]
+    float cameraRotationLimit; // 카메라 상하 한계 각도
+    float currentCameraRotation = 0; // 현재 카메라 상하 각도
+
 
     // 상태 변수
-    private bool isGround = true; // 땅에 닿았는지 여부
-    private bool isRun = false; // 달리고 있는지 여부
-    private bool isSpUsed = false; // 스테미나 사용 여부
-    private bool isDead = false; // 플레이어 죽음 여부
+    bool isGround = true; // 땅에 닿았는지 여부
+    bool isRun = false; // 달리고 있는지 여부
+    bool isSpUsed = false; // 스테미나 사용 여부
+    bool isDead = false; // 플레이어 죽음 여부
 
     // 필요한 컴포넌트
     [SerializeField]
-    private Rigidbody playerRb;
+    Rigidbody playerRb;
     [SerializeField]
-    private Collider playerCol;
+    Collider playerCol;
+    [SerializeField]
+    Camera theCamera;
 
-    private void Start()
+    void Start()
     {
         applySpeed = walkSpeed;
         currentSp = sp;
@@ -55,6 +65,9 @@ public class PlayerController : MonoBehaviour
         SPRecover();
         CheckIsGround();
         isDead = CheckDead();
+
+        CameraRotation();
+        CharacterRotation();
     }
 
     // 점프 시도
@@ -151,6 +164,25 @@ public class PlayerController : MonoBehaviour
         if (hp > 0) // hp가 0 이상이면 (안 죽었으면)
             return false;
         return true;
+    }
+
+    // 상하 카메라 회전
+    void CameraRotation()
+    {
+        float rotation = Input.GetAxisRaw("Mouse Y") * lookSensitivity;
+        currentCameraRotation -= rotation;
+        currentCameraRotation = Mathf.Clamp(currentCameraRotation, -cameraRotationLimit, cameraRotationLimit);
+
+        theCamera.transform.localEulerAngles = new Vector3(currentCameraRotation, 0, 0);
+    }
+
+    // 좌우 캐릭터 회전
+    void CharacterRotation()
+    {
+        float rotation = Input.GetAxisRaw("Mouse X") * lookSensitivity;
+        Vector3 characterRotation = new Vector3(0, rotation, 0);
+
+        playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(characterRotation));
     }
 
     // 플레이어 정보 내보내는 메서드들
