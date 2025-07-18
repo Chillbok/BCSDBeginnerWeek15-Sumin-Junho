@@ -993,7 +993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpBar: {fileID: 284313899}
-  HpText: {fileID: 1978980141}
+  HpText: {fileID: 1978980143}
   SpBar: {fileID: 991891516}
   thePlayerController: {fileID: 1506438069}
 --- !u!1 &1506438064

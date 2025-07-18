@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class StatusBarController : MonoBehaviour
     [SerializeField]
     GameObject HpBar; //HP 바
     [SerializeField]
-    GameObject HpText; //HP 텍스트
+    TextMeshProUGUI HpText; //HP 텍스트
 
     //SP 관련 변수
     [SerializeField]
@@ -20,12 +21,16 @@ public class StatusBarController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UpdatePlayerStatus();
+    }
+
+    void UpdatePlayerStatus()
+    {
     }
 }
