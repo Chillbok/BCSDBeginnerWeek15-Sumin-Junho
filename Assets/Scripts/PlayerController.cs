@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
 
     //플레이어의 체력
     [SerializeField]
-    private int hp;
-    private int currentHp;
+    private float hp;
+    private float currentHp;
 
     // 플레이어의 스테미나
     [SerializeField]
@@ -155,12 +155,12 @@ public class PlayerController : MonoBehaviour
 
     //플레이어 정보 내보내는 메서드들
     #region GetMethods
-    public int GetPlayerCurrentHP()
+    public float GetPlayerCurrentHP()
     {
         return currentHp;
     }
 
-    public int GetPlayerHP()
+    public float GetPlayerHP()
     {
         return hp;
     }

@@ -19,8 +19,8 @@ public class StatusBarController : MonoBehaviour
     PlayerController thePlayerController; //PlayerController.cs 참조 변수
 
     //PlayerController에서 가져올 변수
-    private int currentHp;
-    private int hp;
+    private float currentHp;
+    private float hp;
     private float currentSp;
     private float sp;
 
