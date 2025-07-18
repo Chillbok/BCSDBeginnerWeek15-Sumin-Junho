@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     //플레이어의 체력
     [SerializeField]
     private int hp;
+    private int currentHp;
 
     // 플레이어의 스테미나
     [SerializeField]
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         applySpeed = walkSpeed;
         currentSp = sp;
+        currentHp = hp;
     }
 
     void Update()
