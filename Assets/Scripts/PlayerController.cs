@@ -152,4 +152,27 @@ public class PlayerController : MonoBehaviour
             return false;
         return true;
     }
+
+    //플레이어 정보 내보내는 메서드들
+    #region GetMethods
+    public int GetPlayerCurrentHP()
+    {
+        return currentHp;
+    }
+
+    public int GetPlayerHP()
+    {
+        return hp;
+    }
+
+    public float GetPlayerCurrentSP()
+    {
+        return currentSp;
+    }
+
+    public float GetPlayerSP()
+    {
+        return sp;
+    }
+    #endregion GetMethods
 }
