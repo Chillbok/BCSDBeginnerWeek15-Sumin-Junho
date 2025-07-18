@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool isGround = true;
     private bool isRun = false;
     private bool isSpUsed = false;
+    private bool isDead = false; //플레이어 죽음 여부
 
     // 필요한 컴포넌트
     [SerializeField]
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
         Move();
         SPRecover();
         CheckIsGround();
+        isDead = CheckDead();
     }
 
     // 점프 시도
@@ -138,5 +140,14 @@ public class PlayerController : MonoBehaviour
     private void CheckIsGround()
     {
         isGround = Physics.Raycast(transform.position, Vector3.down, playerCol.bounds.extents.y + 0.1f);
+    }
+
+    //플레이어의 사망 여부 출력하는 메서드
+    //hp가 0이 되면 true 반환
+    private bool CheckDead()
+    {
+        if (hp > 0) //hp가 0 이상이면 (안 죽었으면)
+            return false;
+        return true;
     }
 }
