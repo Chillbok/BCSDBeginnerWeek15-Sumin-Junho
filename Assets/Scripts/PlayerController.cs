@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce;
 
+    //플레이어의 체력
+    [SerializeField]
+    private int hp;
+
     // 플레이어의 스테미나
     [SerializeField]
     private float sp;

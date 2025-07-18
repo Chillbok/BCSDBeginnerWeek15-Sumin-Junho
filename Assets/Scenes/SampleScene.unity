@@ -741,10 +741,9 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 10
   jumpForce: 5
+  hp: 10
   sp: 5
-  currentSp: 0
   spCooldown: 3
-  currentSpCooldown: 0
   playerRb: {fileID: 1506438070}
   playerCol: {fileID: 1506438065}
 --- !u!54 &1506438070
