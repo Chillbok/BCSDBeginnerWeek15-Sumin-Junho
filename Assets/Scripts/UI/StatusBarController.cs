@@ -16,21 +16,35 @@ public class StatusBarController : MonoBehaviour
 
     //참조 변수
     [SerializeField]
-    PlayerController thePlayerController; //PlayerController.cs
+    PlayerController thePlayerController; //PlayerController.cs 참조 변수
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //PlayerController에서 가져올 변수
+    private int currentHp;
+    private int hp;
+    private float currentSp;
+    private float sp;
+
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        UpdatePlayerStatus();
+        UpdatePlayerStatus(); //플레이어 데이터 동기화
+        UpdateHpText(); //HP 텍스트 업데이트
     }
 
-    void UpdatePlayerStatus()
+    void UpdatePlayerStatus() //플레이어 데이터 가져오기(프레임마다 실행)
     {
+        currentHp = thePlayerController.GetPlayerCurrentHP();
+        hp = thePlayerController.GetPlayerHP();
+        currentSp = thePlayerController.GetPlayerCurrentSP();
+        sp = thePlayerController.GetPlayerSP();
+    }
+
+    void UpdateHpText()
+    {
+        HpText.text = $"{currentHp} / {hp}";
     }
 }
