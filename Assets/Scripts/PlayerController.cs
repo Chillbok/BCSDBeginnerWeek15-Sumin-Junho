@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         float moveDirX = Input.GetAxisRaw("Horizontal");
         float moveDirZ = Input.GetAxisRaw("Vertical");
 
-        Vector3 velocity = new Vector3(moveDirX, 0, moveDirZ).normalized * applySpeed;
+        Vector3 velocity = (transform.right * moveDirX + transform.forward * moveDirZ).normalized * applySpeed;
 
         playerRb.MovePosition(transform.position + velocity * Time.deltaTime);
     }
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
     // 스테미나 회복
     void SPRecover()
     {
-        if (!isRun) //
+        if (!isRun)
         {
             if (isSpUsed)
             {
