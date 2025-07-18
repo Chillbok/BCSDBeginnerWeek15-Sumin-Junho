@@ -4,10 +4,10 @@ public class PlayerController : MonoBehaviour
 {
     // 플레이어의 속도
     [SerializeField]
-    private float walkSpeed;
+    private float walkSpeed; // 걷기 속도
     [SerializeField]
-    private float runSpeed;
-    private float applySpeed;
+    private float runSpeed; // 달리기 속도
+    private float applySpeed; // 적용 속도
 
     // 플레이어의 점프 강도
     [SerializeField]
@@ -15,13 +15,13 @@ public class PlayerController : MonoBehaviour
 
     //플레이어의 체력
     [SerializeField]
-    private float hp;
-    private float currentHp;
+    private float hp; // 최대 체력
+    private float currentHp; // 현재 체력
 
     // 플레이어의 스테미나
     [SerializeField]
-    private float sp;
-    private float currentSp;
+    private float sp; // 최대 스테미나 (5일경우 5초동안 사용 가능)
+    private float currentSp; // 현재 스테미나
 
     // 스테미나 회복 쿨타임
     [SerializeField]
@@ -29,10 +29,10 @@ public class PlayerController : MonoBehaviour
     private float currentSpCooldown;
 
     // 상태 변수
-    private bool isGround = true;
-    private bool isRun = false;
-    private bool isSpUsed = false;
-    private bool isDead = false; //플레이어 죽음 여부
+    private bool isGround = true; // 땅에 닿았는지 여부
+    private bool isRun = false; // 달리고 있는지 여부
+    private bool isSpUsed = false; // 스테미나 사용 여부
+    private bool isDead = false; // 플레이어 죽음 여부
 
     // 필요한 컴포넌트
     [SerializeField]
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
     // 스테미나 회복
     private void SPRecover()
     {
-        if (!isRun)
+        if (!isRun) //
         {
             if (isSpUsed)
             {
@@ -144,16 +144,16 @@ public class PlayerController : MonoBehaviour
         isGround = Physics.Raycast(transform.position, Vector3.down, playerCol.bounds.extents.y + 0.1f);
     }
 
-    //플레이어의 사망 여부 출력하는 메서드
-    //hp가 0이 되면 true 반환
+    // 플레이어의 사망 여부 출력하는 메서드
+    // hp가 0이 되면 true 반환
     private bool CheckDead()
     {
-        if (hp > 0) //hp가 0 이상이면 (안 죽었으면)
+        if (hp > 0) // hp가 0 이상이면 (안 죽었으면)
             return false;
         return true;
     }
 
-    //플레이어 정보 내보내는 메서드들
+    // 플레이어 정보 내보내는 메서드들
     #region GetMethods
     public float GetPlayerCurrentHP()
     {

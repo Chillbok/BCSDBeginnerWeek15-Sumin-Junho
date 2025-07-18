@@ -4,30 +4,25 @@ using UnityEngine;
 
 public class StatusBarController : MonoBehaviour
 {
-    //HP 관련 변수
+    // HP 관련 변수
     [SerializeField]
-    GameObject HpBar; //HP 바
+    GameObject HpBar; // HP 바
     [SerializeField]
-    TextMeshProUGUI HpText; //HP 텍스트
+    TextMeshProUGUI HpText; // HP 텍스트
 
-    //SP 관련 변수
+    // SP 관련 변수
     [SerializeField]
     GameObject SpBar; //스태미나 바
 
-    //참조 변수
+    // 참조 변수
     [SerializeField]
     PlayerController thePlayerController; //PlayerController.cs 참조 변수
 
-    //PlayerController에서 가져올 변수
+    // PlayerController에서 가져올 변수
     private float currentHp;
     private float hp;
     private float currentSp;
     private float sp;
-
-    void Start()
-    {
-
-    }
 
     void Update()
     {
