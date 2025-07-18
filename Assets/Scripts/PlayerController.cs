@@ -13,8 +13,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce;
 
+    // 플레이어의 스테미나
+    [SerializeField]
+    private float sp;
+    private float currentSp;
+
+    // 스테미나 회복 쿨타임
+    [SerializeField]
+    private float spCooldown;
+    private float currentSpCooldown;
+
     // 상태 변수
     private bool isGround = true;
+    private bool isRun = false;
+    private bool isSpUsed = false;
 
     // 필요한 컴포넌트
     [SerializeField]
@@ -25,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         applySpeed = walkSpeed;
+        currentSp = sp;
     }
 
     void Update()
@@ -32,6 +45,7 @@ public class PlayerController : MonoBehaviour
         TryJump();
         TryRun();
         Move();
+        SPRecover();
         CheckIsGround();
     }
 
@@ -51,21 +65,25 @@ public class PlayerController : MonoBehaviour
     // 달리기 시도
     private void TryRun()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && currentSp > 0)
             Run();
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift) || currentSp <= 0)
             RunCancel();
     }
 
     // 달리기
     private void Run()
     {
+        isRun = true;
+        currentSp -= Time.deltaTime;
+
         applySpeed = runSpeed;
     }
 
     // 달리기 취소
     private void RunCancel()
     {
+        isRun = false;
         applySpeed = walkSpeed;
     }
 
@@ -78,6 +96,38 @@ public class PlayerController : MonoBehaviour
         Vector3 velocity = new Vector3(moveDirX, 0, moveDirZ).normalized * applySpeed;
 
         playerRb.MovePosition(transform.position + velocity * Time.deltaTime);
+    }
+
+    // 스테미나 회복
+    private void SPRecover()
+    {
+        if (!isRun)
+        {
+            if (isSpUsed)
+            {
+                if (currentSpCooldown < spCooldown)
+                {
+                    currentSpCooldown += Time.deltaTime;
+                }
+                else
+                {
+                    isSpUsed = false;
+                    currentSpCooldown = 0;
+                }
+            }
+            else if (!isSpUsed)
+            {
+                if (currentSp < sp)
+                    currentSp += Time.deltaTime;
+                else
+                    currentSp = sp;
+            }
+        }
+        else
+        {
+            isSpUsed = true;
+            currentSpCooldown = 0;
+        }
     }
 
     // 플레이어가 땅에 닿아있는지에 대한 여부 판별
