@@ -58,20 +58,20 @@ public class PlayerController : MonoBehaviour
     }
 
     // 점프 시도
-    private void TryJump()
+    void TryJump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
             Jump();
     }
 
     // 점프
-    private void Jump()
+    void Jump()
     {
         playerRb.linearVelocity = transform.up * jumpForce;
     }
 
     // 달리기 시도
-    private void TryRun()
+    void TryRun()
     {
         if (Input.GetKey(KeyCode.LeftShift) && currentSp > 0)
             Run();
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // 달리기
-    private void Run()
+    void Run()
     {
         isRun = true;
         currentSp -= Time.deltaTime;
@@ -89,14 +89,14 @@ public class PlayerController : MonoBehaviour
     }
 
     // 달리기 취소
-    private void RunCancel()
+    void RunCancel()
     {
         isRun = false;
         applySpeed = walkSpeed;
     }
 
     // 움직임
-    private void Move()
+    void Move()
     {
         float moveDirX = Input.GetAxisRaw("Horizontal");
         float moveDirZ = Input.GetAxisRaw("Vertical");
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // 스테미나 회복
-    private void SPRecover()
+    void SPRecover()
     {
         if (!isRun) //
         {
@@ -139,14 +139,14 @@ public class PlayerController : MonoBehaviour
     }
 
     // 플레이어가 땅에 닿아있는지에 대한 여부 판별
-    private void CheckIsGround()
+    void CheckIsGround()
     {
         isGround = Physics.Raycast(transform.position, Vector3.down, playerCol.bounds.extents.y + 0.1f);
     }
 
     // 플레이어의 사망 여부 출력하는 메서드
     // hp가 0이 되면 true 반환
-    private bool CheckDead()
+    bool CheckDead()
     {
         if (hp > 0) // hp가 0 이상이면 (안 죽었으면)
             return false;

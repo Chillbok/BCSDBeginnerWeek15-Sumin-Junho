@@ -992,9 +992,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fcc348e797ed34bbc7d94d0673db2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpBar: {fileID: 284313899}
+  HpBar: {fileID: 284313901}
   HpText: {fileID: 1978980143}
-  SpBar: {fileID: 991891516}
+  SpBar: {fileID: 991891518}
   thePlayerController: {fileID: 1506438069}
 --- !u!1 &1506438064
 GameObject:
