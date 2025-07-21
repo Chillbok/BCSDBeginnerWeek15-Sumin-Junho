@@ -150,5 +150,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 10
-  spread: 0.7
+  spread: 0.5
   theCamera: {fileID: 0}

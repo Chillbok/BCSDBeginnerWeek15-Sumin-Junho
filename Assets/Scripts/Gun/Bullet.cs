@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        Vector3 shotSpread = new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), 0);
+        Vector3 shotSpread = Random.insideUnitSphere * spread;
 
         bulletRb.AddForce((theCamera.gameObject.transform.forward * range) + shotSpread, ForceMode.Impulse);
         Destroy(gameObject, 2);
