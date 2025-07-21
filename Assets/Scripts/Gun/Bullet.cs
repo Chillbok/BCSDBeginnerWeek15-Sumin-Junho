@@ -5,6 +5,9 @@ public class Bullet : MonoBehaviour
     // ÃÑ¾Ë ¹ß»ç °Å¸®
     [SerializeField]
     float range;
+    // ÃÑ¾Ë »êÅº ¿ÀÂ÷
+    [SerializeField]
+    float spread;
 
     // ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
     Rigidbody bulletRb;
@@ -19,7 +22,9 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        bulletRb.AddForce(theCamera.gameObject.transform.forward * range, ForceMode.Impulse);
+        Vector3 shotSpread = new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), 0);
+
+        bulletRb.AddForce((theCamera.gameObject.transform.forward * range) + shotSpread, ForceMode.Impulse);
         Destroy(gameObject, 2);
     }
 }
