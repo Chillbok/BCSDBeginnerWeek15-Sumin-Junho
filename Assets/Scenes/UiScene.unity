@@ -2132,6 +2132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2057450408}
+  - component: {fileID: 2057450409}
   m_Layer: 5
   m_Name: GunStatus
   m_TagString: Untagged
@@ -2162,6 +2163,20 @@ RectTransform:
   m_AnchoredPosition: {x: 10, y: 10}
   m_SizeDelta: {x: 107, y: 36}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2057450409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057450407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717f69cd1ab426c4bacb05027407b4d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentBulletUI: {fileID: 146749150}
+  leftBulletUI: {fileID: 480155590}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
