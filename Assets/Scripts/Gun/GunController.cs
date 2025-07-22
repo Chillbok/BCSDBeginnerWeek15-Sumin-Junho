@@ -3,17 +3,12 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    // 총알 갯수
-    [SerializeField]
-    private int bulletCount; // 가지고 있는 총알 갯수
-    [SerializeField]
-    private int maxBulletCount; // 탄창에 넣을 수 있는 최대 총알 갯수
-    public int currentBulletCount; // 탄창에 있는 총알 갯수
-
     // 상태 변수
-    public bool isReload = false; // 재장전 여부
+    public static bool isReload = false; // 재장전 여부
 
     // 필요한 컴포넌트
+    [SerializeField]
+    private Gun gun;
     [SerializeField]
     private GameObject Bullet;
 
@@ -22,7 +17,7 @@ public class GunController : MonoBehaviour
     {
         if (!isReload)
         {
-            if (currentBulletCount > 0)
+            if (gun.currentBulletCount > 0)
                 Shoot();
             else
                 StartCoroutine(Reload());
@@ -37,29 +32,29 @@ public class GunController : MonoBehaviour
             Instantiate(Bullet, transform.position + Vector3.up * 0.5f, Quaternion.Euler(transform.forward));
         }
 
-        currentBulletCount--;
+        gun.currentBulletCount--;
     }
 
     // 재장전
      public IEnumerator Reload()
     {
-        if (bulletCount > 0)
+        if (gun.bulletCount > 0)
         {
             isReload = true;
 
-            int needBulletCount = maxBulletCount - currentBulletCount;
+            int needBulletCount = gun.maxBulletCount - gun.currentBulletCount;
 
             yield return new WaitForSeconds(1.5f);
 
-            if (bulletCount >= needBulletCount)
+            if (gun.bulletCount >= needBulletCount)
             {
-                currentBulletCount = maxBulletCount;
-                bulletCount -= needBulletCount;
+                gun.currentBulletCount = gun.maxBulletCount;
+                gun.bulletCount -= needBulletCount;
             }
             else
             {
-                currentBulletCount += bulletCount;
-                bulletCount = 0;
+                gun.currentBulletCount += gun.bulletCount;
+                gun.bulletCount = 0;
             }
 
             isReload = false;

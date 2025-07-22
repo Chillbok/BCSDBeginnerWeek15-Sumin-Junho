@@ -119,14 +119,14 @@ public class PlayerController : MonoBehaviour
     // 발사 시도
     void TryFire()
     {
-        if (Input.GetMouseButtonDown(0) && !theGunController.isReload)
+        if (Input.GetMouseButtonDown(0) && !GunController.isReload)
             theGunController.Fire();
     }
 
     // 재장전 시도
     void TryReload()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && !GunController.isReload)
             StartCoroutine(theGunController.Reload());
     }
 
