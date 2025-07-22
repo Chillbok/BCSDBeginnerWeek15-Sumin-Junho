@@ -38,7 +38,7 @@ public class GunController : MonoBehaviour
     // ÀçÀåÀü
      public IEnumerator Reload()
     {
-        if (gun.bulletCount > 0)
+        if (gun.bulletCount > 0 && gun.currentBulletCount != gun.maxBulletCount)
         {
             isReload = true;
 
