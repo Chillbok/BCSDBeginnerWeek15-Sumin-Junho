@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
         TryJump();
         TryRun();
         TryAttack();
+        TryReload();
         Move();
         SPRecover();
         CheckIsGround();
@@ -118,11 +119,20 @@ public class PlayerController : MonoBehaviour
     // 공격 시도
     void TryAttack()
     {
-        if (theGunController.bulletCount > 0)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (theGunController.currentBulletCount > 0)
                 theGunController.Attack();
+            else
+                theGunController.Reload();
         }
+    }
+
+    // 재장전 시도
+    void TryReload()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            theGunController.Reload();
     }
 
     // 움직임

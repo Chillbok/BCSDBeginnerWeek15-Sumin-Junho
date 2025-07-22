@@ -646,7 +646,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0687f0b18e83e8a4d85c3cf8feaa433f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletCount: 15
+  bulletCount: 10
+  maxBulletCount: 5
+  currentBulletCount: 5
   Bullet: {fileID: 7395056369457146468, guid: 93eb0d5eca9f95445a0657c82d0a625d, type: 3}
 --- !u!4 &603735307
 Transform:

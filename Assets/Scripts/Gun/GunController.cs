@@ -3,12 +3,15 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     // ÃÑ¾Ë °¹¼ö
-    public int bulletCount;
+    [SerializeField]
+    private int bulletCount; // °¡Áö°í ÀÖ´Â ÃÑ¾Ë °¹¼ö
+    [SerializeField]
+    private int maxBulletCount; // ÅºÃ¢¿¡ ³ÖÀ» ¼ö ÀÖ´Â ÃÖ´ë ÃÑ¾Ë °¹¼ö
+    public int currentBulletCount; // ÅºÃ¢¿¡ ÀÖ´Â ÃÑ¾Ë °¹¼ö
 
     // ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
     [SerializeField]
     private GameObject Bullet;
-
 
     // °ø°Ý
     public void Attack()
@@ -18,6 +21,23 @@ public class GunController : MonoBehaviour
             Instantiate(Bullet, transform.position + Vector3.up * 0.5f, Quaternion.Euler(transform.forward));
         }
 
-        bulletCount--;
+        currentBulletCount--;
+    }
+
+    // ÀçÀåÀü
+    public void Reload()
+    {
+        int needBulletCount = maxBulletCount - currentBulletCount;
+
+        if (bulletCount >= needBulletCount)
+        {
+            currentBulletCount = maxBulletCount;
+            bulletCount -= needBulletCount;
+        }
+        else
+        {
+            currentBulletCount += bulletCount;
+            bulletCount = 0;
+        }
     }
 }
