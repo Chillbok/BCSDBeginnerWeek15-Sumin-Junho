@@ -650,6 +650,7 @@ MonoBehaviour:
   maxBulletCount: 5
   currentBulletCount: 5
   Bullet: {fileID: 7395056369457146468, guid: 93eb0d5eca9f95445a0657c82d0a625d, type: 3}
+  GunModel: {fileID: 157570422}
 --- !u!4 &603735307
 Transform:
   m_ObjectHideFlags: 0

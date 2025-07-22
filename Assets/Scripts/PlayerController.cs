@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         TryJump();
         TryRun();
-        TryAttack();
+        TryFire();
         TryReload();
         Move();
         SPRecover();
@@ -116,23 +116,18 @@ public class PlayerController : MonoBehaviour
         applySpeed = walkSpeed;
     }
 
-    // 공격 시도
-    void TryAttack()
+    // 발사 시도
+    void TryFire()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (theGunController.currentBulletCount > 0)
-                theGunController.Attack();
-            else
-                theGunController.Reload();
-        }
+        if (Input.GetMouseButtonDown(0) && !theGunController.isReload)
+            theGunController.Fire();
     }
 
     // 재장전 시도
     void TryReload()
     {
         if (Input.GetKeyDown(KeyCode.R))
-            theGunController.Reload();
+            StartCoroutine(theGunController.Reload());
     }
 
     // 움직임

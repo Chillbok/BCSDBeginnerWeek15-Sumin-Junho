@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GunController : MonoBehaviour
@@ -9,12 +10,27 @@ public class GunController : MonoBehaviour
     private int maxBulletCount; // 탄창에 넣을 수 있는 최대 총알 갯수
     public int currentBulletCount; // 탄창에 있는 총알 갯수
 
+    // 상태 변수
+    public bool isReload = false; // 재장전 여부
+
     // 필요한 컴포넌트
     [SerializeField]
     private GameObject Bullet;
 
-    // 공격
-    public void Attack()
+    // 발사 준비
+    public void Fire()
+    {
+        if (!isReload)
+        {
+            if (currentBulletCount > 0)
+                Shoot();
+            else
+                StartCoroutine(Reload());
+        }
+    }
+
+    // 발사
+    private void Shoot()
     {
         for (int i = 0; i < 8; i++)
         {
@@ -25,19 +41,28 @@ public class GunController : MonoBehaviour
     }
 
     // 재장전
-    public void Reload()
+     public IEnumerator Reload()
     {
-        int needBulletCount = maxBulletCount - currentBulletCount;
+        if (bulletCount > 0)
+        {
+            isReload = true;
 
-        if (bulletCount >= needBulletCount)
-        {
-            currentBulletCount = maxBulletCount;
-            bulletCount -= needBulletCount;
-        }
-        else
-        {
-            currentBulletCount += bulletCount;
-            bulletCount = 0;
+            int needBulletCount = maxBulletCount - currentBulletCount;
+
+            yield return new WaitForSeconds(1.5f);
+
+            if (bulletCount >= needBulletCount)
+            {
+                currentBulletCount = maxBulletCount;
+                bulletCount -= needBulletCount;
+            }
+            else
+            {
+                currentBulletCount += bulletCount;
+                bulletCount = 0;
+            }
+
+            isReload = false;
         }
     }
 }
