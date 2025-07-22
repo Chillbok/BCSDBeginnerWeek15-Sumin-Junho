@@ -118,8 +118,11 @@ public class PlayerController : MonoBehaviour
     // 공격 시도
     void TryAttack()
     {
-        if (Input.GetMouseButtonDown(0))
-            theGunController.Attack();
+        if (theGunController.bulletCount > 0)
+        {
+            if (Input.GetMouseButtonDown(0))
+                theGunController.Attack();
+        }
     }
 
     // 움직임
