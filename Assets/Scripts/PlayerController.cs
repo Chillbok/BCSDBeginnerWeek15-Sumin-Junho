@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Camera theCamera;
 
+    // 참조 변수
+    [SerializeField]
+    GunController theGunController;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -63,6 +67,8 @@ public class PlayerController : MonoBehaviour
     {
         TryJump();
         TryRun();
+        TryFire();
+        TryReload();
         Move();
         SPRecover();
         CheckIsGround();
@@ -108,6 +114,20 @@ public class PlayerController : MonoBehaviour
     {
         isRun = false;
         applySpeed = walkSpeed;
+    }
+
+    // 발사 시도
+    void TryFire()
+    {
+        if (Input.GetMouseButtonDown(0) && !GunController.isReload)
+            theGunController.Fire();
+    }
+
+    // 재장전 시도
+    void TryReload()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && !GunController.isReload)
+            StartCoroutine(theGunController.Reload());
     }
 
     // 움직임
