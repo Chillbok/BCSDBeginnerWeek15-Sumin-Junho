@@ -2,47 +2,47 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	// ÇÃ·¹ÀÌ¾îÀÇ ¼Óµµ
+	// í”Œë ˆì´ì–´ì˜ ì†ë„
 	[SerializeField]
-	float walkSpeed; // °È±â ¼Óµµ
+	float walkSpeed; // ê±·ê¸° ì†ë„
 	[SerializeField]
-	float runSpeed; // ´Ş¸®±â ¼Óµµ
-	float applySpeed; // Àû¿ë ¼Óµµ
+	float runSpeed; // ë‹¬ë¦¬ê¸° ì†ë„
+	float applySpeed; // ì ìš© ì†ë„
 
-	// ÇÃ·¹ÀÌ¾îÀÇ Á¡ÇÁ °­µµ
+	// í”Œë ˆì´ì–´ì˜ ì í”„ ê°•ë„
 	[SerializeField]
 	float jumpForce;
 
-	//ÇÃ·¹ÀÌ¾îÀÇ Ã¼·Â
+	//í”Œë ˆì´ì–´ì˜ ì²´ë ¥
 	[SerializeField]
-	float hp; // ÃÖ´ë Ã¼·Â
-	float currentHp; // ÇöÀç Ã¼·Â
+	float hp; // ìµœëŒ€ ì²´ë ¥
+	float currentHp; // í˜„ì¬ ì²´ë ¥
 
-	// ÇÃ·¹ÀÌ¾îÀÇ ½ºÅ×¹Ì³ª
+	// í”Œë ˆì´ì–´ì˜ ìŠ¤í…Œë¯¸ë‚˜
 	[SerializeField]
-	float sp; // ÃÖ´ë ½ºÅ×¹Ì³ª (5ÀÏ°æ¿ì 5ÃÊµ¿¾È »ç¿ë °¡´É)
-	float currentSp; // ÇöÀç ½ºÅ×¹Ì³ª
+	float sp; // ìµœëŒ€ ìŠ¤í…Œë¯¸ë‚˜ (5ì¼ê²½ìš° 5ì´ˆë™ì•ˆ ì‚¬ìš© ê°€ëŠ¥)
+	float currentSp; // í˜„ì¬ ìŠ¤í…Œë¯¸ë‚˜
 
-	// ½ºÅ×¹Ì³ª È¸º¹ ÄğÅ¸ÀÓ
+	// ìŠ¤í…Œë¯¸ë‚˜ íšŒë³µ ì¿¨íƒ€ì„
 	[SerializeField]
 	float spCooldown;
 	float currentSpCooldown;
 
-	// ½Ã¾ß °ü·Ã º¯¼ö
+	// ì‹œì•¼ ê´€ë ¨ ë³€ìˆ˜
 	[SerializeField]
-	float lookSensitivity; // Ä«¸Ş¶ó ¹Î°¨µµ
+	float lookSensitivity; // ì¹´ë©”ë¼ ë¯¼ê°ë„
 	[SerializeField]
-	float cameraRotationLimit; // Ä«¸Ş¶ó »óÇÏ ÇÑ°è °¢µµ
-	float currentCameraRotation = 0; // ÇöÀç Ä«¸Ş¶ó »óÇÏ °¢µµ
+	float cameraRotationLimit; // ì¹´ë©”ë¼ ìƒí•˜ í•œê³„ ê°ë„
+	float currentCameraRotation = 0; // í˜„ì¬ ì¹´ë©”ë¼ ìƒí•˜ ê°ë„
 
 
-	// »óÅÂ º¯¼ö
-	bool isGround = true; // ¶¥¿¡ ´ê¾Ò´ÂÁö ¿©ºÎ
-	bool isRun = false; // ´Ş¸®°í ÀÖ´ÂÁö ¿©ºÎ
-	bool isSpUsed = false; // ½ºÅ×¹Ì³ª »ç¿ë ¿©ºÎ
-	bool isDead = false; // ÇÃ·¹ÀÌ¾î Á×À½ ¿©ºÎ
+	// ìƒíƒœ ë³€ìˆ˜
+	bool isGround = true; // ë•…ì— ë‹¿ì•˜ëŠ”ì§€ ì—¬ë¶€
+	bool isRun = false; // ë‹¬ë¦¬ê³  ìˆëŠ”ì§€ ì—¬ë¶€
+	bool isSpUsed = false; // ìŠ¤í…Œë¯¸ë‚˜ ì‚¬ìš© ì—¬ë¶€
+	bool isDead = false; // í”Œë ˆì´ì–´ ì£½ìŒ ì—¬ë¶€
 
-	// ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+	// í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸
 	[SerializeField]
 	Rigidbody playerRb;
 	[SerializeField]
@@ -72,20 +72,20 @@ public class PlayerController : MonoBehaviour
 		CharacterRotation();
 	}
 
-	// Á¡ÇÁ ½Ãµµ
+	// ì í”„ ì‹œë„
 	void TryJump()
 	{
 		if (Input.GetKeyDown(KeyCode.Space) && isGround)
 			Jump();
 	}
 
-	// Á¡ÇÁ
+	// ì í”„
 	void Jump()
 	{
 		playerRb.linearVelocity = transform.up * jumpForce;
 	}
 
-	// ´Ş¸®±â ½Ãµµ
+	// ë‹¬ë¦¬ê¸° ì‹œë„
 	void TryRun()
 	{
 		if (Input.GetKey(KeyCode.LeftShift) && currentSp > 0)
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
 			RunCancel();
 	}
 
-	// ´Ş¸®±â
+	// ë‹¬ë¦¬ê¸°
 	void Run()
 	{
 		isRun = true;
@@ -103,14 +103,14 @@ public class PlayerController : MonoBehaviour
 		applySpeed = runSpeed;
 	}
 
-	// ´Ş¸®±â Ãë¼Ò
+	// ë‹¬ë¦¬ê¸° ì·¨ì†Œ
 	void RunCancel()
 	{
 		isRun = false;
 		applySpeed = walkSpeed;
 	}
 
-	// ¿òÁ÷ÀÓ
+	// ì›€ì§ì„
 	void Move()
 	{
 		float moveDirX = Input.GetAxisRaw("Horizontal");
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
 		playerRb.MovePosition(transform.position + velocity * Time.deltaTime);
 	}
 
-	// ½ºÅ×¹Ì³ª È¸º¹
+	// ìŠ¤í…Œë¯¸ë‚˜ íšŒë³µ
 	void SPRecover()
 	{
 		if (!isRun)
@@ -153,22 +153,22 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	// ÇÃ·¹ÀÌ¾î°¡ ¶¥¿¡ ´ê¾ÆÀÖ´ÂÁö¿¡ ´ëÇÑ ¿©ºÎ ÆÇº°
+	// í”Œë ˆì´ì–´ê°€ ë•…ì— ë‹¿ì•„ìˆëŠ”ì§€ì— ëŒ€í•œ ì—¬ë¶€ íŒë³„
 	void CheckIsGround()
 	{
 		isGround = Physics.Raycast(transform.position, Vector3.down, playerCol.bounds.extents.y + 0.1f);
 	}
 
-	// ÇÃ·¹ÀÌ¾îÀÇ »ç¸Á ¿©ºÎ Ãâ·ÂÇÏ´Â ¸Ş¼­µå
-	// hp°¡ 0ÀÌ µÇ¸é true ¹İÈ¯
+	// í”Œë ˆì´ì–´ì˜ ì‚¬ë§ ì—¬ë¶€ ì¶œë ¥í•˜ëŠ” ë©”ì„œë“œ
+	// hpê°€ 0ì´ ë˜ë©´ true ë°˜í™˜
 	bool CheckDead()
 	{
-		if (hp > 0) // hp°¡ 0 ÀÌ»óÀÌ¸é (¾È Á×¾úÀ¸¸é)
+		if (hp > 0) // hpê°€ 0 ì´ìƒì´ë©´ (ì•ˆ ì£½ì—ˆìœ¼ë©´)
 			return false;
 		return true;
 	}
 
-	// »óÇÏ Ä«¸Ş¶ó È¸Àü
+	// ìƒí•˜ ì¹´ë©”ë¼ íšŒì „
 	void CameraRotation()
 	{
 		float rotation = Input.GetAxisRaw("Mouse Y") * lookSensitivity;
@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
 		theCamera.transform.localEulerAngles = new Vector3(currentCameraRotation, 0, 0);
 	}
 
-	// ÁÂ¿ì Ä³¸¯ÅÍ È¸Àü
+	// ì¢Œìš° ìºë¦­í„° íšŒì „
 	void CharacterRotation()
 	{
 		float rotation = Input.GetAxisRaw("Mouse X") * lookSensitivity;
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
 		playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(characterRotation));
 	}
 
-	// ÇÃ·¹ÀÌ¾î Á¤º¸ ³»º¸³»´Â ¸Ş¼­µåµé
+	// í”Œë ˆì´ì–´ ì •ë³´ ë‚´ë³´ë‚´ëŠ” ë©”ì„œë“œë“¤
 	#region GetMethods
 	public float GetPlayerCurrentHP()
 	{
