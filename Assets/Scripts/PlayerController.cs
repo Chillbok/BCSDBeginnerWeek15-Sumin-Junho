@@ -3,20 +3,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // 플레이어의 속도
-    [SerializeField]
-    float walkSpeed; // 걷기 속도
-    [SerializeField]
-    float runSpeed; // 달리기 속도
-    float applySpeed; // 적용 속도
+    public float walkSpeed; // 걷기 속도
+    public float runSpeed; // 달리기 속도
+    public float applySpeed; // 적용 속도
 
     // 플레이어의 점프 강도
-    [SerializeField]
-    float jumpForce;
+    public float jumpForce;
 
     //플레이어의 체력
     [SerializeField]
     float hp; // 최대 체력
-    float currentHp; // 현재 체력
+    public float currentHp; // 현재 체력
 
     // 플레이어의 스테미나
     [SerializeField]
