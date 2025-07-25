@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Border : MonoBehaviour
@@ -18,11 +19,13 @@ public class Border : MonoBehaviour
 	}
 
 	// 플랫폼과 충돌 시
-    private void OnTriggerEnter(Collider other)
+    private IEnumerator OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ground"))
         {
 			GameObject flatform = other.gameObject;
+
+			yield return new WaitForSeconds(Random.Range(0.1f, 1.0f));
 
 			other.GetComponent<Rigidbody>().useGravity = true;
 			other.GetComponent<Rigidbody>().isKinematic = false;
