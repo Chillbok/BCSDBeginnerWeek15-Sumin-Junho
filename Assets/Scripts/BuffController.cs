@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public enum BuffType
@@ -10,26 +11,31 @@ public enum BuffType
 public class BuffController : MonoBehaviour
 {
     public BuffType buffType; //열거형 변수 선언
-    public float duration; //버프 지속시간
+    [SerializeField]
+    public float buffDuration; //버프 지속시간
+
+    //참조변수
+    [SerializeField]
+    private PlayerController thePlayerController;
+
 
     void Start()
     {
 
     }
 
-    void ApplyBuffEffect()
+    private void private void OnTriggerEnter(Collider other) {
     {
-        switch (buffType)
+        if (other.CompareTag("Player")) //만약 부딪힌 객체의 태그가 Player라면
         {
-            case BuffType.AddSpeed: //플레이어의 속도를 증가시키는 코드
-                Debug.Log("속도 증가 버프 적용!");
-                break;
-            case BuffType.SuperJump: //플레이어의 점프력을 높이는 코드
-                Debug.Log("점프 높이 증가 버프 적용!");
-                break;
-            case BuffType.HealthRegen: //플레이어의 체력을 회복시키는 코드
-                Debug.Log("체력 회복 버프적용!");
-                break;
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                //PlayerController에 있는 ApplyBuff 메서드 호출해 버프 종류, 지속시간, 강도 전달
+                player.ApplyBuff(this.buffType, this.buffDuration, 1.5f); //1.5f는 예시 비율
+            }
+
+            gameObject.SetActive(false); //버프 활성화 패널 비활성화
         }
     }
 }

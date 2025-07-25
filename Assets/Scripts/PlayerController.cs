@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,7 +9,8 @@ public class PlayerController : MonoBehaviour
     public float applySpeed; // 적용 속도
 
     // 플레이어의 점프 강도
-    public float jumpForce;
+    public float jumpForce; //기본 점프 강도
+    public float applyJumpForce; //적용할 점프 강도
 
     //플레이어의 체력
     [SerializeField]
@@ -46,6 +48,9 @@ public class PlayerController : MonoBehaviour
     Collider playerCol;
     [SerializeField]
     Camera theCamera;
+    
+    //버프 보관용 딕셔너리
+    private Dictionary<BuffType, Coroutine> activeBuffs = new Dictionary<BuffType, Coroutine>();
 
     void Start()
     {
@@ -67,6 +72,37 @@ public class PlayerController : MonoBehaviour
 
         CameraRotation();
         CharacterRotation();
+    }
+
+    //새로운 버프 적용하는 메서드
+    //목표: 새로운 버프 적용하고, 만약 이미 같은 버프 있으면 기존 것 중지시키고 새로 시작해 시간 갱신
+    public void ApplyBuff(BuffType buffType, float buffDuration, float multiplier)
+    {
+        if (activeBuffs.ContainsKey(buffType)) //만약 같은 종류의 버프가 이미 활성화되었다면
+        {
+            //기존 버프의 코루틴 멈추기
+            StopCoroutine(activeBuffs[buffType]);
+        }
+        
+        //새로운 버프 효과를 적용하고 지속시간을 관리할 코루틴 시작
+        Coroutine buffCoroutine = StartCoroutine(BuffCoroutine(buffType, buffDuration, multiplier));
+        //딕셔너리에 새로운 코루틴 저장(또는 갱신)
+        activeBuffs[buffType] = buffCoroutine;
+    }
+
+    private IEnumerator BuffCoroutine(BuffType buffType, float buffDuration, float multiplier)
+    {
+        //버프 효과 적용
+        Debug.Log($"{buffType} 버프 적용 시작! 지속 시간: {buffDuration}초");
+
+        //지정한 시간만큼 대기
+        yield return new WaitForSeconds(buffDuration);
+
+        //버프 효과 제거
+        Debug.Log($"{buffType} 버프 종료!");
+
+        //딕셔너리에서 해당 버프 정보 제거
+        activeBuffs.Remove(buffType);
     }
 
     // 점프 시도
