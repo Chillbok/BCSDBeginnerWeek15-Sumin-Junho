@@ -22,10 +22,12 @@ public class Border : MonoBehaviour
     {
         if (other.CompareTag("Ground"))
         {
+			GameObject flatform = other.gameObject;
+
 			other.GetComponent<Rigidbody>().useGravity = true;
 			other.GetComponent<Rigidbody>().isKinematic = false;
 
-			Destroy(other, 2f);
+			Destroy(flatform, 2f);
         }
     }
 }
