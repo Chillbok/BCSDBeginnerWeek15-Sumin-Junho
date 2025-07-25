@@ -1,47 +1,55 @@
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // ÇÃ·¹ÀÌ¾îÀÇ ¼Óµµ
-    public float walkSpeed; // °È±â ¼Óµµ
-    public float runSpeed; // ´Ş¸®±â ¼Óµµ
-    public float applySpeed; // Àû¿ë ¼Óµµ
-
-    // ÇÃ·¹ÀÌ¾îÀÇ Á¡ÇÁ °­µµ
-    public float jumpForce; //±âº» Á¡ÇÁ °­µµ
-    public float applyJumpForce; //Àû¿ëÇÒ Á¡ÇÁ °­µµ
-
-    //ÇÃ·¹ÀÌ¾îÀÇ Ã¼·Â
+    // í”Œë ˆì´ì–´ì˜ ì†ë„
     [SerializeField]
-    float hp; // ÃÖ´ë Ã¼·Â
-    public float currentHp; // ÇöÀç Ã¼·Â
-
-    // ÇÃ·¹ÀÌ¾îÀÇ ½ºÅ×¹Ì³ª
+    private float walkSpeed; // ê¸°ë³¸ ê±·ê¸° ì†ë„
     [SerializeField]
-    float sp; // ÃÖ´ë ½ºÅ×¹Ì³ª (5ÀÏ°æ¿ì 5ÃÊµ¿¾È »ç¿ë °¡´É)
-    float currentSp; // ÇöÀç ½ºÅ×¹Ì³ª
+    private float runSpeed; // ê¸°ë³¸ ë‹¬ë¦¬ê¸° ì†ë„
+    private float appliedWalkSpeed; //ì ìš©ëœ ê±·ê¸° ì†ë„
+    private float appliedRunSpeed; //ì ìš©ëœ ë‹¬ë¦¬ê¸° ì†ë„
+    [SerializeField]
+    private float currentSpeed; //ì ìš©í•  ì†ë„
 
-    // ½ºÅ×¹Ì³ª È¸º¹ ÄğÅ¸ÀÓ
+    // í”Œë ˆì´ì–´ì˜ ì í”„ ê°•ë„
+    [SerializeField]
+    private float jumpForce; //ê¸°ë³¸ ì í”„ ê°•ë„
+    private float appliedJumpForce; //ì ìš©í•  ì í”„ ê°•ë„
+
+    //í”Œë ˆì´ì–´ì˜ ì²´ë ¥
+    [SerializeField]
+    float hp; // ìµœëŒ€ ì²´ë ¥
+    public float currentHp; // í˜„ì¬ ì²´ë ¥
+
+    // í”Œë ˆì´ì–´ì˜ ìŠ¤í…Œë¯¸ë‚˜
+    [SerializeField]
+    float sp; // ìµœëŒ€ ìŠ¤í…Œë¯¸ë‚˜ (5ì¼ê²½ìš° 5ì´ˆë™ì•ˆ ì‚¬ìš© ê°€ëŠ¥)
+    float currentSp; // í˜„ì¬ ìŠ¤í…Œë¯¸ë‚˜
+
+    // ìŠ¤í…Œë¯¸ë‚˜ íšŒë³µ ì¿¨íƒ€ì„
     [SerializeField]
     float spCooldown;
     float currentSpCooldown;
 
-    // ½Ã¾ß °ü·Ã º¯¼ö
+    // ì‹œì•¼ ê´€ë ¨ ë³€ìˆ˜
     [SerializeField]
-    float lookSensitivity; // Ä«¸Ş¶ó ¹Î°¨µµ
+    float lookSensitivity; // ì¹´ë©”ë¼ ë¯¼ê°ë„
     [SerializeField]
-    float cameraRotationLimit; // Ä«¸Ş¶ó »óÇÏ ÇÑ°è °¢µµ
-    float currentCameraRotation = 0; // ÇöÀç Ä«¸Ş¶ó »óÇÏ °¢µµ
+    float cameraRotationLimit; // ì¹´ë©”ë¼ ìƒí•˜ í•œê³„ ê°ë„
+    float currentCameraRotation = 0; // í˜„ì¬ ì¹´ë©”ë¼ ìƒí•˜ ê°ë„
 
 
-    // »óÅÂ º¯¼ö
-    bool isGround = true; // ¶¥¿¡ ´ê¾Ò´ÂÁö ¿©ºÎ
-    bool isRun = false; // ´Ş¸®°í ÀÖ´ÂÁö ¿©ºÎ
-    bool isSpUsed = false; // ½ºÅ×¹Ì³ª »ç¿ë ¿©ºÎ
-    bool isDead = false; // ÇÃ·¹ÀÌ¾î Á×À½ ¿©ºÎ
+    // ìƒíƒœ ë³€ìˆ˜
+    bool isGround = true; // ë•…ì— ë‹¿ì•˜ëŠ”ì§€ ì—¬ë¶€
+    bool isRun = false; // ë‹¬ë¦¬ê³  ìˆëŠ”ì§€ ì—¬ë¶€
+    bool isSpUsed = false; // ìŠ¤í…Œë¯¸ë‚˜ ì‚¬ìš© ì—¬ë¶€
+    bool isDead = false; // í”Œë ˆì´ì–´ ì£½ìŒ ì—¬ë¶€
 
-    // ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+    // í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸
     [SerializeField]
     Rigidbody playerRb;
     [SerializeField]
@@ -49,14 +57,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Camera theCamera;
     
-    //¹öÇÁ º¸°ü¿ë µñ¼Å³Ê¸®
+    //ë²„í”„ ë³´ê´€ìš© ë”•ì…”ë„ˆë¦¬
     private Dictionary<BuffType, Coroutine> activeBuffs = new Dictionary<BuffType, Coroutine>();
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        applySpeed = walkSpeed;
+
+        //í”Œë ˆì´ì–´ ìŠ¤íƒ¯ ì´ˆê¸°í™”
+        currentSpeed = walkSpeed;
+        appliedWalkSpeed = walkSpeed;
+        appliedRunSpeed = runSpeed;
+        appliedJumpForce = jumpForce;
         currentSp = sp;
         currentHp = hp;
     }
@@ -74,51 +87,81 @@ public class PlayerController : MonoBehaviour
         CharacterRotation();
     }
 
-    //»õ·Î¿î ¹öÇÁ Àû¿ëÇÏ´Â ¸Ş¼­µå
-    //¸ñÇ¥: »õ·Î¿î ¹öÇÁ Àû¿ëÇÏ°í, ¸¸¾à ÀÌ¹Ì °°Àº ¹öÇÁ ÀÖÀ¸¸é ±âÁ¸ °Í ÁßÁö½ÃÅ°°í »õ·Î ½ÃÀÛÇØ ½Ã°£ °»½Å
+    //ìƒˆë¡œìš´ ë²„í”„ ì ìš©í•˜ëŠ” ë©”ì„œë“œ
+    //ëª©í‘œ: ìƒˆë¡œìš´ ë²„í”„ ì ìš©í•˜ê³ , ë§Œì•½ ì´ë¯¸ ê°™ì€ ë²„í”„ ìˆìœ¼ë©´ ê¸°ì¡´ ê²ƒ ì¤‘ì§€ì‹œí‚¤ê³  ìƒˆë¡œ ì‹œì‘í•´ ì‹œê°„ ê°±ì‹ 
     public void ApplyBuff(BuffType buffType, float buffDuration, float multiplier)
     {
-        if (activeBuffs.ContainsKey(buffType)) //¸¸¾à °°Àº Á¾·ùÀÇ ¹öÇÁ°¡ ÀÌ¹Ì È°¼ºÈ­µÇ¾ú´Ù¸é
+        if (activeBuffs.ContainsKey(buffType)) //ë§Œì•½ ê°™ì€ ì¢…ë¥˜ì˜ ë²„í”„ê°€ ì´ë¯¸ í™œì„±í™”ë˜ì—ˆë‹¤ë©´
         {
-            //±âÁ¸ ¹öÇÁÀÇ ÄÚ·çÆ¾ ¸ØÃß±â
+            //ê¸°ì¡´ ë²„í”„ì˜ ì½”ë£¨í‹´ ë©ˆì¶”ê¸°
             StopCoroutine(activeBuffs[buffType]);
         }
         
-        //»õ·Î¿î ¹öÇÁ È¿°ú¸¦ Àû¿ëÇÏ°í Áö¼Ó½Ã°£À» °ü¸®ÇÒ ÄÚ·çÆ¾ ½ÃÀÛ
+        //ìƒˆë¡œìš´ ë²„í”„ íš¨ê³¼ë¥¼ ì ìš©í•˜ê³  ì§€ì†ì‹œê°„ì„ ê´€ë¦¬í•  ì½”ë£¨í‹´ ì‹œì‘
         Coroutine buffCoroutine = StartCoroutine(BuffCoroutine(buffType, buffDuration, multiplier));
-        //µñ¼Å³Ê¸®¿¡ »õ·Î¿î ÄÚ·çÆ¾ ÀúÀå(¶Ç´Â °»½Å)
+        //ë”•ì…”ë„ˆë¦¬ì— ìƒˆë¡œìš´ ì½”ë£¨í‹´ ì €ì¥(ë˜ëŠ” ê°±ì‹ )
         activeBuffs[buffType] = buffCoroutine;
     }
 
     private IEnumerator BuffCoroutine(BuffType buffType, float buffDuration, float multiplier)
     {
-        //¹öÇÁ È¿°ú Àû¿ë
-        Debug.Log($"{buffType} ¹öÇÁ Àû¿ë ½ÃÀÛ! Áö¼Ó ½Ã°£: {buffDuration}ÃÊ");
+        
+        //ë²„í”„ íš¨ê³¼ ì ìš©
+        Debug.Log($"{buffType} ë²„í”„ ì ìš© ì‹œì‘! ì§€ì† ì‹œê°„: {buffDuration}ì´ˆ");
 
-        //ÁöÁ¤ÇÑ ½Ã°£¸¸Å­ ´ë±â
+        switch (buffType)
+        {
+            /*
+            *=ëŠ” ì‚¬ìš©í•˜ì§€ ì•ŠëŠ”ë‹¤.
+            *= multiplierë¡œ í‘œí˜„í•  ì‹œ ì´ì „ íš¨ê³¼ì— ì¤‘ì²©ë˜ëŠ” ë¬¸ì œê°€ ë°œìƒí•œë‹¤.
+            */
+            case (BuffType.AddSpeed): //ì†ë„ ì¦ê°€ ë²„í”„
+                appliedRunSpeed = runSpeed * multiplier;
+                appliedWalkSpeed = walkSpeed * multiplier;
+                break;
+            case (BuffType.SuperJump): //ì í”„ ë†’ì´ ì¦ê°€ ë²„í”„
+                appliedJumpForce = jumpForce * multiplier;
+                break;
+            case (BuffType.HealthRegen): //ì²´ë ¥ íšŒë³µ ë²„í”„
+                break;
+        }
+
+        //ì§€ì •í•œ ì‹œê°„ë§Œí¼ ëŒ€ê¸°
         yield return new WaitForSeconds(buffDuration);
 
-        //¹öÇÁ È¿°ú Á¦°Å
-        Debug.Log($"{buffType} ¹öÇÁ Á¾·á!");
+        //ë²„í”„ íš¨ê³¼ ì œê±°
+        Debug.Log($"{buffType} ë²„í”„ ì¢…ë£Œ!");
+        switch (buffType)
+        {
+            case (BuffType.AddSpeed): //ì†ë„ ì¦ê°€ ë²„í”„ í•´ì œ
+                appliedRunSpeed = runSpeed;
+                appliedWalkSpeed = walkSpeed;
+                break;
+            case (BuffType.SuperJump): //ì í”„ ë†’ì´ ì¦ê°€ ë²„í”„ í•´ì œ
+                appliedJumpForce = jumpForce;
+                break;
+            case (BuffType.HealthRegen): //ì²´ë ¥ íšŒë³µ ë²„í”„ í•´ì œ
+                break;
+        }
 
-        //µñ¼Å³Ê¸®¿¡¼­ ÇØ´ç ¹öÇÁ Á¤º¸ Á¦°Å
+        //ë”•ì…”ë„ˆë¦¬ì—ì„œ í•´ë‹¹ ë²„í”„ ì •ë³´ ì œê±°
         activeBuffs.Remove(buffType);
     }
 
-    // Á¡ÇÁ ½Ãµµ
+    // ì í”„ ì‹œë„
     void TryJump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
             Jump();
     }
 
-    // Á¡ÇÁ
+    // ì í”„
     void Jump()
     {
-        playerRb.linearVelocity = transform.up * jumpForce;
+        playerRb.linearVelocity = transform.up * appliedJumpForce;
     }
 
-    // ´Ş¸®±â ½Ãµµ
+    // ë‹¬ë¦¬ê¸° ì‹œë„
     void TryRun()
     {
         if (Input.GetKey(KeyCode.LeftShift) && currentSp > 0)
@@ -127,34 +170,34 @@ public class PlayerController : MonoBehaviour
             RunCancel();
     }
 
-    // ´Ş¸®±â
+    // ë‹¬ë¦¬ê¸°
     void Run()
     {
         isRun = true;
         currentSp -= Time.deltaTime;
 
-        applySpeed = runSpeed;
+        currentSpeed = appliedRunSpeed;
     }
 
-    // ´Ş¸®±â Ãë¼Ò
+    // ë‹¬ë¦¬ê¸° ì·¨ì†Œ
     void RunCancel()
     {
         isRun = false;
-        applySpeed = walkSpeed;
+        currentSpeed = appliedWalkSpeed;
     }
 
-    // ¿òÁ÷ÀÓ
+    // ì›€ì§ì„
     void Move()
     {
         float moveDirX = Input.GetAxisRaw("Horizontal");
         float moveDirZ = Input.GetAxisRaw("Vertical");
 
-        Vector3 velocity = (transform.right * moveDirX + transform.forward * moveDirZ).normalized * applySpeed;
+        Vector3 velocity = (transform.right * moveDirX + transform.forward * moveDirZ).normalized * currentSpeed;
 
         playerRb.MovePosition(transform.position + velocity * Time.deltaTime);
     }
 
-    // ½ºÅ×¹Ì³ª È¸º¹
+    // ìŠ¤í…Œë¯¸ë‚˜ íšŒë³µ
     void SPRecover()
     {
         if (!isRun)
@@ -186,22 +229,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î°¡ ¶¥¿¡ ´ê¾ÆÀÖ´ÂÁö¿¡ ´ëÇÑ ¿©ºÎ ÆÇº°
+    // í”Œë ˆì´ì–´ê°€ ë•…ì— ë‹¿ì•„ìˆëŠ”ì§€ì— ëŒ€í•œ ì—¬ë¶€ íŒë³„
     void CheckIsGround()
     {
         isGround = Physics.Raycast(transform.position, Vector3.down, playerCol.bounds.extents.y + 0.1f);
     }
 
-    // ÇÃ·¹ÀÌ¾îÀÇ »ç¸Á ¿©ºÎ Ãâ·ÂÇÏ´Â ¸Ş¼­µå
-    // hp°¡ 0ÀÌ µÇ¸é true ¹İÈ¯
+    // í”Œë ˆì´ì–´ì˜ ì‚¬ë§ ì—¬ë¶€ ì¶œë ¥í•˜ëŠ” ë©”ì„œë“œ
+    // hpê°€ 0ì´ ë˜ë©´ true ë°˜í™˜
     bool CheckDead()
     {
-        if (hp > 0) // hp°¡ 0 ÀÌ»óÀÌ¸é (¾È Á×¾úÀ¸¸é)
+        if (hp > 0) // hpê°€ 0 ì´ìƒì´ë©´ (ì•ˆ ì£½ì—ˆìœ¼ë©´)
             return false;
         return true;
     }
 
-    // »óÇÏ Ä«¸Ş¶ó È¸Àü
+    // ìƒí•˜ ì¹´ë©”ë¼ íšŒì „
     void CameraRotation()
     {
         float rotation = Input.GetAxisRaw("Mouse Y") * lookSensitivity;
@@ -211,7 +254,7 @@ public class PlayerController : MonoBehaviour
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotation, 0, 0);
     }
 
-    // ÁÂ¿ì Ä³¸¯ÅÍ È¸Àü
+    // ì¢Œìš° ìºë¦­í„° íšŒì „
     void CharacterRotation()
     {
         float rotation = Input.GetAxisRaw("Mouse X") * lookSensitivity;
@@ -220,7 +263,7 @@ public class PlayerController : MonoBehaviour
         playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(characterRotation));
     }
 
-    // ÇÃ·¹ÀÌ¾î Á¤º¸ ³»º¸³»´Â ¸Ş¼­µåµé
+    // í”Œë ˆì´ì–´ ì •ë³´ ë‚´ë³´ë‚´ëŠ” ë©”ì„œë“œë“¤
     #region GetMethods
     public float GetPlayerCurrentHP()
     {

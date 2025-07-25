@@ -24,18 +24,20 @@ public class BuffController : MonoBehaviour
 
     }
 
-    private void private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) //만약 부딪힌 객체의 태그가 Player라면
         {
-            PlayerController player = other.GetComponent<PlayerController>();
-            if (player != null)
+            if (other.CompareTag("Player")) //만약 부딪힌 객체의 태그가 Player라면
             {
-                //PlayerController에 있는 ApplyBuff 메서드 호출해 버프 종류, 지속시간, 강도 전달
-                player.ApplyBuff(this.buffType, this.buffDuration, 1.5f); //1.5f는 예시 비율
-            }
+                PlayerController player = other.GetComponent<PlayerController>();
+                if (player != null)
+                {
+                    //PlayerController에 있는 ApplyBuff 메서드 호출해 버프 종류, 지속시간, 강도 전달
+                    player.ApplyBuff(this.buffType, this.buffDuration, 1.5f); //1.5f는 예시 비율
+                }
 
-            gameObject.SetActive(false); //버프 활성화 패널 비활성화
+                gameObject.SetActive(false); //버프 활성화 패널 비활성화
+            }
         }
     }
 }
