@@ -5,51 +5,50 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // �댁댁 
+    //플레이어의 속도
     [SerializeField]
-    private float walkSpeed; // 湲곕낯 嫄룰린 
+    private float walkSpeed; // 기본 걷기 속도
     [SerializeField]
-    private float runSpeed; // 湲곕낯 щ━湲 
-    private float appliedWalkSpeed; //�⑸ 嫄룰린 
-    private float appliedRunSpeed; //�⑸ щ━湲 
+    private float runSpeed; // 기본 달리기 속도
+    private float appliedWalkSpeed; //적용된 걷기 속도
+    private float appliedRunSpeed; //적용된 달리기 속도
     [SerializeField]
-    private float currentSpeed; //�⑺ 
+    private float currentSpeed; //적용할 속도
 
-    // �댁댁 � 媛
+    //플레이어의 점프 강도
     [SerializeField]
-    private float jumpForce; //湲곕낯 � 媛
-    private float appliedJumpForce; //�⑺ � 媛
+    private float jumpForce; //기본 점프 강도
+    private float appliedJumpForce; //적용할 점프 강도
 
-    //�댁댁 泥대
+    //플레이어의 체력
     [SerializeField]
-    float hp; // 理 泥대
-    public float currentHp; //  泥대
+    float hp; //플레이어 최대 체력
+    public float currentHp; //플레이어 현재 체력
 
-    // �댁댁 ㅽ誘몃
+    //플레이어 스태미나
     [SerializeField]
-    float sp; // 理 ㅽ誘몃 (5쇨꼍 5珥 ъ 媛)
-    float currentSp; //  ㅽ誘몃
+    float sp; //플레이어 최대 스태미나 (5일 경우 5초 동안 사용 가능)
+    float currentSp; //현재 스태미나
 
-    // ㅽ誘몃 蹂 荑⑦
+    //스태미나 회복까지 걸리는 쿨타임
     [SerializeField]
     float spCooldown;
     float currentSpCooldown;
 
-    //  愿� 蹂
+    //시야 관련 변수
     [SerializeField]
-    float lookSensitivity; // 移대 誘쇨
+    float lookSensitivity; //카메라 민감도
     [SerializeField]
-    float cameraRotationLimit; // 移대  怨 媛
-    float currentCameraRotation = 0; //  移대  媛
+    float cameraRotationLimit; //카메라 상하 한계 각도
+    float currentCameraRotation = 0; //현재 카메라 상하 각도
 
+    //상태 변수
+    bool isGround = true; //땅에 닿았는지 여부
+    bool isRun = false; //달리고 있는지 여부
+    bool isSpUsed = false; //스테미나 사용 여부
+    bool isDead = false; //플레이어 죽음 여부
 
-    //  蹂
-    bool isGround = true; //  우吏 щ
-    bool isRun = false; // щ━怨 吏 щ
-    bool isSpUsed = false; // ㅽ誘몃 ъ щ
-    bool isDead = false; // �댁 二쎌 щ
-
-    //  而댄щ
+    //필요한 컴포넌트
     [SerializeField]
     Rigidbody playerRb;
     [SerializeField]
@@ -57,7 +56,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Camera theCamera;
     
-    //踰 蹂닿 由
+    //버프 보관용 딕셔너리
     private Dictionary<BuffType, Coroutine> activeBuffs = new Dictionary<BuffType, Coroutine>();
 
     // 참조 변수
@@ -69,7 +68,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        //�댁 ㅽ 珥湲고
+        //플레이어 스탯 초기화
         currentSpeed = walkSpeed;
         appliedWalkSpeed = walkSpeed;
         appliedRunSpeed = runSpeed;
@@ -93,81 +92,80 @@ public class PlayerController : MonoBehaviour
         CharacterRotation();
     }
 
-    //濡 踰 �⑺ 硫
-    //紐⑺: 濡 踰 �⑺怨, 留 대� 媛 踰 쇰㈃ 湲곗〈 寃 以吏ㅺ� 濡  媛 媛깆
+    //새로 버프 적용하는 메서드
+    //목표: 새로운 버프 적용하고, 만약 이미 같은 버프 있으면 기존 것 중지시키고 새로 시작해 시간 갱신
     public void ApplyBuff(BuffType buffType, float buffDuration, float multiplier)
     {
-        if (activeBuffs.ContainsKey(buffType)) //留 媛 醫瑜 踰媛 대� 깊ㅻ㈃
+        if (activeBuffs.ContainsKey(buffType)) //만약 같은 종류의버프가 이미 활성화되었다면
         {
-            //湲곗〈 踰 肄猷⑦ 硫異湲
+            //기존 버프의 코루틴 멈추기
             StopCoroutine(activeBuffs[buffType]);
         }
         
-        //濡 踰 ④낵瑜 �⑺怨 吏媛 愿由ы 肄猷⑦ 
+        //새로운 버프 효과를 적용하고 지속시간을 관리할 코루틴 시작
         Coroutine buffCoroutine = StartCoroutine(BuffCoroutine(buffType, buffDuration, multiplier));
-        //由ъ 濡 肄猷⑦ �( 媛깆)
+        //딕셔너리에 새로운 코루틴 저장(또는 갱신)
         activeBuffs[buffType] = buffCoroutine;
     }
 
     private IEnumerator BuffCoroutine(BuffType buffType, float buffDuration, float multiplier)
     {
-        
-        //踰 ④낵 �
-        Debug.Log($"{buffType} 踰 � ! 吏 媛: {buffDuration}珥");
+        //버프 효과 적용
+        Debug.Log($"{buffType} 버프 적용 시작! 지속 시간: {buffDuration}초");
 
         switch (buffType)
         {
             /*
-            *= ъ⑺吏 .
-            *= multiplier濡   댁 ④낵 以泥⑸ 臾몄媛 諛.
+            *=는 사용하지않는다.
+            *= multiplier로 표현할 시 이전 효과에 중첩되는 문제가 발생한다.
             */
-            case (BuffType.AddSpeed): // 利媛 踰
+            case (BuffTYpe.AddSpeed): //속도 증가 버프
                 appliedRunSpeed = runSpeed * multiplier;
                 appliedWalkSpeed = walkSpeed * multiplier;
                 break;
-            case (BuffType.SuperJump): //�  利媛 踰
+            case (BuffType.SuperJump): //점프 높이 증가 버프
                 appliedJumpForce = jumpForce * multiplier;
                 break;
-            case (BuffType.HealthRegen): //泥대 蹂 踰
+            case (BuffType.HealthRegen): //체력 회복 버프
                 break;
         }
 
-        //吏� 媛留 湲
+        //지정한 대기시간만큼 대기
         yield return new WaitForSeconds(buffDuration);
 
-        //踰 ④낵 �嫄
-        Debug.Log($"{buffType} 踰 醫猷!");
+        //버프 효과 제거
+        Debug.Log($"{buffType} 버프 종료!");
         switch (buffType)
         {
-            case (BuffType.AddSpeed): // 利媛 踰 댁
+            case (BuffType.AddSpeed): //속도 증가 버프 제거
                 appliedRunSpeed = runSpeed;
                 appliedWalkSpeed = walkSpeed;
                 break;
-            case (BuffType.SuperJump): //�  利媛 踰 댁
+            case (BuffType.SuperJump): //슈퍼 점프 버프 제거
                 appliedJumpForce = jumpForce;
                 break;
-            case (BuffType.HealthRegen): //泥대 蹂 踰 댁
+            case (BuffType.HealthRegen): //체력 회복 버프 제거
                 break;
         }
 
-        //由ъ 대 踰 �蹂 �嫄
+        //딕셔너리에서 해당 버프 정보 제거
         activeBuffs.Remove(buffType);
     }
 
-    // � 
+    //점프 시도
     void TryJump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
             Jump();
     }
 
-    // �
+    //점프
     void Jump()
     {
         playerRb.linearVelocity = transform.up * appliedJumpForce;
     }
 
-    // щ━湲 
+    //달리기 시도
     void TryRun()
     {
         if (Input.GetKey(KeyCode.LeftShift) && currentSp > 0)
@@ -176,7 +174,7 @@ public class PlayerController : MonoBehaviour
             RunCancel();
     }
 
-    // щ━湲
+    //달리기
     void Run()
     {
         isRun = true;
@@ -185,7 +183,7 @@ public class PlayerController : MonoBehaviour
         currentSpeed = appliedRunSpeed;
     }
 
-    // щ━湲 痍⑥
+    //달리기 취소
     void RunCancel()
     {
         isRun = false;
@@ -217,7 +215,7 @@ public class PlayerController : MonoBehaviour
         playerRb.MovePosition(transform.position + velocity * Time.deltaTime);
     }
 
-    // ㅽ誘몃 蹂
+    //스태미나 회복
     void SPRecover()
     {
         if (!isRun)
@@ -249,22 +247,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // �댁닿  우吏  щ 蹂
+    //플레이어가 땅에 닿아있는지에 대한 여부 판별
     void CheckIsGround()
     {
         isGround = Physics.Raycast(transform.position, Vector3.down, playerCol.bounds.extents.y + 0.1f);
     }
 
-    // �댁댁 щ щ 異�ν 硫
-    // hp媛 0 硫 true 諛
+    //플레이어의 사망 여부 출력하는 메서드
+    //hp가 0이 되면 true 반환
     bool CheckDead()
     {
-        if (hp > 0) // hp媛 0 댁대㈃ ( 二쎌쇰㈃)
+        if (hp > 0) //hp가 0 이상이면 (안 죽었으면)
             return false;
         return true;
     }
 
-    //  移대 �
+    //상하 카메라 회전
     void CameraRotation()
     {
         float rotation = Input.GetAxisRaw("Mouse Y") * lookSensitivity;
@@ -274,7 +272,7 @@ public class PlayerController : MonoBehaviour
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotation, 0, 0);
     }
 
-    // 醫 罹由� �
+    //좌우 캐릭터 회전
     void CharacterRotation()
     {
         float rotation = Input.GetAxisRaw("Mouse X") * lookSensitivity;
@@ -283,7 +281,7 @@ public class PlayerController : MonoBehaviour
         playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(characterRotation));
     }
 
-    // �댁 �蹂 대낫대 硫
+    //플레이어 정보 내보내는 메서드들
     #region GetMethods
     public float GetPlayerCurrentHP()
     {
