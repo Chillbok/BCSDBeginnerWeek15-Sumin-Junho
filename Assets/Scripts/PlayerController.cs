@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
             *=는 사용하지않는다.
             *= multiplier로 표현할 시 이전 효과에 중첩되는 문제가 발생한다.
             */
-            case (BuffTYpe.AddSpeed): //속도 증가 버프
+            case (BuffType.AddSpeed): //속도 증가 버프
                 appliedRunSpeed = runSpeed * multiplier;
                 appliedWalkSpeed = walkSpeed * multiplier;
                 break;
