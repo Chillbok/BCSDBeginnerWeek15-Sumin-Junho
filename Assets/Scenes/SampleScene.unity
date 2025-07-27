@@ -228,10 +228,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 28b3d2a (Merge pull request #3 from Chillbok/AddGunUI)
 --- !u!1 &191688827
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,11 +264,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-=======
->>>>>>> parent of 91d6429 (feat(ui): 총알 개수 UI 배치)
-=======
->>>>>>> parent of 28b3d2a (Merge pull request #3 from Chillbok/AddGunUI)
 --- !u!1 &284313899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,15 +1061,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 191688828}
   - {fileID: 1402663679}
-<<<<<<< HEAD
-<<<<<<< HEAD
-  - {fileID: 191688828}
-=======
->>>>>>> parent of 91d6429 (feat(ui): 총알 개수 UI 배치)
-=======
-  - {fileID: 191688828}
->>>>>>> parent of 28b3d2a (Merge pull request #3 from Chillbok/AddGunUI)
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1467,8 +1451,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   runSpeed: 14
+  currentSpeed: 0
   jumpForce: 5
   hp: 10
+  currentHp: 0
   sp: 5
   spCooldown: 3
   lookSensitivity: 1.5
