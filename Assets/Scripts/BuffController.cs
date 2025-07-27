@@ -1,3 +1,4 @@
+//버프 아이템에 붙일 스크립트
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
