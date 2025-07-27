@@ -158,6 +158,7 @@ public class PlayerController : MonoBehaviour
 
         //딕셔너리에서 해당 버프 정보 제거
         activeBuffs.Remove(buffType);
+        buffRemainingTimes.Remove(buffType); //남은 시간 딕셔너리에서 제거
     }
 
     //점프 시도
