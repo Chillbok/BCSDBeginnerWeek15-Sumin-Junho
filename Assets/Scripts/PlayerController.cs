@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
     
     //버프 보관용 딕셔너리
     private Dictionary<BuffType, Coroutine> activeBuffs = new Dictionary<BuffType, Coroutine>();
+    //UI 표시를 위해 버프 남은 시간을 저장할 딕셔너리(공개용)
+    public Dictionary<BuffType, float> buffRemainingTimes = new Dictionary<BuffType, float>();
 
     // 참조 변수
     [SerializeField]
