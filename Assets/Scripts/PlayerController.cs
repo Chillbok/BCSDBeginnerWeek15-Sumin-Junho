@@ -131,8 +131,15 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        //지정한 대기시간만큼 대기
-        yield return new WaitForSeconds(buffDuration);
+        //남은 시간을 딕셔너리에 추가
+        buffRemainingTimes[buffType] = buffDuration;
+
+        //지정한 지속시간만큼 반복해서 대기
+        while (buffRemainingTimes[buffType] > 0)
+        {
+            buffRemainingTimes[buffType] -= Time.deltaTime; //1프레임만큼 시간 차감
+            yield return null; //다음 프레임까지 대기
+        }
 
         //버프 효과 제거
         Debug.Log($"{buffType} 버프 종료!");
