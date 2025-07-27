@@ -5,12 +5,27 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager; //어디에서든 게임매니저를 접근할 수 있는 전역 변수
     float currentPlayTime = 0; //현재 플레이 시간
-    int currentScore; //현재 스코어
-    int maxScore; //모든 게임 통틀어서 기록해본 최대 스코어
+    float currentScore = 0; //현재 스코어
+    float maxScore; //모든 게임 통틀어서 기록해본 최대 스코어
 
     void Update()
     {
-        currentPlayTime += Time.deltaTime; //시간 늘리기
+        currentPlayTime += Time.deltaTime; //시간 변수에 시간 추가하기
+        AddScore();
+        UpdateMaxScore(); //현재 스코어, 기존 최대 스코어 비교 후 출력시키는 메서드
+    }
+
+    //점수 추가하는 메서드
+    void AddScore()
+    {
+        currentScore += Time.deltaTime * 10; //점수에 현재 플레이 시간 * 10 추가
+    }
+
+    void UpdateMaxScore() //현재 스코어와 비교해 최대 스코어 반환하는 메서드
+    {
+        if (maxScore < currentScore)
+            maxScore = currentScore;
+        return;
     }
 
     //Get 메서드 모음
@@ -20,12 +35,12 @@ public class GameManager : MonoBehaviour
         return currentPlayTime;
     }
 
-    public int GetCurrentScore() //현재 플레이 스코어
+    public float GetCurrentScore() //현재 플레이 스코어
     {
         return currentScore;
     }
 
-    public int GetMaxScore() //지금까지 기록해본 가장 높은 스코어
+    public float GetMaxScore() //지금까지 기록해본 가장 높은 스코어
     {
         return maxScore;
     }
