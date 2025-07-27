@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
         currentPlayTime += Time.deltaTime; //시간 늘리기
     }
 
+    //Get 메서드 모음
     #region GetMethods
     public float GetCurrentPlayTime() //현재 플레이 시간
     {
