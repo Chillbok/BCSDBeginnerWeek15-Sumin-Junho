@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    // ÃÑ¾Ë °¹¼ö
-    public int bulletCount; // °¡Áö°í ÀÖ´Â ÃÑ¾Ë °¹¼ö
-    public int maxBulletCount; // ÅºÃ¢¿¡ ³ÖÀ» ¼ö ÀÖ´Â ÃÖ´ë ÃÑ¾Ë °¹¼ö
-    public int currentBulletCount; // ÅºÃ¢¿¡ ÀÖ´Â ÃÑ¾Ë °¹¼ö
+    //ì´ ê´€ë ¨ ë³€ìˆ˜ë“¤
+    public int bulletCount; //ì´ì•Œ ê°œìˆ˜
+    public int maxBulletCount; //ìµœëŒ€ ì´ì•Œ ê°œìˆ˜
+    public int currentBulletCount; //í˜„ì¬ ì´ì•Œ ê°œìˆ˜
 }

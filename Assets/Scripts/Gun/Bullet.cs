@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // ÃÑ¾Ë ¹ß»ç °Å¸®
+    //ì´ì•Œ ì‚¬ê±°ë¦¬
     [SerializeField]
     float range;
-    // ÃÑ¾Ë »êÅº ¿ÀÂ÷
+    //ì´ì•Œ ë¶„ì‚°ë„
     [SerializeField]
     float spread;
 
-    // ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
     Rigidbody bulletRb;
     [SerializeField]
     Camera theCamera;

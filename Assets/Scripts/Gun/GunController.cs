@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    // »óÅÂ º¯¼ö
-    public static bool isReload = false; // ÀçÀåÀü ¿©ºÎ
+    // ìƒíƒœ ë³€ìˆ˜
+    public static bool isReload = false; // ì¬ì¥ì „ ì—¬ë¶€
 
-    // ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+    // í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸
     [SerializeField]
     private Gun gun;
     [SerializeField]
     private GameObject Bullet;
 
-    // ¹ß»ç ÁØºñ
+    // ë°œì‚¬ ì¤€ë¹„
     public void Fire()
     {
         if (!isReload)
@@ -24,7 +24,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    // ¹ß»ç
+    // ë°œì‚¬
     private void Shoot()
     {
         for (int i = 0; i < 8; i++)
@@ -35,7 +35,7 @@ public class GunController : MonoBehaviour
         gun.currentBulletCount--;
     }
 
-    // ÀçÀåÀü
+    // ì¬ì¥ì „
      public IEnumerator Reload()
     {
         if (gun.bulletCount > 0 && gun.currentBulletCount != gun.maxBulletCount)
