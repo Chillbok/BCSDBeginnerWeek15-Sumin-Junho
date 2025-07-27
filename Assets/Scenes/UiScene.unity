@@ -1671,6 +1671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 685037115}
+  - component: {fileID: 685037116}
   m_Layer: 5
   m_Name: PointStatus
   m_TagString: Untagged
@@ -1701,6 +1702,22 @@ RectTransform:
   m_AnchoredPosition: {x: -10, y: 10}
   m_SizeDelta: {x: 210, y: 86}
   m_Pivot: {x: 1, y: 0}
+--- !u!114 &685037116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685037114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154af49f8331d4a499281d7a0f432845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playTimeText: {fileID: 228405256}
+  maxScoreText: {fileID: 1321509299}
+  currentScoreText: {fileID: 157372604}
+  theGameManager: {fileID: 868314256}
 --- !u!1 &827024300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,6 +1882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 868314255}
+  - component: {fileID: 868314256}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1887,6 +1905,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &868314256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868314254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27ca775d9d1bce419eb676ab99d30eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &991891516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2071,7 +2101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play Time
+  m_text: Max Score
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

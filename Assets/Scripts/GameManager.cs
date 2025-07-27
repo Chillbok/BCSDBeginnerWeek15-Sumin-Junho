@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        currentPlayTime += Time.deltaTime; //시간 늘리기
     }
 
     #region GetMethods
