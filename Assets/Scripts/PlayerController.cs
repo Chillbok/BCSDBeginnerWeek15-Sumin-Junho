@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     private float runSpeed; // 기본 달리기 속도
     private float appliedWalkSpeed; //적용된 걷기 속도
     private float appliedRunSpeed; //적용된 달리기 속도
-    [SerializeField]
     private float currentSpeed; //적용할 속도
 
     //플레이어의 점프 강도
