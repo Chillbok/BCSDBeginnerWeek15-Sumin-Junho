@@ -19,19 +19,11 @@ public class StatusBarController : MonoBehaviour
 	[SerializeField]
 	PlayerController thePlayerController; //PlayerController.cs 참조 변수
 
-<<<<<<< HEAD
-    // PlayerController에서 가져올 변수
-    float currentHp;
-    float hp;
-    float currentSp;
-    float sp;
-=======
 	// PlayerController에서 가져올 변수
-	private float currentHp;
-	private float hp;
-	private float currentSp;
-	private float sp;
->>>>>>> feature/platform
+	float currentHp;
+	float hp;
+	float currentSp;
+	float sp;
 
 	void Update()
 	{
