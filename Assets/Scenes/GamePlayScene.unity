@@ -2424,11 +2424,11 @@ Transform:
   m_GameObject: {fileID: 687493889}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1135766424}
+  m_Father: {fileID: 862106306}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &687493891
 MonoBehaviour:
@@ -2893,6 +2893,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 687493890}
   - {fileID: 2032116180}
   m_Father: {fileID: 1135766424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3426,7 +3427,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 862106306}
-  - {fileID: 687493890}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1135766425
@@ -4890,7 +4890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBulletUI: {fileID: 1807404605}
   leftBulletUI: {fileID: 593687098}
-  theGun: {fileID: 0}
+  theGun: {fileID: 863057905}
 --- !u!1 &1630621088
 GameObject:
   m_ObjectHideFlags: 0
