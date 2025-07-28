@@ -133,6 +133,10 @@ public class PlayerController : MonoBehaviour
         //지정한 지속시간만큼 반복해서 대기
         while (buffRemainingTimes[buffType] > 0)
         {
+            //버프가 점프인 경우, 한 번 점프 후에 삭제.
+            if (buffType == BuffType.SuperJump) //버프 타입이 슈퍼 점프면 실시
+                if (Input.GetKeyDown(KeyCode.Space)) //점프 버튼을 누르면
+                    break;
             buffRemainingTimes[buffType] -= Time.deltaTime; //1프레임만큼 시간 차감
             yield return null; //다음 프레임까지 대기
         }
