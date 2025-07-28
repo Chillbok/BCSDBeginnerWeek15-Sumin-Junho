@@ -10,6 +10,8 @@ public class GunController : MonoBehaviour
     [SerializeField]
     private Gun gun;
     [SerializeField]
+    private Transform muzzle; // 총구 위치
+    [SerializeField]
     private GameObject Bullet;
     [SerializeField]
     private Animator gunAnim;
@@ -33,7 +35,7 @@ public class GunController : MonoBehaviour
 
         for (int i = 0; i < 8; i++)
         {
-            Instantiate(Bullet, transform.position + Vector3.up * 0.5f, Quaternion.Euler(transform.forward));
+            Instantiate(Bullet, muzzle.position, Quaternion.Euler(transform.forward));
         }
 
         gun.currentBulletCount--;
