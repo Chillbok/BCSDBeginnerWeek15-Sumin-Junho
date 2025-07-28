@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     private float jumpForce; //기본 점프 강도
     private float appliedJumpForce; //적용할 점프 강도
 
+    // 플레이어의 직전 위치 ( 움직임 여부를 체크하기 위해 )
+    private Vector3 lastPos;
+
     //플레이어의 체력
     [SerializeField]
     float hp; //플레이어 최대 체력
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     //상태 변수
     bool isGround = true; //땅에 닿았는지 여부
+    bool isWalk = false; // 걷고 있는지 여부
     bool isRun = false; //달리고 있는지 여부
     bool isSpUsed = false; //스테미나 사용 여부
     bool isDead = false; //플레이어 죽음 여부
@@ -54,6 +58,8 @@ public class PlayerController : MonoBehaviour
     Collider playerCol;
     [SerializeField]
     Camera theCamera;
+    [SerializeField]
+    Animator gunAnim;
     
     //버프 보관용 딕셔너리
     private Dictionary<BuffType, Coroutine> activeBuffs = new Dictionary<BuffType, Coroutine>();
@@ -76,6 +82,7 @@ public class PlayerController : MonoBehaviour
         appliedJumpForce = jumpForce;
         currentSp = sp;
         currentHp = hp;
+        lastPos = transform.position;
     }
 
     void Update()
@@ -85,6 +92,7 @@ public class PlayerController : MonoBehaviour
         TryFire();
         TryReload();
         Move();
+        CheckMove();
         SPRecover();
         CheckIsGround();
         isDead = CheckDead();
@@ -186,6 +194,7 @@ public class PlayerController : MonoBehaviour
     void Run()
     {
         isRun = true;
+        gunAnim.SetBool("isRun", isRun);
         currentSp -= Time.deltaTime;
 
         currentSpeed = appliedRunSpeed;
@@ -195,6 +204,7 @@ public class PlayerController : MonoBehaviour
     void RunCancel()
     {
         isRun = false;
+        gunAnim.SetBool("isRun", isRun);
         currentSpeed = appliedWalkSpeed;
     }
     #endregion Run
@@ -223,6 +233,26 @@ public class PlayerController : MonoBehaviour
 
 		playerRb.MovePosition(transform.position + velocity * Time.deltaTime);
 	}
+
+    // 움직임 체크
+    void CheckMove()
+    {
+        if (!isRun && isGround)
+        {
+            if (Vector3.Distance(lastPos, transform.position) >= 0.01f)
+            {
+                isWalk = true;
+                gunAnim.SetBool("isWalk", isWalk);
+            }
+            else
+            {
+                isWalk = false;
+                gunAnim.SetBool("isWalk", isWalk);
+            }
+
+            lastPos = transform.position;
+        }
+    }
 
     //스태미나 회복
     void SPRecover()

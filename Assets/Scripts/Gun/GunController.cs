@@ -11,6 +11,8 @@ public class GunController : MonoBehaviour
     private Gun gun;
     [SerializeField]
     private GameObject Bullet;
+    [SerializeField]
+    private Animator gunAnim;
 
     // 발사 준비
     public void Fire()
@@ -27,6 +29,8 @@ public class GunController : MonoBehaviour
     // 발사
     private void Shoot()
     {
+        gunAnim.SetTrigger("Attack");
+
         for (int i = 0; i < 8; i++)
         {
             Instantiate(Bullet, transform.position + Vector3.up * 0.5f, Quaternion.Euler(transform.forward));
@@ -38,6 +42,8 @@ public class GunController : MonoBehaviour
     // 재장전
     public IEnumerator Reload()
     {
+        gunAnim.SetTrigger("Reload");
+
         if (gun.leftBulletCount > 0 && gun.currentBulletCount != gun.maxBulletCount) //총알 개수가 0개보다 크고, 현재 탄창의 총알 개수가 탄창 최대 총알 개수와 같지 않을 때
         {
             isReload = true; //재장전 활성화

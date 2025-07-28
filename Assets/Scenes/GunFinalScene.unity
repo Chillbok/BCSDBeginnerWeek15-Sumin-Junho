@@ -3448,6 +3448,7 @@ MonoBehaviour:
   playerRb: {fileID: 1135766426}
   playerCol: {fileID: 1135766425}
   theCamera: {fileID: 862106309}
+  gunAnim: {fileID: 484604285}
   theGunController: {fileID: 2032116179}
 --- !u!4 &1135766424
 Transform:
@@ -4926,7 +4927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBulletUI: {fileID: 1807404605}
   leftBulletUI: {fileID: 593687098}
-  theGun: {fileID: 0}
+  theGun: {fileID: 484604284}
 --- !u!1 &1630621088
 GameObject:
   m_ObjectHideFlags: 0
@@ -6053,6 +6054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 484604284}
   Bullet: {fileID: 7395056369457146468, guid: 93eb0d5eca9f95445a0657c82d0a625d, type: 3}
+  gunAnim: {fileID: 484604285}
 --- !u!4 &2032116180
 Transform:
   m_ObjectHideFlags: 0
