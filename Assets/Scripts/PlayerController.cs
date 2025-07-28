@@ -116,10 +116,6 @@ public class PlayerController : MonoBehaviour
 
         switch (buffType)
         {
-            /*
-            *=는 사용하지않는다.
-            *= multiplier로 표현할 시 이전 효과에 중첩되는 문제가 발생한다.
-            */
             case (BuffType.AddSpeed): //속도 증가 버프
                 appliedRunSpeed = runSpeed * multiplier;
                 appliedWalkSpeed = walkSpeed * multiplier;
@@ -156,11 +152,12 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        //딕셔너리에서 해당 버프 정보 제거
+        //딕셔너리에서 버프 정보 제거
         activeBuffs.Remove(buffType);
-        buffRemainingTimes.Remove(buffType); //남은 시간 딕셔너리에서 제거
+        buffRemainingTimes.Remove(buffType);
     }
 
+    #region Jump
     //점프 시도
     void TryJump()
     {
@@ -173,7 +170,9 @@ public class PlayerController : MonoBehaviour
     {
         playerRb.linearVelocity = transform.up * appliedJumpForce;
     }
+    #endregion Jump
 
+    #region Run
     //달리기 시도
     void TryRun()
     {
@@ -198,6 +197,7 @@ public class PlayerController : MonoBehaviour
         isRun = false;
         currentSpeed = appliedWalkSpeed;
     }
+    #endregion Run
 
     // 발사 시도
     void TryFire()
@@ -266,11 +266,12 @@ public class PlayerController : MonoBehaviour
     //hp가 0이 되면 true 반환
     bool CheckDead()
     {
-        if (hp > 0) //hp가 0 이상이면 (안 죽었으면)
+        if (hp > 0)
             return false;
         return true;
     }
 
+    #region PlayerRotation
     //상하 카메라 회전
     void CameraRotation()
     {
@@ -289,6 +290,7 @@ public class PlayerController : MonoBehaviour
 
 		playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(characterRotation));
 	}
+    #endregion PlayerRotation
 
     //플레이어 정보 내보내는 메서드들
     #region GetMethods
