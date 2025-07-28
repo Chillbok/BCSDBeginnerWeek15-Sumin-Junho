@@ -44,10 +44,11 @@ public class GunController : MonoBehaviour
     // 재장전
     public IEnumerator Reload()
     {
-        gunAnim.SetTrigger("Reload");
 
         if (gun.leftBulletCount > 0 && gun.currentBulletCount != gun.maxBulletCount) //총알 개수가 0개보다 크고, 현재 탄창의 총알 개수가 탄창 최대 총알 개수와 같지 않을 때
         {
+            gunAnim.SetTrigger("Reload");
+
             isReload = true; //재장전 활성화
 
             int needBulletCount = gun.maxBulletCount - gun.currentBulletCount; //탄창에 더 들어가야 할 총알
