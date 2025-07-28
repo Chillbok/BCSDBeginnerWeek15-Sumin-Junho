@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8246775716283952829}
   - component: {fileID: 676234124738583801}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: SpeedUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
