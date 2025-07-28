@@ -1,21 +1,11 @@
 fileFormatVersion: 2
-guid: feeb8730d611c3b4e9cff76d5bb78bf0
+guid: c1e0b54e00937054d8479a8deb005fbd
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: rechargue03
-    second: {fileID: 2100000, guid: b637f17d5dc26d348917429f5d292fb8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: shotgun03
-    second: {fileID: 2100000, guid: 274a75a12c40d904f895f93f3d520759, type: 2}
+  externalObjects: {}
   materials:
-    materialImportMode: 2
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -24,10 +14,8 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 1
+    removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -50,6 +38,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -76,7 +65,8 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -109,6 +99,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
@@ -116,8 +107,8 @@ ModelImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 240774
-  packageName: LowPoly Shotguns - Pixel Texture
-  packageVersion: 1.0.0
-  assetPath: Assets/VillegasArts/LowPoly Shotguns/Objects/shotgun03.fbx
-  uploadId: 547297
+  productId: 283665
+  packageName: Low Poly ShotGun Weapon Pack 1
+  packageVersion: 1.0
+  assetPath: Assets/Low Poly ShotGun Weapon Pack 1/Models/Weapons/ShotGun_E.fbx
+  uploadId: 724253
