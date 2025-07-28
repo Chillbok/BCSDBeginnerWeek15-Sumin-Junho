@@ -1735,24 +1735,48 @@ PrefabInstance:
     m_TransformParent: {fileID: 2032116180}
     m_Modifications:
     - target: {fileID: 217657209172257206, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
+      propertyPath: m_Name
+      value: ShotGun_Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 217657209172257206, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 524546276894254620, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
+      propertyPath: m_Name
+      value: ShotGun_Receiver
       objectReference: {fileID: 0}
     - target: {fileID: 524546276894254620, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1056050662997437132, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
+      propertyPath: m_Name
+      value: ShotGun_Barrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056050662997437132, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350702965476880501, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
+      propertyPath: m_Name
+      value: ShotGun_BarrelGuard
       objectReference: {fileID: 0}
     - target: {fileID: 5350702965476880501, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6495262313036428294, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
+      propertyPath: m_Name
+      value: ShotGun_Rail
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495262313036428294, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6764984000933165890, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
+      propertyPath: m_Name
+      value: ShotGun_Bolt
       objectReference: {fileID: 0}
     - target: {fileID: 6764984000933165890, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
       propertyPath: m_Layer
@@ -1808,7 +1832,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8396158248225550356, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 489626385}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9209568620739521198, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
       insertIndex: -1
@@ -1864,6 +1891,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &489626384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 489626385}
+  m_Layer: 6
+  m_Name: Gun Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &489626385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489626384}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.04, z: 0.83}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 484604283}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &493893547
 GameObject:
   m_ObjectHideFlags: 0
@@ -6053,6 +6111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 484604284}
+  muzzle: {fileID: 489626385}
   Bullet: {fileID: 7395056369457146468, guid: 93eb0d5eca9f95445a0657c82d0a625d, type: 3}
   gunAnim: {fileID: 484604285}
 --- !u!4 &2032116180
@@ -6064,7 +6123,7 @@ Transform:
   m_GameObject: {fileID: 2032116178}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: -0.1, y: -0.5, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
