@@ -44,7 +44,7 @@ public class GunController : MonoBehaviour
 
             int needBulletCount = gun.maxBulletCount - gun.currentBulletCount; //탄창에 더 들어가야 할 총알
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2f);
 
             if (gun.leftBulletCount >= needBulletCount) //총 총알 개수가 탄창에 더 넣어야 하는 총알만큼 있다면
             {

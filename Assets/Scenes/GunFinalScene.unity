@@ -1813,6 +1813,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9209568620739521198, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 484604284}
+    - targetCorrespondingSourceObject: {fileID: 9209568620739521198, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 484604285}
   m_SourcePrefab: {fileID: 100100000, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
 --- !u!1 &484604282 stripped
 GameObject:
@@ -1839,6 +1842,28 @@ MonoBehaviour:
   leftBulletCount: 10
   maxBulletCount: 5
   currentBulletCount: 5
+--- !u!95 &484604285
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484604282}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d268275419639f246a07dafece225ede, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &493893547
 GameObject:
   m_ObjectHideFlags: 0
