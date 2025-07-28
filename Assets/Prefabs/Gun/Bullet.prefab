@@ -149,6 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd043c9acea9824c8d67b2ca5866662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
+  range: 25
   spread: 0.5
   theCamera: {fileID: 0}

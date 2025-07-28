@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
     //달리기 시도
     void TryRun()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && currentSp > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && currentSp > 0 && isWalk)
             Run();
         else if (Input.GetKeyUp(KeyCode.LeftShift) || currentSp <= 0)
             RunCancel();
