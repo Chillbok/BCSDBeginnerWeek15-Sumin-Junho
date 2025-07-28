@@ -38,7 +38,7 @@ public class GunController : MonoBehaviour
     // 재장전
     public IEnumerator Reload()
     {
-        if (gun.bulletCount > 0 && gun.currentBulletCount != gun.maxBulletCount) //총알 개수가 0개보다 크고, 현재 탄창의 총알 개수가 탄창 최대 총알 개수와 같지 않을 때
+        if (gun.leftBulletCount > 0 && gun.currentBulletCount != gun.maxBulletCount) //총알 개수가 0개보다 크고, 현재 탄창의 총알 개수가 탄창 최대 총알 개수와 같지 않을 때
         {
             isReload = true; //재장전 활성화
 
@@ -46,15 +46,15 @@ public class GunController : MonoBehaviour
 
             yield return new WaitForSeconds(1.5f);
 
-            if (gun.bulletCount >= needBulletCount) //총 총알 개수가 탄창에 더 넣어야 하는 총알만큼 있다면
+            if (gun.leftBulletCount >= needBulletCount) //총 총알 개수가 탄창에 더 넣어야 하는 총알만큼 있다면
             {
                 gun.currentBulletCount = gun.maxBulletCount; //탄창 최대 용량으로 총알 넣기
-                gun.bulletCount -= needBulletCount; //총 총알 개수에서 탄창에 더 넣은 총알만큼 빼기
+                gun.leftBulletCount -= needBulletCount; //총 총알 개수에서 탄창에 더 넣은 총알만큼 빼기
             }
             else //총 총알 개수가 탄창에 더 넣어야 할 총알 개수보다 적다면
             {
-                gun.currentBulletCount += gun.bulletCount;
-                gun.bulletCount = 0;
+                gun.currentBulletCount += gun.leftBulletCount;
+                gun.leftBulletCount = 0;
             }
 
             isReload = false; //재장전 비활성화(재장전 끝)

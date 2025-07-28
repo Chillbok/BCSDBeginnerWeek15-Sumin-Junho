@@ -29,10 +29,7 @@ public class GunStatusUIController : MonoBehaviour
     void UpdateBulletCount() //총알 개수 동기화
     {
         currentBulletStatus = theGun.currentBulletCount;
-        if (theGun.bulletCount > theGun.maxBulletCount) //남은 총알 개수가 탄창 용량보다 크면
-            leftBulletStatus = theGun.bulletCount; //남은 총알 개수 가져오기
-        else
-            leftBulletStatus = 0;
+        leftBulletStatus = theGun.leftBulletCount;
     }
 
     void UpdateBulletUI() //총알 UI 동기화
