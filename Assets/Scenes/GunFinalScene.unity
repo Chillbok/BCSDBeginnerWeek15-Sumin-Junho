@@ -1837,9 +1837,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9209568620739521198, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 484604284}
-    - targetCorrespondingSourceObject: {fileID: 9209568620739521198, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 484604285}
   m_SourcePrefab: {fileID: 100100000, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
 --- !u!1 &484604282 stripped
@@ -1852,21 +1849,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8396158248225550356, guid: 106d42a182d825e4ead3c727dfaacd2b, type: 3}
   m_PrefabInstance: {fileID: 484604281}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &484604284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484604282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35a11466b859b2d469d0584a84afa229, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftBulletCount: 10
-  maxBulletCount: 5
-  currentBulletCount: 5
 --- !u!95 &484604285
 Animator:
   serializedVersion: 7
@@ -5122,7 +5104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBulletUI: {fileID: 1807404605}
   leftBulletUI: {fileID: 593687098}
-  theGun: {fileID: 484604284}
+  theGun: {fileID: 2032116179}
 --- !u!1 &1630621088
 GameObject:
   m_ObjectHideFlags: 0
@@ -6247,7 +6229,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0687f0b18e83e8a4d85c3cf8feaa433f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 484604284}
+  leftBulletCount: 10
+  maxBulletCount: 5
+  currentBulletCount: 5
   muzzle: {fileID: 489626385}
   bulletPrefab: {fileID: 7395056369457146468, guid: 93eb0d5eca9f95445a0657c82d0a625d, type: 3}
   gunAnim: {fileID: 484604285}
@@ -6264,8 +6248,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 489626385}
   - {fileID: 484604283}
+  - {fileID: 489626385}
   m_Father: {fileID: 862106306}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2073326169

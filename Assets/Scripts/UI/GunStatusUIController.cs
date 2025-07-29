@@ -11,7 +11,7 @@ public class GunStatusUIController : MonoBehaviour
 
     //가져올 변수
     [SerializeField]
-    Gun theGun;
+    GunController theGun;
 
     //총알 개수 가져올 수 있는 스크립트 필요
 
