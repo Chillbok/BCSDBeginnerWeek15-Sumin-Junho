@@ -6249,7 +6249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 484604284}
   muzzle: {fileID: 489626385}
-  Bullet: {fileID: 7395056369457146468, guid: 93eb0d5eca9f95445a0657c82d0a625d, type: 3}
+  bulletPrefab: {fileID: 7395056369457146468, guid: 93eb0d5eca9f95445a0657c82d0a625d, type: 3}
   gunAnim: {fileID: 484604285}
 --- !u!4 &2032116180
 Transform:

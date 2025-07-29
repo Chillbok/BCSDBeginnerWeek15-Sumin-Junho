@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class GunController : MonoBehaviour
 {
@@ -12,9 +13,17 @@ public class GunController : MonoBehaviour
     [SerializeField]
     private Transform muzzle; // 총구 위치
     [SerializeField]
-    private GameObject Bullet;
+    private GameObject bulletPrefab;
     [SerializeField]
     private Animator gunAnim;
+
+    // 오브젝트 풀링 변수
+    private IObjectPool<Bullet> pool;
+
+    private void Awake()
+    {
+        pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize:16);
+    }
 
     // 발사 준비
     public void Fire()
@@ -36,7 +45,8 @@ public class GunController : MonoBehaviour
 
         for (int i = 0; i < 8; i++)
         {
-            Instantiate(Bullet, muzzle.position, Quaternion.Euler(transform.forward));
+            var bullet = pool.Get();
+            bullet.transform.position = muzzle.position;
         }
 
         gun.currentBulletCount--;
@@ -70,5 +80,31 @@ public class GunController : MonoBehaviour
 
             isReload = false; //재장전 비활성화(재장전 끝)
         }
+    }
+
+    // 총알 생성
+    private Bullet CreateBullet()
+    {
+        Bullet bullet = Instantiate(bulletPrefab).GetComponent<Bullet>();
+        bullet.SetManagedPool(pool);
+        return bullet;
+    }
+
+    // 풀에서 오브젝트를 빌리는 함수
+    private void OnGetBullet(Bullet bullet)
+    {
+        bullet.gameObject.SetActive(true);
+    }
+
+    // 풀에서 오브젝트를 돌려줄 함수
+    private void OnReleaseBullet(Bullet bullet)
+    {
+        bullet.gameObject.SetActive(false);
+    }
+
+    // 풀에서 오브젝트를 파괴하는 함수
+    private void OnDestroyBullet(Bullet bullet)
+    {
+        Destroy(bullet.gameObject);
     }
 }
