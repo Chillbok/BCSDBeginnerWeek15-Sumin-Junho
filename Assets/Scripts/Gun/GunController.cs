@@ -32,6 +32,7 @@ public class GunController : MonoBehaviour
     private void Shoot()
     {
         gunAnim.SetTrigger("Attack");
+        SoundManager.instance.PlaySFX("shotgun_fire");
 
         for (int i = 0; i < 8; i++)
         {
@@ -48,6 +49,7 @@ public class GunController : MonoBehaviour
         if (gun.leftBulletCount > 0 && gun.currentBulletCount != gun.maxBulletCount) //총알 개수가 0개보다 크고, 현재 탄창의 총알 개수가 탄창 최대 총알 개수와 같지 않을 때
         {
             gunAnim.SetTrigger("Reload");
+            SoundManager.instance.PlaySFX("shotgun_reload");
 
             isReload = true; //재장전 활성화
 
