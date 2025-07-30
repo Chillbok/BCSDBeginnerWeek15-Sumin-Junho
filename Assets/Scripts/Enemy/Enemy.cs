@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // 체력
+    [SerializeField]
+    private float hp;
+    private float currentHp;
+    // 공격 속도
+    [SerializeField]
+    private float attackSpeed;
+    // 공격력
+    [SerializeField]
+    private float damage;
     // 감지 범위
     [SerializeField]
     private float radius;
@@ -12,6 +22,15 @@ public class Enemy : MonoBehaviour
     // 터렛이 회전할 부위 (Rotation y 값)
     [SerializeField]
     private GameObject turretHead;
+
+    // 참조 변수
+    [SerializeField]
+    private GameObject bulletPrefab;
+
+    void Start()
+    {
+        currentHp = hp;
+    }
 
     void Update()
     {
