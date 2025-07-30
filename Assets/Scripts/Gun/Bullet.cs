@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour
     }
 
     // 총알 파괴
-    public void DestroyBullet()
+    private void DestroyBullet()
     {
         managedPool.Release(this);
     }

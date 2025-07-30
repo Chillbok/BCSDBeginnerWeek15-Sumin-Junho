@@ -582,11 +582,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7027379480058617096, guid: 8a4fca54c9faa3449bcff12193992420, type: 3}
+      propertyPath: range
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027379480058617096, guid: 8a4fca54c9faa3449bcff12193992420, type: 3}
+      propertyPath: speed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027379480058617096, guid: 8a4fca54c9faa3449bcff12193992420, type: 3}
+      propertyPath: muzzle
+      value: 
+      objectReference: {fileID: 177352560}
+    - target: {fileID: 7027379480058617096, guid: 8a4fca54c9faa3449bcff12193992420, type: 3}
+      propertyPath: radius
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a4fca54c9faa3449bcff12193992420, type: 3}
+--- !u!4 &177352560 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 904206908919454927, guid: 8a4fca54c9faa3449bcff12193992420, type: 3}
+  m_PrefabInstance: {fileID: 177352559}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &222513293
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,8 +2927,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1631307752}
   - {fileID: 1253498103}
+  - {fileID: 1631307752}
   m_Father: {fileID: 1135766424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &862106307
@@ -3002,7 +3023,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 63
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3301,7 +3322,7 @@ GameObject:
   - component: {fileID: 1135766425}
   - component: {fileID: 1135766426}
   - component: {fileID: 1135766423}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5118,7 +5139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1631307752}
   - component: {fileID: 1631307753}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gun Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

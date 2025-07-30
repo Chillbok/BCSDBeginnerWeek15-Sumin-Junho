@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9146811454278432661}
   - component: {fileID: 3012642750523692396}
   - component: {fileID: 9095597737369349610}
-  - component: {fileID: 7416180022093216145}
+  - component: {fileID: -7376499070097511893}
   m_Layer: 0
   m_Name: Enemy_Bullet
   m_TagString: Untagged
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 186d664a03f161d4ba351b6263e7f816, type: 2}
+  - {fileID: 2100000, guid: 992ef74bd037d3f4cb387165398f3bc4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,7 +137,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7416180022093216145
+--- !u!114 &-7376499070097511893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,9 +146,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7395056369457146468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dd043c9acea9824c8d67b2ca5866662, type: 3}
+  m_Script: {fileID: 11500000, guid: 54f151e259695894ab72c82a984c5201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 1
-  spread: 0.05
-  theCamera: {fileID: 0}
