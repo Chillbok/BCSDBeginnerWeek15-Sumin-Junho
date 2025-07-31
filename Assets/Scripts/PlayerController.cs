@@ -143,8 +143,21 @@ public class PlayerController : MonoBehaviour
         {
             //버프가 점프인 경우, 한 번 점프 후에 삭제.
             if (buffType == BuffType.SuperJump) //버프 타입이 슈퍼 점프면 실시
+            {
                 if (Input.GetKeyDown(KeyCode.Space)) //점프 버튼을 누르면
+                {
                     break;
+                }
+            }
+            //버프가 체력 회복인 경우, 초당 10씩 서서히 체력 회복 후 삭제.
+            else if (buffType == BuffType.HealthRegen)
+            {
+                currentHp += Time.deltaTime * 10; //초당 10씩 회복
+
+                //더해진 체력이 최대 체력을 초과하면
+                if (currentHp > hp)
+                    currentHp = hp;
+            }
             buffRemainingTimes[buffType] -= Time.deltaTime; //1프레임만큼 시간 차감
             yield return null; //다음 프레임까지 대기
         }
