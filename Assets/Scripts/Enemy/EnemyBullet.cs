@@ -9,7 +9,6 @@ public class EnemyBullet : MonoBehaviour
 
     // 참조 변수
     Rigidbody bulletRb;
-    PlayerController player;
 
     // 오브젝트 풀링 변수
     private IObjectPool<EnemyBullet> managedPool;
@@ -17,7 +16,6 @@ public class EnemyBullet : MonoBehaviour
     void Awake()
     {
         bulletRb = GetComponent<Rigidbody>();
-        player = FindObjectOfType<PlayerController>();
     }
 
     void OnEnable()
@@ -35,7 +33,7 @@ public class EnemyBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-            player.DecreaseHP(damage);
+            other.GetComponent<PlayerController>().DecreaseHP(damage);
         else
             DestroyBullet();
     }

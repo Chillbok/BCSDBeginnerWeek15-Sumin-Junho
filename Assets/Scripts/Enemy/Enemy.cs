@@ -56,6 +56,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         DetectPlayer();
+
+        if (CheckDead())
+            Destroy(gameObject);
     }
 
     // 플레이어 감지
@@ -110,10 +113,24 @@ public class Enemy : MonoBehaviour
         bullet.GetComponent<Rigidbody>().AddForce(attackDirection * speed, ForceMode.Impulse);
     }
 
+    private bool CheckDead()
+    {
+        if (currentHp > 0)
+            return false;
+        else
+            return true;
+    }
+
     // 공격 방향 가져오기
     public Vector3 GetAttackDirection()
     {
         return attackDirection;
+    }
+
+    // 체력 감소
+    public void DecreaseHP(float damage)
+    {
+        currentHp -= damage;
     }
 
     // 총알 생성

@@ -300,9 +300,10 @@ public class PlayerController : MonoBehaviour
     //hp가 0이 되면 true 반환
     bool CheckDead()
     {
-        if (hp > 0)
+        if (currentHp > 0)
             return false;
-        return true;
+        else
+            return true;
     }
 
     // 체력 회복

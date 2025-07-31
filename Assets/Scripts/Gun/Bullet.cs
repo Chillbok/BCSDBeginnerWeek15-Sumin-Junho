@@ -38,6 +38,12 @@ public class Bullet : MonoBehaviour
         bulletRb.angularVelocity = Vector3.zero;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+            other.GetComponent<Enemy>().DecreaseHP(1);
+    }
+
     // 오브젝트 풀링 함수
     public void SetManagedPool(IObjectPool<Bullet> pool)
     {
