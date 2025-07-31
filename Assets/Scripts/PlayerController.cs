@@ -300,11 +300,28 @@ public class PlayerController : MonoBehaviour
     //hp가 0이 되면 true 반환
     bool CheckDead()
     {
-        if (hp > 0)
+        if (currentHp > 0)
             return false;
-        return true;
+        else
+            return true;
     }
 
+    // 체력 회복
+    public void IncreaseHP(float recover)
+    {
+        if (hp > currentHp + recover)
+            currentHp += recover;
+        else
+            currentHp = hp;
+    }
+
+    // 체력 감소
+    public void DecreaseHP(float damage)
+    {
+        currentHp -= damage;
+    }
+
+    // 플레이어 회전을 관리하는 메서드
     #region PlayerRotation
     //상하 카메라 회전
     void CameraRotation()
@@ -326,7 +343,7 @@ public class PlayerController : MonoBehaviour
 	}
     #endregion PlayerRotation
 
-    //플레이어 정보 내보내는 메서드들
+    //플레이어 정보 내보내는 메서드
     #region GetMethods
     public float GetPlayerCurrentHP()
     {
