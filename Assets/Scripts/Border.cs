@@ -7,9 +7,14 @@ public class Border : MonoBehaviour
 	[SerializeField]
 	private float borderSpeed;
 
+	// 참조 변수
+	[SerializeField]
+	private PlayerController player;
+
 	void Update()
 	{
 		BorderMove();
+		PlayerDamage();
 	}
 
 	// 경계선 움직임
@@ -18,19 +23,10 @@ public class Border : MonoBehaviour
 		transform.Translate(Vector3.forward * borderSpeed * Time.deltaTime);
 	}
 
-	// 플랫폼과 충돌 시
-    private IEnumerator OnTriggerEnter(Collider other)
+	// 플레이어 데미지 입힘
+	void PlayerDamage()
     {
-        if (other.CompareTag("Ground"))
-        {
-			GameObject flatform = other.gameObject;
-
-			yield return new WaitForSeconds(Random.Range(0.1f, 1.0f));
-
-			other.GetComponent<Rigidbody>().useGravity = true;
-			other.GetComponent<Rigidbody>().isKinematic = false;
-
-			Destroy(flatform, 2f);
-        }
+		if (transform.position.z >= player.transform.position.z)
+			player.DecreaseHP(0.1f);
     }
 }
