@@ -45,7 +45,7 @@ public class StatusBarController : MonoBehaviour
 	// HP 텍스트 업데이트
 	void UpdateHpText()
 	{
-		HpText.text = $"{currentHp} / {hp}";
+		HpText.text = $"{(int)currentHp} / {(int)hp}";
 	}
 
 	// HP 바 업데이트
