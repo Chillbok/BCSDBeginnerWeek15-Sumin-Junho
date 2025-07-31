@@ -358,10 +358,11 @@ MonoBehaviour:
   hp: 4
   attackSpeed: 1.5
   damage: 20
-  radius: 15
+  radius: 30
   rotationSpeed: 5
+  speed: 0.5
   turretHead: {fileID: 8191472077001266609}
-  muzzle: {fileID: 0}
+  muzzle: {fileID: 904206908919454927}
   bulletPrefab: {fileID: 7395056369457146468, guid: 316bc395c8dc85348ac7cb4d6f0c56a8, type: 3}
 --- !u!1 &1000012338640140
 GameObject:

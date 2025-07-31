@@ -11,9 +11,6 @@ public class Enemy : MonoBehaviour
     // 공격 속도
     [SerializeField]
     private float attackSpeed;
-    // 공격력
-    [SerializeField]
-    private float damage;
     // 감지 범위
     [SerializeField]
     private float radius;
