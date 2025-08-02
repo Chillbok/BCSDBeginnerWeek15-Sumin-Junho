@@ -6,6 +6,9 @@ public class Border : MonoBehaviour
 	// 경계선 속도
 	[SerializeField]
 	private float borderSpeed;
+	// 경계선 속도 증가량
+	[SerializeField]
+	private float speedIncreaseRate;
 
 	// 참조 변수
 	[SerializeField]
@@ -21,6 +24,7 @@ public class Border : MonoBehaviour
 	void BorderMove()
 	{
 		transform.Translate(Vector3.forward * borderSpeed * Time.deltaTime);
+		borderSpeed += speedIncreaseRate * Time.deltaTime;
 	}
 
 	// 플레이어 데미지 입힘

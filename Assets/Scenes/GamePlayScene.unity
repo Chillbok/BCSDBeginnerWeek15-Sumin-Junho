@@ -3242,6 +3242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   borderSpeed: 1.5
+  speedIncreaseRate: 0.5
   player: {fileID: 1135766423}
 --- !u!65 &1767417069
 BoxCollider:
@@ -4662,11 +4663,11 @@ SceneRoots:
   - {fileID: 2083457926}
   - {fileID: 528205348}
   - {fileID: 161027236}
+  - {fileID: 715646916}
   - {fileID: 1767417072}
-  - {fileID: 1368743804}
-  - {fileID: 2009534461}
   - {fileID: 1043998535}
   - {fileID: 725676431}
   - {fileID: 791036299}
   - {fileID: 1361529054}
-  - {fileID: 715646916}
+  - {fileID: 1368743804}
+  - {fileID: 2009534461}
