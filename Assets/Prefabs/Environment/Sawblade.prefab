@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  speed: 1.5
 --- !u!64 &5755296458864571435
 MeshCollider:
   m_ObjectHideFlags: 0

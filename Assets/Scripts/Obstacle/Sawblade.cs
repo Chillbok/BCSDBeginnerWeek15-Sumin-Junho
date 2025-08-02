@@ -6,12 +6,13 @@ public class Sawblade : MonoBehaviour
     [SerializeField]
     private float damage;
 
+    // 움직임 속도
+    [SerializeField]
+    private float speed;
+
     // 필요한 좌표 벡터
     Vector3 left = new Vector3(-0.25f, 0, 0);
     Vector3 right = new Vector3(1.75f, 0, 0);
-
-    // 상태 벡터
-    private bool movingRight = true;
 
     void Update()
     {
@@ -21,11 +22,9 @@ public class Sawblade : MonoBehaviour
     // 톱니 움직임
     private void MoveSawblade()
     {
-        Vector3 target = movingRight ? right : left;
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, Time.deltaTime);
+        float time = Mathf.PingPong(Time.time * speed, 1.0f);
 
-        if (Vector3.Distance(transform.localPosition, target) < 0.01f)
-            movingRight = !movingRight;
+        transform.localPosition = Vector3.Lerp(left, right, time);
     }
 
     private void OnTriggerEnter(Collider other)
