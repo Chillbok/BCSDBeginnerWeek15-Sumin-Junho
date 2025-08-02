@@ -1226,6 +1226,67 @@ MonoBehaviour:
   HpText: {fileID: 132552316}
   SpBar: {fileID: 1413464422}
   thePlayerController: {fileID: 1135766423}
+--- !u!1001 &791036299
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6720404898763900392, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720404898763900392, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720404898763900392, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720404898763900392, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720404898763900392, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720404898763900392, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720404898763900392, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720404898763900392, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720404898763900392, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720404898763900392, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7106545464070525342, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: m_Name
+      value: HealthRegen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926026513896018805, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
+      propertyPath: thePlayerController
+      value: 
+      objectReference: {fileID: 1135766423}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3a1912b13c7adce438b88f4e37733120, type: 3}
 --- !u!1 &862106305
 GameObject:
   m_ObjectHideFlags: 0
@@ -4216,4 +4277,5 @@ SceneRoots:
   - {fileID: 2009534461}
   - {fileID: 1043998535}
   - {fileID: 725676431}
+  - {fileID: 791036299}
   - {fileID: 1361529054}
