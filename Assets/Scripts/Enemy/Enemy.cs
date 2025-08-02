@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour
     // 참조 변수
     [SerializeField]
     private GameObject bulletPrefab;
+    [SerializeField]
+    private GunController gun;
 
     // 오브젝트 풀링 변수
     private IObjectPool<EnemyBullet> pool;
@@ -58,7 +60,10 @@ public class Enemy : MonoBehaviour
         DetectPlayer();
 
         if (CheckDead())
+        {
+            gun.leftBulletCount += 10;
             Destroy(gameObject);
+        }
     }
 
     // 플레이어 감지
