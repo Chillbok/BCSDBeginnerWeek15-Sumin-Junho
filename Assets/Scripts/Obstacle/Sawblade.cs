@@ -1,11 +1,7 @@
 using UnityEngine;
 
-public class Sawblade : MonoBehaviour
+public class Sawblade : Obstacle
 {
-    // 데미지
-    [SerializeField]
-    private float damage;
-
     // 움직임 속도
     [SerializeField]
     private float speed;
@@ -25,14 +21,5 @@ public class Sawblade : MonoBehaviour
         float time = Mathf.PingPong(Time.time * speed, 1.0f);
 
         transform.localPosition = Vector3.Lerp(left, right, time);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            var player = other.GetComponent<PlayerController>();
-            player.DecreaseHP(damage);
-        }
     }
 }
