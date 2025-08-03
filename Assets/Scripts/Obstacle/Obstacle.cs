@@ -6,7 +6,7 @@ public class Obstacle : MonoBehaviour
     [SerializeField]
     protected float damage;
 
-    protected void OnTriggerEnter(Collider other)
+    protected void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
