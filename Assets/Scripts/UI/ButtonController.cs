@@ -15,9 +15,35 @@ public class ButtonController : MonoBehaviour
 #endif
     }
 
-    //특정 씬으로 이동하는 스크립트
+    //특정 씬으로 이동하는 메서드
     public void MoveToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    //특정 게임오브젝트를 활성화하는 메서드
+    public void ActivateGameObject(GameObject obj)
+    {
+        //게임 오브젝트 활성화하는 코드
+        if (!obj.activeSelf)
+            obj.SetActive(true);
+        return;
+    }
+
+    //특정 게임오브젝트를 비활성화하는 메서드
+    public void DeactiveGameObject(GameObject obj)
+    {
+        if (obj.activeSelf)
+            obj.SetActive(false);
+        return;
+    }
+
+    //특정 게임 오브젝트의 활성화/비활성화 상태를 전환하는 메서드
+    public void ToggleGameObjectActive(GameObject obj)
+    {
+        if (obj.activeSelf)
+            obj.SetActive(false);
+        else
+            obj.SetActive(true);
     }
 }
