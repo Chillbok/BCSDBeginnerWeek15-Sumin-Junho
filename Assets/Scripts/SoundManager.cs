@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ????
+
 [System.Serializable]
 public class Sound 
 {
-    // ?????? ???
+    // 사운드 이름
     public string name;
-    // ?????? ???
+    // 사운드 클립
     public AudioClip clip;
 }
 
@@ -33,21 +33,21 @@ public class SoundManager : MonoBehaviour
     }
     #endregion singleton
 
-    // ??? ???? ?��
+    // BGM
     [SerializeField]
     Sound[] bgms;
-    // ????? ????? ????? ???
+    // BGM 출력할 오디오 소스
     [SerializeField]
     AudioSource audioBgm;
 
-    // ????? ???? ?��
+    // 효과음
     [SerializeField]
     Sound[] sfxs;
-    // ??????? ????? ????? ???
+    // 효과음 출력할 오디오 소스
     [SerializeField]
-    AudioSource[] audioSfx; // ??????? ???????? ????? ?? ??????? ?��?? ????
+    AudioSource[] audioSfx; // 효과음은 중첩되어 들릴 수 있으므로 배열로 설정
 
-    // ??? ???
+    // BGM 재생
     public void PlayBGM(string name)
     {
         for (int i = 0; i < bgms.Length; i++)
@@ -61,10 +61,10 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ??? ???? ?????
+    // 재생 중인 효과음 이름
     public string[] playSoundName;
 
-    // ????? ???
+    // 효과음 재생
     public void PlaySFX(string name)
     {
         for (int i = 0; i < sfxs.Length; i++)
@@ -85,7 +85,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ????? ????
+    // 효과음 중지
     public void StopSFX(string name)
     {
         for (int i = 0; i < audioSfx.Length; i++)
@@ -98,7 +98,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ??? ????? ????
+    // 모든 효과음 중지
     public void StopAllSFX()
     {
         for (int i = 0; i < audioSfx.Length; i++)

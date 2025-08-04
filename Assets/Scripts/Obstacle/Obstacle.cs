@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    // µ¥¹ÌÁö
+    // ë°ë¯¸ì§€
     [SerializeField]
     protected float damage;
 

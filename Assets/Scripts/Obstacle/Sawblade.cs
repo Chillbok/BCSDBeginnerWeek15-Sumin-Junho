@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Sawblade : Obstacle
 {
-    // ¿òÁ÷ÀÓ ¼Óµµ
+    // ì›€ì§ì„ ì†ë„
     [SerializeField]
     private float speed;
 
-    // ÇÊ¿äÇÑ ÁÂÇ¥ º¤ÅÍ
+    // í•„ìš”í•œ ì¢Œí‘œ ë²¡í„°
     Vector3 left = new Vector3(-0.25f, 0, 0);
     Vector3 right = new Vector3(1.75f, 0, 0);
 
@@ -15,7 +15,7 @@ public class Sawblade : Obstacle
         MoveSawblade();
     }
 
-    // Åé´Ï ¿òÁ÷ÀÓ
+    // í†±ë‹ˆ ì›€ì§ì„
     private void MoveSawblade()
     {
         float time = Mathf.PingPong(Time.time * speed, 1.0f);

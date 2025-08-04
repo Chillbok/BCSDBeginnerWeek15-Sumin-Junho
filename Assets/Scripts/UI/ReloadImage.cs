@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ReloadImage : MonoBehaviour
 {
-    // ÀÌ¹ÌÁö¸¦ Á¶Á¤ÇÏ±â À§ÇÑ ½Ã°£ º¯¼ö
+    // ì´ë¯¸ì§€ë¥¼ ì¡°ì •í•˜ê¸° ìœ„í•œ ì‹œê°„ ë³€ìˆ˜
     float currentTime;
 
     void OnEnable()

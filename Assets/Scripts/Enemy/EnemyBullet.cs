@@ -3,14 +3,14 @@ using UnityEngine.Pool;
 
 public class EnemyBullet : MonoBehaviour
 {
-    // °ø°İ·Â
+    // ê³µê²©ë ¥
     [SerializeField]
     private float damage;
 
-    // ÂüÁ¶ º¯¼ö
+    // ì°¸ì¡° ë³€ìˆ˜
     Rigidbody bulletRb;
 
-    // ¿ÀºêÁ§Æ® Ç®¸µ º¯¼ö
+    // ì˜¤ë¸Œì íŠ¸ í’€ë§ ë³€ìˆ˜
     private IObjectPool<EnemyBullet> managedPool;
 
     void Awake()
@@ -38,13 +38,13 @@ public class EnemyBullet : MonoBehaviour
             DestroyBullet();
     }
 
-    // ¿ÀºêÁ§Æ® Ç®¸µ ÇÔ¼ö
+    // ì˜¤ë¸Œì íŠ¸ í’€ë§ í•¨ìˆ˜
     public void SetManagedPool(IObjectPool<EnemyBullet> pool)
     {
         managedPool = pool;
     }
 
-    // ÃÑ¾Ë ÆÄ±«
+    // ì´ì•Œ íŒŒê´´
     private void DestroyBullet()
     {
         managedPool.Release(this);

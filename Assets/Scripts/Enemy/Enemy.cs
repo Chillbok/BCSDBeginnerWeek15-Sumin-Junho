@@ -4,44 +4,44 @@ using UnityEngine.Pool;
 
 public class Enemy : MonoBehaviour
 {
-    // Ã¼·Â
+    // ì²´ë ¥
     [SerializeField]
     private float hp;
     private float currentHp;
-    // °ø°İ ¼Óµµ
+    // ê³µê²© ì†ë„
     [SerializeField]
     private float attackSpeed;
-    // °¨Áö ¹üÀ§
+    // ê°ì§€ ë²”ìœ„
     [SerializeField]
     private float radius;
-    // È¸Àü ¼Óµµ
+    // íšŒì „ ì†ë„
     [SerializeField]
     private float rotationSpeed;
-    //ÃÑ¾Ë ¼Óµµ
+    //ì´ì•Œ ì†ë„
     [SerializeField]
     float speed;
 
-    // °ø°İ ¹æÇâ
+    // ê³µê²© ë°©í–¥
     Vector3 attackDirection;
 
-    // »óÅÂ º¯¼ö
+    // ìƒíƒœ ë³€ìˆ˜
     private bool isFire = false;
 
-    // ÅÍ·¿ÀÌ È¸ÀüÇÒ ºÎÀ§ (Rotation y °ª)
+    // í„°ë ›ì´ íšŒì „í•  ë¶€ìœ„ (Rotation y ê°’)
     [SerializeField]
     private GameObject turretHead;
 
-    // ÃÑ±¸ ºÎÀ§
+    // ì´êµ¬ ë¶€ìœ„
     [SerializeField]
     private Transform muzzle;
 
-    // ÂüÁ¶ º¯¼ö
+    // ì°¸ì¡° ë³€ìˆ˜
     [SerializeField]
     private GameObject bulletPrefab;
     [SerializeField]
     private GunController gun;
 
-    // ¿ÀºêÁ§Æ® Ç®¸µ º¯¼ö
+    // ì˜¤ë¸Œì íŠ¸ í’€ë§ ë³€ìˆ˜
     private IObjectPool<EnemyBullet> pool;
 
     private void Awake()
@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î °¨Áö
+    // í”Œë ˆì´ì–´ ê°ì§€
     private void DetectPlayer()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î ¹Ù¶óº¸±â
+    // í”Œë ˆì´ì–´ ë°”ë¼ë³´ê¸°
     private void LookPlayer(Collider target)
     {
         attackDirection = (target.transform.position - turretHead.transform.position).normalized;
@@ -89,12 +89,12 @@ public class Enemy : MonoBehaviour
         turretHead.transform.rotation = Quaternion.Lerp(turretHead.transform.rotation, Quaternion.LookRotation(attackDirection), rotationSpeed * Time.deltaTime);
     }
 
-    // ¹ß»ç ½Ãµµ
+    // ë°œì‚¬ ì‹œë„
     private void TryFire()
     {
         Debug.DrawRay(muzzle.position, muzzle.right * 5, Color.red);
 
-        // ·¹ÀÌ¾î 3¹ø - Player
+        // ë ˆì´ì–´ 3ë²ˆ - Player
         if (Physics.Raycast(muzzle.position, muzzle.right, radius, 3))
         {
             if (!isFire)
@@ -110,7 +110,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // ¹ß»ç
+    // ë°œì‚¬
     private void Fire()
     {
         var bullet = pool.Get();
@@ -126,19 +126,19 @@ public class Enemy : MonoBehaviour
             return true;
     }
 
-    // °ø°İ ¹æÇâ °¡Á®¿À±â
+    // ê³µê²© ë°©í–¥ ê°€ì ¸ì˜¤ê¸°
     public Vector3 GetAttackDirection()
     {
         return attackDirection;
     }
 
-    // Ã¼·Â °¨¼Ò
+    // ì²´ë ¥ ê°ì†Œ
     public void DecreaseHP(float damage)
     {
         currentHp -= damage;
     }
 
-    // ÃÑ¾Ë »ı¼º
+    // ì´ì•Œ ìƒì„±
     private EnemyBullet CreateBullet()
     {
         EnemyBullet bullet = Instantiate(bulletPrefab).GetComponent<EnemyBullet>();
@@ -146,19 +146,19 @@ public class Enemy : MonoBehaviour
         return bullet;
     }
 
-    // Ç®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ ºô¸®´Â ÇÔ¼ö
+    // í’€ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ë¹Œë¦¬ëŠ” í•¨ìˆ˜
     private void OnGetBullet(EnemyBullet bullet)
     {
         bullet.gameObject.SetActive(true);
     }
 
-    // Ç®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ µ¹·ÁÁÙ ÇÔ¼ö
+    // í’€ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ëŒë ¤ì¤„ í•¨ìˆ˜
     private void OnReleaseBullet(EnemyBullet bullet)
     {
         bullet.gameObject.SetActive(false);
     }
 
-    // Ç®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ ÆÄ±«ÇÏ´Â ÇÔ¼ö
+    // í’€ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ íŒŒê´´í•˜ëŠ” í•¨ìˆ˜
     private void OnDestroyBullet(EnemyBullet bullet)
     {
         Destroy(bullet.gameObject);
