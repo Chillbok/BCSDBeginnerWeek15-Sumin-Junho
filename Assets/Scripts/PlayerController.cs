@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
             //기존 버프의 코루틴 멈추기
             StopCoroutine(activeBuffs[buffType]);
         }
-        
+
         //새로운 버프 효과를 적용하고 지속시간을 관리할 코루틴 시작
         Coroutine buffCoroutine = StartCoroutine(BuffCoroutine(buffType, buffDuration, multiplier));
         //딕셔너리에 새로운 코루틴 저장(또는 갱신)
