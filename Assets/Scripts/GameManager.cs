@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager; //어디에서든 게임매니저를 접근할 수 있는 전역 변수
+    [SerializeField]
+    GameObject StopMenu;
     float currentPlayTime = 0; //현재 플레이 시간
     float currentScore = 0; //현재 스코어
     float maxScore; //모든 게임 통틀어서 기록해본 최대 스코어
@@ -26,6 +28,11 @@ public class GameManager : MonoBehaviour
         if (maxScore < currentScore)
             maxScore = currentScore;
         return;
+    }
+
+    void OpenGameStopMenu(GameObject obj)
+    {
+
     }
 
     //Get 메서드 모음

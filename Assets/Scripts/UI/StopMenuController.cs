@@ -1,0 +1,56 @@
+//게임의 일시정지 메뉴의 작동을 관리하기 위한 스크립트
+//게임매니저에 붙여 사용한다.
+using NUnit.Framework;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class StopMenuController : MonoBehaviour
+{
+    [SerializeField]
+    GameManager gameManager;
+    [SerializeField]
+    GameObject stopMenu; //일시정지 메뉴
+    [SerializeField]
+    GameObject settingMenu; //일시정지 메뉴 시 열리는 설정 메뉴
+
+    public bool isPaused; //yes면 게임 일시정지
+
+    void Start()
+    {
+        stopMenu.SetActive(false); //게임메뉴 비활성화
+    }
+
+    void Update()
+    {
+        //ESC 누르면 게임 일시정지 후 메뉴 출력
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused)
+            {
+                ResumeTime(); //게임 다시 이어하기
+                stopMenu.SetActive(false);
+            }
+            else
+            {
+                PauseTime(); //게임 시간 멈춤
+                stopMenu.SetActive(true);
+            }
+        }
+    }
+
+    //게임시간 멈추는 메서드
+    public void PauseTime()
+    {
+        Time.timeScale = 0f;
+        isPaused = true;
+        Debug.Log("게임 시간 멈춤");
+    }
+
+    //게임 시간 다시 흘러가게 하는 메서드
+    public void ResumeTime()
+    {
+        Time.timeScale = 1f;
+        isPaused = false;
+        Debug.Log("게임 시간 다시 흘러감");
+    }
+}
