@@ -15,11 +15,6 @@ public class BuffController : MonoBehaviour
     [SerializeField]
     public float buffDuration; //버프 지속시간
 
-    //참조변수
-    [SerializeField]
-    private PlayerController thePlayerController;
-
-
     void Start()
     {
 
