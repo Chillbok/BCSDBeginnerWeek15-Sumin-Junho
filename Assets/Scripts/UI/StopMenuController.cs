@@ -38,6 +38,8 @@ public class StopMenuController : MonoBehaviour
             {
                 ResumeTime(); //게임 다시 이어하기
                 stopMenu.SetActive(false);
+                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+                UnityEngine.Cursor.visible = false;
                 //Cursor.lockState = CursorLockMode.Locked;
                 //Cursor.visible = false;
             }
@@ -46,6 +48,8 @@ public class StopMenuController : MonoBehaviour
                 PauseTime(); //게임 시간 멈춤
                 stopMenu.SetActive(true);
                 DeactivePauseMenus();
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
+                UnityEngine.Cursor.visible = true;
             }
         }
     }
