@@ -24,9 +24,6 @@ public class Enemy : MonoBehaviour
     // 공격 방향
     Vector3 attackDirection;
 
-    // 상태 변수
-    private bool isFire = false;
-
     // 터렛이 회전할 부위 (Rotation y 값)
     [SerializeField]
     private GameObject turretHead;
@@ -35,11 +32,19 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Transform muzzle;
 
+    // 중복 발사 방지용 코루틴 변수
+    private Coroutine fire_coroutine;
+
+    // 상태 변수
+    private bool isPlayerDetected;
+
     // 참조 변수
     [SerializeField]
     private GameObject bulletPrefab;
     [SerializeField]
     private GunController gun;
+    [SerializeField]
+    private LayerMask layer;
 
     // 오브젝트 풀링 변수
     private IObjectPool<EnemyBullet> pool;
@@ -58,6 +63,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         DetectPlayer();
+        TryFire();
 
         if (CheckDead())
         {
@@ -69,14 +75,17 @@ public class Enemy : MonoBehaviour
     // 플레이어 감지
     private void DetectPlayer()
     {
+        isPlayerDetected = false;
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 
         foreach (Collider col in colliders)
         {
             if (col.gameObject.CompareTag("Player"))
             {
+                isPlayerDetected = true;
                 LookPlayer(col);
-                TryFire();
+                break;
             }
         }
     }
@@ -92,30 +101,36 @@ public class Enemy : MonoBehaviour
     // 발사 시도
     private void TryFire()
     {
-        Debug.DrawRay(muzzle.position, muzzle.right * 5, Color.red);
+        Debug.DrawRay(muzzle.position, muzzle.right * radius, Color.red);
 
-        // 레이어 3번 - Player
-        if (Physics.Raycast(muzzle.position, muzzle.right, radius, 3))
+        if (isPlayerDetected && Physics.Raycast(muzzle.position, muzzle.right, radius, layer))
         {
-            if (!isFire)
+            if (fire_coroutine == null)
             {
-                InvokeRepeating("Fire", 0, attackSpeed);
-                isFire = true;
+                fire_coroutine = StartCoroutine(Fire());
             }
         }
         else
         {
-            CancelInvoke("Fire");
-            isFire = false;
+            if (fire_coroutine != null)
+            {
+                StopCoroutine(fire_coroutine);
+                fire_coroutine = null;
+            }
         }
     }
 
     // 발사
-    private void Fire()
+    private IEnumerator Fire()
     {
-        var bullet = pool.Get();
-        bullet.transform.position = muzzle.position;
-        bullet.GetComponent<Rigidbody>().AddForce(attackDirection * speed, ForceMode.Impulse);
+        while (true)
+        {
+            var bullet = pool.Get();
+            bullet.transform.position = muzzle.position;
+            bullet.GetComponent<Rigidbody>().AddForce(attackDirection * speed, ForceMode.Impulse);
+
+            yield return new WaitForSeconds(attackSpeed);
+        }
     }
 
     private bool CheckDead()
