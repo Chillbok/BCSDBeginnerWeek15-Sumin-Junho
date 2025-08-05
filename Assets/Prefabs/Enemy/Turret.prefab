@@ -364,6 +364,9 @@ MonoBehaviour:
   muzzle: {fileID: 904206908919454927}
   bulletPrefab: {fileID: 6416110688088556407, guid: 0c38aa33a30ebfe478861cd2795f8e33, type: 3}
   gun: {fileID: 0}
+  layer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1000012338640140
 GameObject:
   m_ObjectHideFlags: 0
