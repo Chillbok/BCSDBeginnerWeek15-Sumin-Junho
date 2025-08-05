@@ -40,8 +40,6 @@ public class StopMenuController : MonoBehaviour
                 stopMenu.SetActive(false);
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
                 UnityEngine.Cursor.visible = false;
-                //Cursor.lockState = CursorLockMode.Locked;
-                //Cursor.visible = false;
             }
             else
             {
@@ -51,6 +49,15 @@ public class StopMenuController : MonoBehaviour
                 UnityEngine.Cursor.lockState = CursorLockMode.None;
                 UnityEngine.Cursor.visible = true;
             }
+        }
+
+        //일시정지 상태인데 메뉴가 비활성화되면 게임 재개
+        if (gameManager.isPaused && !stopMenu.activeSelf)
+        {
+            ResumeTime();
+            //커서 지우기
+            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+            UnityEngine.Cursor.visible = false;
         }
     }
 
