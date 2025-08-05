@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //플레이어의 속도
+    [Header("플레이어 이동 관련 변수")]
     [SerializeField]
     private float walkSpeed; // 기본 걷기 속도
     [SerializeField]
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed; //적용할 속도
 
     //플레이어의 점프 강도
+    [Header("플레이어 점프 관련 변수")]
     [SerializeField]
     private float jumpForce; //기본 점프 강도
     private float appliedJumpForce; //적용할 점프 강도
@@ -23,11 +25,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastPos;
 
     //플레이어의 체력
+    [Header("플레이어 체력 관련 변수")]
     [SerializeField]
     float hp; //플레이어 최대 체력
     public float currentHp; //플레이어 현재 체력
 
     //플레이어 스태미나
+    [Header("플레이어 스태미나 관련 변수")]
     [SerializeField]
     float sp; //플레이어 최대 스태미나 (5일 경우 5초 동안 사용 가능)
     float currentSp; //현재 스태미나
@@ -38,6 +42,7 @@ public class PlayerController : MonoBehaviour
     float currentSpCooldown;
 
     //시야 관련 변수
+    [Header("플레이어 시야 관련 변수")]
     [SerializeField]
     float lookSensitivity; //카메라 민감도
     [SerializeField]
@@ -45,6 +50,7 @@ public class PlayerController : MonoBehaviour
     float currentCameraRotation = 0; //현재 카메라 상하 각도
 
     //상태 변수
+    [Header("플레이어 상태 관련 변수")]
     bool isGround = true; //땅에 닿았는지 여부
     bool isWalk = false; // 걷고 있는지 여부
     bool isRun = false; //달리고 있는지 여부
@@ -52,6 +58,7 @@ public class PlayerController : MonoBehaviour
     bool isDead = false; //플레이어 죽음 여부
 
     //필요한 컴포넌트
+    [Header("플레이어에게 필요한 컴포넌트")]
     [SerializeField]
     Rigidbody playerRb;
     [SerializeField]
@@ -62,11 +69,15 @@ public class PlayerController : MonoBehaviour
     Animator gunAnim;
     
     //버프 보관용 딕셔너리
+    [Header("버프 보관용 딕셔너리")]
     private Dictionary<BuffType, Coroutine> activeBuffs = new Dictionary<BuffType, Coroutine>();
     //UI 표시를 위해 버프 남은 시간을 저장할 딕셔너리(공개용)
     public Dictionary<BuffType, float> buffRemainingTimes = new Dictionary<BuffType, float>();
 
     // 참조 변수
+    [Header("참조 변수")]
+    [SerializeField]
+    private GameManager gameManager;
     [SerializeField]
     GunController theGunController;
 
@@ -87,18 +98,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        TryJump();
-        TryRun();
-        TryFire();
-        TryReload();
-        Move();
-        CheckMove();
-        SPRecover();
-        CheckIsGround();
-        isDead = CheckDead();
+        bool isPaused = gameManager.isPaused;
+        if (!isPaused)
+        {
+            TryJump();
+            TryRun();
+            TryFire();
+            TryReload();
+            Move();
+            CheckMove();
+            SPRecover();
+            CheckIsGround();
+            isDead = CheckDead();
 
-		CameraRotation();
-		CharacterRotation();
+            CameraRotation();
+            CharacterRotation();
+        }
 	}
 
     //새로 버프 적용하는 메서드
@@ -110,7 +125,7 @@ public class PlayerController : MonoBehaviour
             //기존 버프의 코루틴 멈추기
             StopCoroutine(activeBuffs[buffType]);
         }
-        
+
         //새로운 버프 효과를 적용하고 지속시간을 관리할 코루틴 시작
         Coroutine buffCoroutine = StartCoroutine(BuffCoroutine(buffType, buffDuration, multiplier));
         //딕셔너리에 새로운 코루틴 저장(또는 갱신)
