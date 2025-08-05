@@ -101,9 +101,7 @@ public class Enemy : MonoBehaviour
     // 발사 시도
     private void TryFire()
     {
-        Debug.DrawRay(muzzle.position, muzzle.right * radius, Color.red);
-
-        if (isPlayerDetected && Physics.Raycast(muzzle.position, muzzle.right, radius, layer))
+        if (isPlayerDetected)
         {
             if (fire_coroutine == null)
             {
