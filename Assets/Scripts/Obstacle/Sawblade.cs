@@ -7,7 +7,9 @@ public class Sawblade : Obstacle
     private float speed;
 
     // 필요한 좌표 벡터
+    [SerializeField]
     Vector3 left = new Vector3(-0.25f, 0, 0);
+    [SerializeField]
     Vector3 right = new Vector3(1.75f, 0, 0);
 
     void Update()

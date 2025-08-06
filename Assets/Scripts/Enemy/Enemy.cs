@@ -41,7 +41,6 @@ public class Enemy : MonoBehaviour
     // 참조 변수
     [SerializeField]
     private GameObject bulletPrefab;
-    [SerializeField]
     private GunController gun;
     [SerializeField]
     private LayerMask layer;
@@ -52,7 +51,8 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         attackDirection = Vector3.zero;
-        pool = new ObjectPool<EnemyBullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: 1);
+        gun = FindObjectOfType<GunController>();
+        pool = new ObjectPool<EnemyBullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: 2);
     }
 
     void Start()
