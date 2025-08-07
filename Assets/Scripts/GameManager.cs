@@ -27,7 +27,9 @@ public class GameManager : MonoBehaviour
     float maxScore; //모든 게임 통틀어서 기록해본 최대 스코어
 
     // 상태 변수
+    [Header("시작 여부")]
     public bool isPlay = false;
+    [Header("정지 여부")]
     public bool isPaused = false;
 
     // 참조 변수
