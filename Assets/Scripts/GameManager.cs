@@ -32,9 +32,15 @@ public class GameManager : MonoBehaviour
     [Header("정지 여부")]
     public bool isPaused = false;
 
-    // 참조 변수
+    // 시작 경계선
+    [Header("시작 경계선")]
     [SerializeField]
     private GameObject startBorder;
+
+    // 참조 변수
+    [Header("참조 변수")]
+    [SerializeField]
+    private CountDownController countDown;
 
     void Start()
     {
@@ -43,7 +49,13 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartCount()
     {
-        yield return new WaitForSeconds(3);
+        countDown.ChangeTxt("3");
+        yield return new WaitForSeconds(1);
+        countDown.ChangeTxt("2");
+        yield return new WaitForSeconds(1);
+        countDown.ChangeTxt("1");
+        yield return new WaitForSeconds(1);
+        countDown.Deactive();
         isPlay = true;
         startBorder.SetActive(false);
         yield return null;
