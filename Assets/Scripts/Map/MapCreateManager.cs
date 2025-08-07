@@ -3,6 +3,9 @@ using UnityEngine.Pool;
 
 public class MapCreateManager : MonoBehaviour
 {
+    // map 접근을 위한 정적 변수
+    public static MapCreateManager instance;
+
     // 오브젝트 풀링 변수
     private IObjectPool<Map> pool;
 
@@ -13,11 +16,19 @@ public class MapCreateManager : MonoBehaviour
 
     void Awake()
     {
-        pool = new ObjectPool<Map>(CreateMap, OnGetMap, OnReleaseMap, OnDestroyMap, maxSize: 2);
+        instance = this;
+        pool = new ObjectPool<Map>(CreatingMap, OnGetMap, OnReleaseMap, OnDestroyMap, maxSize: 2);
     }
 
     // 맵 생성
-    private Map CreateMap()
+    public Map CreateMap()
+    {
+        var map = pool.Get();
+        return map;
+    }
+
+    // 풀에서 맵 생성하는 함수
+    private Map CreatingMap()
     {
         // 랜덤한 맵 생성
         Map map = Instantiate(mapPrefab[Random.Range(0, mapPrefab.Length)]).GetComponent<Map>();
