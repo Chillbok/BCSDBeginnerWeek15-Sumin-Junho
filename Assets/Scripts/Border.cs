@@ -16,8 +16,11 @@ public class Border : MonoBehaviour
 
 	void Update()
 	{
-		BorderMove();
-		PlayerDamage();
+		if (GameManager.instance.isPlay)
+        {
+			BorderMove();
+			PlayerDamage();
+		}
 	}
 
 	// 경계선 움직임

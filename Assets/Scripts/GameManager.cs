@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
     public bool isPlay = false;
     public bool isPaused = false;
 
+    // 참조 변수
+    [SerializeField]
+    private GameObject startBorder;
+
     void Start()
     {
         StartCoroutine(StartCount());
@@ -39,13 +43,18 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         isPlay = true;
+        startBorder.SetActive(false);
+        yield return null;
     }
 
     void Update()
     {
-        currentPlayTime += Time.deltaTime; //시간 변수에 시간 추가하기
-        AddScore();
-        UpdateMaxScore(); //현재 스코어, 기존 최대 스코어 비교 후 출력시키는 메서드
+        if (isPlay)
+        {
+            currentPlayTime += Time.deltaTime; //시간 변수에 시간 추가하기
+            AddScore();
+            UpdateMaxScore(); //현재 스코어, 기존 최대 스코어 비교 후 출력시키는 메서드
+        }
     }
 
     //점수 추가하는 메서드
