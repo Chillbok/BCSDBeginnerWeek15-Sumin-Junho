@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -140,8 +141,9 @@ public class PlayerController : MonoBehaviour
         switch (buffType)
         {
             case (BuffType.AddSpeed): //속도 증가 버프
-                appliedRunSpeed = runSpeed * multiplier;
-                appliedWalkSpeed = walkSpeed * multiplier;
+                //appliedRunSpeed = runSpeed * multiplier;
+                //appliedWalkSpeed = walkSpeed * multiplier;
+                currentSp = sp;
                 break;
             case (BuffType.SuperJump): //점프 높이 증가 버프
                 appliedJumpForce = jumpForce * multiplier;
@@ -156,8 +158,13 @@ public class PlayerController : MonoBehaviour
         //지정한 지속시간만큼 반복해서 대기
         while (buffRemainingTimes[buffType] > 0)
         {
+            //버프 타입이 addspeed인 경우, 계속해서 스태미나 회복
+            if (buffType == BuffType.AddSpeed)
+            {
+                currentSp = sp;
+            }
             //버프가 점프인 경우, 한 번 점프 후에 삭제.
-            if (buffType == BuffType.SuperJump) //버프 타입이 슈퍼 점프면 실시
+            else if (buffType == BuffType.SuperJump) //버프 타입이 슈퍼 점프면 실시
             {
                 if (Input.GetKeyDown(KeyCode.Space)) //점프 버튼을 누르면
                 {
@@ -182,8 +189,6 @@ public class PlayerController : MonoBehaviour
         switch (buffType)
         {
             case (BuffType.AddSpeed): //속도 증가 버프 제거
-                appliedRunSpeed = runSpeed;
-                appliedWalkSpeed = walkSpeed;
                 break;
             case (BuffType.SuperJump): //슈퍼 점프 버프 제거
                 appliedJumpForce = jumpForce;

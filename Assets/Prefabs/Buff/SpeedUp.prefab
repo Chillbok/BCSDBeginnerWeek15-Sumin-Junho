@@ -233,5 +233,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffType: 0
-  buffDuration: 5
-  thePlayerController: {fileID: 0}
+  buffDuration: 3
