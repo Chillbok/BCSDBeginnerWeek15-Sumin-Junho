@@ -10,7 +10,7 @@ public class CountDownController : MonoBehaviour
 
     private void Start()
     {
-        if (!GameManager.instance.isPlay)
+        if (!GameManager.Instance.isPlay)
             countdownTxt.gameObject.SetActive(true);
         else
             countdownTxt.gameObject.SetActive(false);

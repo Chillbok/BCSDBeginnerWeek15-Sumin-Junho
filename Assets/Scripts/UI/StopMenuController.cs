@@ -10,8 +10,6 @@ public class StopMenuController : MonoBehaviour
 {
     [Header("참조 변수")]
     [SerializeField]
-    GameManager gameManager;
-    [SerializeField]
     PlayerController playerController;
 
     [Header("게임 오브젝트들")]
@@ -25,12 +23,11 @@ public class StopMenuController : MonoBehaviour
     void Start()
     {
         stopMenu.SetActive(false); //게임메뉴 비활성화
-        gameManager = GameManager.instance;
     }
 
     void Update()
     {
-        bool isPaused = gameManager.isPaused;
+        bool isPaused = GameManager.Instance.isPaused;
         //ESC 누르면 게임 일시정지 후 메뉴 출력
         //if (Input.GetKeyDown(KeyCode.Escape))
         if (Input.GetKeyDown(KeyCode.Alpha1)) //이후에 위쪽 주석처리된 if문으로 수정 필요
@@ -53,7 +50,7 @@ public class StopMenuController : MonoBehaviour
         }
 
         //일시정지 상태인데 메뉴가 비활성화되면 게임 재개
-        if (gameManager.isPaused && !stopMenu.activeSelf)
+        if (GameManager.Instance.isPaused && !stopMenu.activeSelf)
         {
             ResumeTime();
             //커서 지우기
@@ -75,7 +72,7 @@ public class StopMenuController : MonoBehaviour
     public void PauseTime()
     {
         Time.timeScale = 0f;
-        gameManager.isPaused = true;
+        GameManager.Instance.isPaused = true;
         Debug.Log("게임 시간 멈춤");
     }
 
@@ -83,7 +80,7 @@ public class StopMenuController : MonoBehaviour
     public void ResumeTime()
     {
         Time.timeScale = 1f;
-        gameManager.isPaused = false;
+        GameManager.Instance.isPaused = false;
         Debug.Log("게임 시간 다시 흘러감");
     }
 }

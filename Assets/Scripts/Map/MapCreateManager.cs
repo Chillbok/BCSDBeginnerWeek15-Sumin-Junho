@@ -3,31 +3,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Pool;
 
 
-public class MapCreateManager : MonoBehaviour
+public class MapCreateManager : Singleton<MapCreateManager>
 {
-    #region singleton & pool
-
     // 오브젝트 풀링 변수
     private IObjectPool<Map> pool;
-
-    // map 접근을 위한 정적 변수
-    public static MapCreateManager instance;
-
-    void Awake()
-    {
-        pool = new ObjectPool<Map>(CreatingMap, OnGetMap, OnReleaseMap, OnDestroyMap, maxSize: 2);
-
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    #endregion singleton
 
     // 맵 프리팹
     [Header("맵")]

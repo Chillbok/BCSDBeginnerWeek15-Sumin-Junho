@@ -16,7 +16,7 @@ public class Border : MonoBehaviour
 
 	void Update()
 	{
-		if (GameManager.instance.isPlay)
+		if (GameManager.Instance.isPlay)
         {
 			BorderMove();
 			PlayerDamage();

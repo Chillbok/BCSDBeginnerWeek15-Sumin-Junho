@@ -11,10 +11,6 @@ public class ScoreUIController : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI currentScoreText; //현재 스코어 텍스트 추가
 
-    //참조변수들
-    [SerializeField]
-    GameManager theGameManager; //GameManager 참조변수
-
     //변수들
     float playTime; //플레이 시간
     int playTimeMin; //플레이 시간(분)
@@ -22,10 +18,6 @@ public class ScoreUIController : MonoBehaviour
     float currentScore; //현재 플레이 점수
     float maxScore; //최대 플레이 점수
 
-    void Start()
-    {
-        theGameManager = GameManager.instance;
-    }
 
     void Update()
     {
@@ -37,7 +29,7 @@ public class ScoreUIController : MonoBehaviour
     //플레이 시간을 분, 초로 나눠서 구하는 메서드
     void PlayTimeMinSec()
     {
-        playTime = theGameManager.GetCurrentPlayTime(); //플레이 시간 float값 동기화
+        playTime = GameManager.Instance.GetCurrentPlayTime(); //플레이 시간 float값 동기화
         playTimeMin = (int)(playTime / 60f); //분 계산
         playTimeSec = (int)(playTime % 60f); //초 계산
     }
@@ -54,8 +46,8 @@ public class ScoreUIController : MonoBehaviour
     //점수를 출력하는 메서드
     void UpdateScore()
     {
-        currentScore = theGameManager.GetCurrentScore(); //변수에 현재 점수 동기화
-        maxScore = theGameManager.GetMaxScore(); //변수에 최대 점수 동기화
+        currentScore = GameManager.Instance.GetCurrentScore(); //변수에 현재 점수 동기화
+        maxScore = GameManager.Instance.GetMaxScore(); //변수에 최대 점수 동기화
         currentScoreText.text = $"{(int)currentScore}"; //점수를 int형으로 변환해 출력
         maxScoreText.text = $"{(int)maxScore}"; //점수를 int형으로 변환해 출력  
     }

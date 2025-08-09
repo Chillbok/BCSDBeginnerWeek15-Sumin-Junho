@@ -78,13 +78,10 @@ public class PlayerController : MonoBehaviour
     // 참조 변수
     [Header("참조 변수")]
     [SerializeField]
-    private GameManager gameManager;
-    [SerializeField]
     GunController theGunController;
 
     void Start()
     {
-        gameManager = GameManager.instance;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -100,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        bool isPaused = gameManager.isPaused;
+        bool isPaused = GameManager.Instance.isPaused;
         if (!isPaused)
         {
             TryJump();

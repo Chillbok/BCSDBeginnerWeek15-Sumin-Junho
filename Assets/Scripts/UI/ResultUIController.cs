@@ -11,7 +11,7 @@ public class ResultUIController : MonoBehaviour
 
     private void Start()
     {
-        maxScore.text = "Max Score : " + ((int)GameManager.instance.GetMaxScore()).ToString();
-        currentScore.text = "Score : " + ((int)GameManager.instance.GetCurrentScore()).ToString();
+        maxScore.text = "Max Score : " + ((int)GameManager.Instance.GetMaxScore()).ToString();
+        currentScore.text = "Score : " + ((int)GameManager.Instance.GetCurrentScore()).ToString();
     }
 }

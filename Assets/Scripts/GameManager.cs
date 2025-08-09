@@ -3,25 +3,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    #region singleton
-    public static GameManager instance;
-
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    #endregion singleton
-
     [SerializeField]
     float currentPlayTime = 0; //현재 플레이 시간
     float currentScore = 0; //현재 스코어
