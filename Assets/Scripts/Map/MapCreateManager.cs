@@ -3,12 +3,12 @@ using UnityEngine.Pool;
 
 public class MapCreateManager : MonoBehaviour
 {
-    // map 접근을 위한 정적 변수
     #region singleton & pool
 
     // 오브젝트 풀링 변수
     private IObjectPool<Map> pool;
 
+    // map 접근을 위한 정적 변수
     public static MapCreateManager instance;
 
     void Awake()

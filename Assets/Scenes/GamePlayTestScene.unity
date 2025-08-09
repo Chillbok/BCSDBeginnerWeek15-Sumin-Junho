@@ -4271,6 +4271,7 @@ MonoBehaviour:
   isPlay: 0
   isPaused: 0
   startBorder: {fileID: 1386331172}
+  player: {fileID: 1135766423}
   countDown: {fileID: 176781540}
 --- !u!4 &1411532481
 Transform:

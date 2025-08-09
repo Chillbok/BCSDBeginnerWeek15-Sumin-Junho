@@ -22,11 +22,6 @@ public class ScoreUIController : MonoBehaviour
     float currentScore; //현재 플레이 점수
     float maxScore; //최대 플레이 점수
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         PlayTimeMinSec(); //플레이 시간 분, 초로 나눠서 구하기
@@ -57,8 +52,6 @@ public class ScoreUIController : MonoBehaviour
         currentScore = theGameManager.GetCurrentScore(); //변수에 현재 점수 동기화
         maxScore = theGameManager.GetMaxScore(); //변수에 최대 점수 동기화
         currentScoreText.text = $"{(int)currentScore}"; //점수를 int형으로 변환해 출력
-        maxScoreText.text = $"{(int)maxScore}"; //점수를 int형으로 변환해 출력
-
-        
+        maxScoreText.text = $"{(int)maxScore}"; //점수를 int형으로 변환해 출력  
     }
 }

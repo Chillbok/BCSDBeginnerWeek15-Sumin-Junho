@@ -1,6 +1,7 @@
 // 이 코드는 게임을 플레이하며 점수를 계산하고, 플레이 시간을 출력하도록 할 예정.
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour
     // 참조 변수
     [Header("참조 변수")]
     [SerializeField]
+    private PlayerController player;
+    [SerializeField]
     private CountDownController countDown;
 
     void Start()
@@ -47,6 +50,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartCount());
     }
 
+    // 카운트 다운 시작
     private IEnumerator StartCount()
     {
         countDown.ChangeTxt("3");
@@ -68,6 +72,11 @@ public class GameManager : MonoBehaviour
             currentPlayTime += Time.deltaTime; //시간 변수에 시간 추가하기
             AddScore();
             UpdateMaxScore(); //현재 스코어, 기존 최대 스코어 비교 후 출력시키는 메서드
+        }
+
+        if (player.GetIsDead())
+        {
+            SceneManager.LoadScene("GameResultScene");
         }
     }
 
