@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     //플레이어의 속도
     [Header("플레이어 이동 관련 변수")]
     [SerializeField]
@@ -83,6 +84,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameManager.instance;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 

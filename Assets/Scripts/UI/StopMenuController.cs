@@ -25,6 +25,7 @@ public class StopMenuController : MonoBehaviour
     void Start()
     {
         stopMenu.SetActive(false); //게임메뉴 비활성화
+        gameManager = GameManager.instance;
     }
 
     void Update()

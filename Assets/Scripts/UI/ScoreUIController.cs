@@ -22,6 +22,11 @@ public class ScoreUIController : MonoBehaviour
     float currentScore; //현재 플레이 점수
     float maxScore; //최대 플레이 점수
 
+    void Start()
+    {
+        theGameManager = GameManager.instance;
+    }
+
     void Update()
     {
         PlayTimeMinSec(); //플레이 시간 분, 초로 나눠서 구하기

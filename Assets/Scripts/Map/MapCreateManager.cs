@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Pool;
+
 
 public class MapCreateManager : MonoBehaviour
 {
@@ -32,10 +34,31 @@ public class MapCreateManager : MonoBehaviour
     [SerializeField]
     private GameObject[] mapPrefab;
 
+    // 첫 시작 시
     private void Start()
     {
         var firstMap = CreateMap();
         firstMap.transform.position = Vector3.zero;
+    }
+
+    // 씬이 로드된 후
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "GamePlayScene")
+        {
+            var firstMap = CreateMap();
+            firstMap.transform.position = Vector3.zero;
+        }
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     // 맵 생성

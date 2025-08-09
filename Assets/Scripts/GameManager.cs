@@ -39,15 +39,40 @@ public class GameManager : MonoBehaviour
     private GameObject startBorder;
 
     // 참조 변수
-    [Header("참조 변수")]
-    [SerializeField]
     private PlayerController player;
-    [SerializeField]
     private CountDownController countDown;
 
+    // 첫 시작 시
     void Start()
     {
+        player = FindObjectOfType<PlayerController>();
+        countDown = FindObjectOfType<CountDownController>();
         StartCoroutine(StartCount());
+    }
+
+    // 씬이 로드된 후
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "GamePlayScene")
+        {
+            player = FindObjectOfType<PlayerController>();
+            countDown = FindObjectOfType<CountDownController>();
+            isPlay = false; isPaused = false;
+            currentPlayTime = 0;
+            currentScore = 0;
+            startBorder.SetActive(true);
+            StartCoroutine(StartCount());
+        }
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     // 카운트 다운 시작
@@ -72,11 +97,14 @@ public class GameManager : MonoBehaviour
             currentPlayTime += Time.deltaTime; //시간 변수에 시간 추가하기
             AddScore();
             UpdateMaxScore(); //현재 스코어, 기존 최대 스코어 비교 후 출력시키는 메서드
-        }
 
-        if (player.GetIsDead())
-        {
-            SceneManager.LoadScene("GameResultScene");
+            if (player.GetIsDead())
+            {
+                SceneManager.LoadScene("GameResultScene");
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                isPlay = false;
+            }
         }
     }
 
