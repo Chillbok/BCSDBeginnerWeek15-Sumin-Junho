@@ -11,4 +11,10 @@ public class Map : MonoBehaviour
     {
         managedPool = pool;
     }
+
+    // ¸Ê ÆÄ±«
+    public void DestroyMap()
+    {
+        managedPool.Release(this);
+    }
 }
