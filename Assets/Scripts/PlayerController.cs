@@ -392,5 +392,10 @@ public class PlayerController : MonoBehaviour
 	{
 		return sp;
 	}
+
+    public bool GetIsDead()
+    {
+        return isDead;
+    }
 	#endregion GetMethods
 }

@@ -13,6 +13,9 @@ public class EnemyBullet : MonoBehaviour
     // 오브젝트 풀링 변수
     private IObjectPool<EnemyBullet> managedPool;
 
+    // 중복 release 방지용 플래그
+    private bool isReleased = false;
+
     void Awake()
     {
         bulletRb = GetComponent<Rigidbody>();
@@ -20,6 +23,7 @@ public class EnemyBullet : MonoBehaviour
 
     void OnEnable()
     {
+        isReleased = false;
         Invoke("DestroyBullet", 1f);
     }
 
@@ -47,6 +51,9 @@ public class EnemyBullet : MonoBehaviour
     // 총알 파괴
     private void DestroyBullet()
     {
+        if (isReleased) return;
+        isReleased = true;
+
         managedPool.Release(this);
     }
 }

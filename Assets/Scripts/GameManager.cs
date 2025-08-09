@@ -1,20 +1,83 @@
 // 이 코드는 게임을 플레이하며 점수를 계산하고, 플레이 시간을 출력하도록 할 예정.
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager gameManager; //어디에서든 게임매니저를 접근할 수 있는 전역 변수
+    #region singleton
+    public static GameManager instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    #endregion singleton
+
     [SerializeField]
     float currentPlayTime = 0; //현재 플레이 시간
     float currentScore = 0; //현재 스코어
     float maxScore; //모든 게임 통틀어서 기록해본 최대 스코어
+
+    // 상태 변수
+    [Header("시작 여부")]
+    public bool isPlay = false;
+    [Header("정지 여부")]
     public bool isPaused = false;
+
+    // 시작 경계선
+    [Header("시작 경계선")]
+    [SerializeField]
+    private GameObject startBorder;
+
+    // 참조 변수
+    [Header("참조 변수")]
+    [SerializeField]
+    private PlayerController player;
+    [SerializeField]
+    private CountDownController countDown;
+
+    void Start()
+    {
+        StartCoroutine(StartCount());
+    }
+
+    // 카운트 다운 시작
+    private IEnumerator StartCount()
+    {
+        countDown.ChangeTxt("3");
+        yield return new WaitForSeconds(1);
+        countDown.ChangeTxt("2");
+        yield return new WaitForSeconds(1);
+        countDown.ChangeTxt("1");
+        yield return new WaitForSeconds(1);
+        countDown.Deactive();
+        isPlay = true;
+        startBorder.SetActive(false);
+        yield return null;
+    }
 
     void Update()
     {
-        currentPlayTime += Time.deltaTime; //시간 변수에 시간 추가하기
-        AddScore();
-        UpdateMaxScore(); //현재 스코어, 기존 최대 스코어 비교 후 출력시키는 메서드
+        if (isPlay)
+        {
+            currentPlayTime += Time.deltaTime; //시간 변수에 시간 추가하기
+            AddScore();
+            UpdateMaxScore(); //현재 스코어, 기존 최대 스코어 비교 후 출력시키는 메서드
+        }
+
+        if (player.GetIsDead())
+        {
+            SceneManager.LoadScene("GameResultScene");
+        }
     }
 
     //점수 추가하는 메서드
