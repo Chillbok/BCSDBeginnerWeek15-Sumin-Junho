@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    // 참조 변수
+    private PlayerController player;
+    private CountDownController countDown;
+    private ScoreManager scoreManager;
+
     [SerializeField]
     float currentPlayTime = 0; //현재 플레이 시간
     float currentScore = 0; //현재 스코어
@@ -15,19 +20,19 @@ public class GameManager : Singleton<GameManager>
     public bool isPlay = false;
     [Header("정지 여부")]
     public bool isPaused = false;
+    [Header("게임 오버 여부")]
+    public bool isGameOver = false;
 
     // 시작 경계선
     [Header("시작 경계선")]
     [SerializeField]
     private GameObject startBorder;
 
-    // 참조 변수
-    private PlayerController player;
-    private CountDownController countDown;
-
     // 첫 시작 시
     void Start()
     {
+        if (GetComponent<ScoreManager>() != null)
+            scoreManager = GetComponent<ScoreManager>();
         player = FindObjectOfType<PlayerController>();
         countDown = FindObjectOfType<CountDownController>();
         StartCoroutine(StartCount());
