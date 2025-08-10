@@ -13,13 +13,6 @@ public class MapCreateManager : Singleton<MapCreateManager>
     [SerializeField]
     private GameObject[] mapPrefab;
 
-    // 첫 시작 시
-    private void Start()
-    {
-        var firstMap = CreateMap();
-        firstMap.transform.position = Vector3.zero;
-    }
-
     // 씬이 로드된 후
     private void OnEnable()
     {
@@ -30,8 +23,9 @@ public class MapCreateManager : Singleton<MapCreateManager>
     {
         if (scene.name == "GamePlayScene")
         {
+            pool = new ObjectPool<Map>(CreatingMap, OnGetMap, OnReleaseMap, OnDestroyMap, maxSize: 2);
             var firstMap = CreateMap();
-            firstMap.transform.position = Vector3.zero;
+            firstMap.transform.position = Vector3.zero + Vector3.forward * 20;
         }
     }
 
