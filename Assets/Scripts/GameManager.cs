@@ -73,7 +73,7 @@ public class GameManager : Singleton<GameManager>
             //스코어 최적화
             scoreManager.SetCurrentScore(0f);
 
-            isPlay = false; isPaused = false;
+            isPlay = false; isPaused = false; isGameOver = false;
             startBorder.SetActive(true);
             StartCoroutine(StartCount());
         }
