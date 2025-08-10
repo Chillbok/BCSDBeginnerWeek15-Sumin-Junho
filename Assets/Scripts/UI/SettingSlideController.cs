@@ -1,8 +1,6 @@
 //설정의 슬라이더에서 사용할 스크립트
 //구현 목표: 스크립트를 건드려도, 입력값에 입력해도 설정을 적용할 수 있어야 함
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
