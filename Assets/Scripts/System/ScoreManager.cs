@@ -1,58 +1,35 @@
+//게임의 점수를 계산하기 위한 스크립트
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreManager : MonoBehaviour
 {
-    //참조 변수
-    GameManager gameManager;
-    public static int currentScore;
-    public static int maxScore;
+    //현재 점수
+    private float currentScore = 0f;
+    private float maxScore;
 
-    void Awake()
+    //amount만큼 점수 추가
+    public void AddScore(float amount)
     {
-        gameManager = GetComponent<GameManager>();
-
-        if (PlayerPrefs.HasKey("MaxScore"))
-        {
-            maxScore = PlayerPrefs.GetInt("MaxScore");
-        }
-        else
-        {
-            maxScore = 0;
-        }
+        currentScore += amount;
     }
 
-    void Start()
+    public void ResetScore()
     {
-
+        currentScore = 0f;
     }
 
-    void Update()
+    //현재 스코어 설정
+    public void SetCurrentScore(float score)
     {
-        ChangeMaxScore();
+        currentScore = score;
     }
 
-    //현재 점수, 최고 점수 불러오기
-    void UpdateScore()
+    //현재 스코어 반환
+    public float GetCurrentScore()
     {
-        currentScore = (int)gameManager.GetCurrentScore();
-        maxScore = (int)gameManager.GetMaxScore();
-    }
-
-    //게임 오버 단계에서 실행되는 최고 점수 갱신 메서드
-    void ChangeMaxScore()
-    {
-        //게임 오버가 아닌 경우에 아래 내용 스킵
-        if (!gameManager.isGameOver)
-            return;
-
-        UpdateScore(); //스코어 동기화
-        maxScore = currentScore;
-        SaveScore(); //점수 저장
-    }
-
-    void SaveScore()
-    {
-        PlayerPrefs.SetInt("MaxScore", maxScore);
+        return currentScore;
     }
 }

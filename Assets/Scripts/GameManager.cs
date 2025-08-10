@@ -1,19 +1,24 @@
 // 이 코드는 게임을 플레이하며 점수를 계산하고, 플레이 시간을 출력하도록 할 예정.
+//데이터의 관리 또한 담당한다.
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    //데이터 관리
+    public GameData gameData;
+
     // 참조 변수
+    [Header("참조 변수")]
     private PlayerController player;
     private CountDownController countDown;
     private ScoreManager scoreManager;
 
+    [Header("플레이 점수")]
     [SerializeField]
     float currentPlayTime = 0; //현재 플레이 시간
-    float currentScore = 0; //현재 스코어
-    float maxScore; //모든 게임 통틀어서 기록해본 최대 스코어
 
     // 상태 변수
     [Header("시작 여부")]
@@ -28,19 +33,29 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject startBorder;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        //데이터 로드
+        gameData = SaveGame.LoadData();
+        if (gameData == null)
+        {
+            gameData = new GameData();
+            gameData.maxScore = 0;
+        }
+    }
+
     // 첫 시작 시
     void Start()
     {
-        if (GetComponent<ScoreManager>() != null)
-            scoreManager = GetComponent<ScoreManager>();
-        player = FindObjectOfType<PlayerController>();
-        countDown = FindObjectOfType<CountDownController>();
-        StartCoroutine(StartCount());
     }
 
     // 씬이 로드된 후
     private void OnEnable()
     {
+        player = FindObjectOfType<PlayerController>();
+        countDown = FindObjectOfType<CountDownController>();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -48,11 +63,16 @@ public class GameManager : Singleton<GameManager>
     {
         if (scene.name == "GamePlayScene")
         {
+            //씬 불러올 때 참조변수 할당
             player = FindObjectOfType<PlayerController>();
             countDown = FindObjectOfType<CountDownController>();
-            isPlay = false; isPaused = false;
-            currentPlayTime = 0;
-            currentScore = 0;
+            TryGetComponent<ScoreManager>(out scoreManager);
+            StartCoroutine(StartCount());
+
+            //스코어 최적화
+            scoreManager.SetCurrentScore(0f);
+
+            isPlay = true; isPaused = false;
             startBorder.SetActive(true);
             StartCoroutine(StartCount());
         }
@@ -80,33 +100,30 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
-        if (isPlay)
+        if (isPlay && !isGameOver)
         {
             currentPlayTime += Time.deltaTime; //시간 변수에 시간 추가하기
-            AddScore();
-            UpdateMaxScore(); //현재 스코어, 기존 최대 스코어 비교 후 출력시키는 메서드
+            scoreManager.AddScore(Time.deltaTime * 10);
 
-            if (player.GetIsDead())
+            if (player.GetIsDead()) //플레이어가 죽었을 때
             {
+                isGameOver = true;
+                isPlay = false;
+
+                //스코어 저장을 위해 ScoreManager에 점수 추가
+                float finalScore = scoreManager.GetCurrentScore();
+
+                if (finalScore > gameData.maxScore)
+                    gameData.maxScore = Mathf.RoundToInt(finalScore);
+
+                SaveGame.SaveData(gameData);
+
+                //게임 결과 씬 불러오기
                 SceneManager.LoadScene("GameResultScene");
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                isPlay = false;
             }
         }
-    }
-
-    //점수 추가하는 메서드
-    void AddScore()
-    {
-        currentScore += Time.deltaTime * 10; //점수에 현재 플레이 시간 * 10 추가
-    }
-
-    void UpdateMaxScore() //현재 스코어와 비교해 최대 스코어 반환하는 메서드
-    {
-        if (maxScore < currentScore)
-            maxScore = currentScore;
-        return;
     }
 
     //Get 메서드 모음
@@ -118,12 +135,13 @@ public class GameManager : Singleton<GameManager>
 
     public float GetCurrentScore() //현재 플레이 스코어
     {
-        return currentScore;
+        float score = scoreManager.GetCurrentScore();
+        return score;
     }
 
     public float GetMaxScore() //지금까지 기록해본 가장 높은 스코어
     {
-        return maxScore;
+        return gameData.maxScore;
     }
     #endregion GetMethods
 }

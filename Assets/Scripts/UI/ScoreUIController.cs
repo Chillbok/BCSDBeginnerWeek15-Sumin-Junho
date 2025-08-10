@@ -21,9 +21,12 @@ public class ScoreUIController : MonoBehaviour
 
     void Update()
     {
-        PlayTimeMinSec(); //플레이 시간 분, 초로 나눠서 구하기
-        UpdatePlayTime(); //플레이 시간을 UI에 출력
-        UpdateScore(); //플레이 점수 동기화
+        if (GameManager.Instance != null && GameManager.Instance.isPlay)
+        {
+            PlayTimeMinSec(); //플레이 시간 분, 초로 나눠서 구하기
+            UpdatePlayTime(); //플레이 시간을 UI에 출력
+            UpdateScore(); //플레이 점수 동기화
+        }
     }
 
     //플레이 시간을 분, 초로 나눠서 구하는 메서드
@@ -46,9 +49,7 @@ public class ScoreUIController : MonoBehaviour
     //점수를 출력하는 메서드
     void UpdateScore()
     {
-        currentScore = GameManager.Instance.GetCurrentScore(); //변수에 현재 점수 동기화
-        maxScore = GameManager.Instance.GetMaxScore(); //변수에 최대 점수 동기화
-        currentScoreText.text = $"{(int)currentScore}"; //점수를 int형으로 변환해 출력
-        maxScoreText.text = $"{(int)maxScore}"; //점수를 int형으로 변환해 출력  
+        currentScoreText.text = $"{(int)GameManager.Instance.GetCurrentScore()}"; //점수를 int형으로 변환해 출력
+        maxScoreText.text = $"{(int)GameManager.Instance.GetMaxScore()}"; //점수를 int형으로 변환해 출력  
     }
 }
