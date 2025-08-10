@@ -4002,6 +4002,7 @@ GameObject:
   - component: {fileID: 1411532481}
   - component: {fileID: 1411532480}
   - component: {fileID: 1411532483}
+  - component: {fileID: 1411532484}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4021,9 +4022,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27ca775d9d1bce419eb676ab99d30eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData:
+    maxScore: 0
   currentPlayTime: 0
   isPlay: 0
   isPaused: 0
+  isGameOver: 0
   startBorder: {fileID: 568922238}
 --- !u!4 &1411532481
 Transform:
@@ -4057,6 +4061,18 @@ MonoBehaviour:
   - {fileID: 8070266586102741066, guid: c2f854b675f52f2438dfe1ca2dcacd2b, type: 3}
   - {fileID: 7919088768271584352, guid: 2a10721a706b02f4a81e23cc9dd01c8a, type: 3}
   - {fileID: 8187678548191409007, guid: 5a12dc8e2f0581740b3c6b6e431e1d46, type: 3}
+--- !u!114 &1411532484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411532479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a85120bf56388e40a575ab1c64b9c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1413464420
 GameObject:
   m_ObjectHideFlags: 0
