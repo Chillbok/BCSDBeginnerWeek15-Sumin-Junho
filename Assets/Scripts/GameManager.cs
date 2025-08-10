@@ -49,6 +49,7 @@ public class GameManager : Singleton<GameManager>
     // 첫 시작 시
     void Start()
     {
+        TryGetComponent<ScoreManager>(out scoreManager);
     }
 
     // 씬이 로드된 후
@@ -72,7 +73,7 @@ public class GameManager : Singleton<GameManager>
             //스코어 최적화
             scoreManager.SetCurrentScore(0f);
 
-            isPlay = true; isPaused = false;
+            isPlay = false; isPaused = false;
             startBorder.SetActive(true);
             StartCoroutine(StartCount());
         }
@@ -103,7 +104,10 @@ public class GameManager : Singleton<GameManager>
         if (isPlay && !isGameOver)
         {
             currentPlayTime += Time.deltaTime; //시간 변수에 시간 추가하기
-            scoreManager.AddScore(Time.deltaTime * 10);
+            if (scoreManager == null)
+                Debug.LogError("'GameManager' 게임 오브젝트에 'ScoreManager' 컴포넌트 없음.");
+            else
+                scoreManager.AddScore(Time.deltaTime * 10);
 
             if (player.GetIsDead()) //플레이어가 죽었을 때
             {
@@ -135,8 +139,7 @@ public class GameManager : Singleton<GameManager>
 
     public float GetCurrentScore() //현재 플레이 스코어
     {
-        float score = scoreManager.GetCurrentScore();
-        return score;
+        return scoreManager.GetCurrentScore();
     }
 
     public float GetMaxScore() //지금까지 기록해본 가장 높은 스코어
