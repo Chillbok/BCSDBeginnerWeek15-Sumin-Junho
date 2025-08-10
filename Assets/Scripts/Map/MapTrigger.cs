@@ -15,6 +15,8 @@ public class MapTrigger : MonoBehaviour
                 previousMap.DestroyMap();
 
             previousMap = GetComponentInParent<Map>();
+
+            gameObject.SetActive(false);
         }
     }
 }
