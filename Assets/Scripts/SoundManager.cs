@@ -46,9 +46,6 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] gamePlayMusic;
     public AudioClip[] gameResultMusic;
 
-    [SerializeField]
-    float musicGap;
-
     // 효과음
     [SerializeField]
     Sound[] sfxs;
@@ -83,22 +80,18 @@ public class SoundManager : MonoBehaviour
             case "GameStartScene_withMusic":
                 if (gameStartMusic != null)
                 {
-                    if (gameStartMusic.Length >= 2)
-                        StartCoroutine(PlayIntroLoopMusic(gameStartMusic[0], gameStartMusic[1]));
-                    else if (gameStartMusic.Length > 0)
-                        PlayLoopMusic(gameStartMusic[0]);
+                    if (gameStartMusic.Length >= 2) StartCoroutine(PlayIntroLoopMusic(gameStartMusic[0], gameStartMusic[1]));
+                    else if (gameStartMusic.Length > 0) PlayLoopMusic(gameStartMusic[0]);
                 }
                 break;
             case "GamePlayScene":
                 if (gameStartMusic != null)
                 {
-                    if (gameStartMusic.Length >= 2)
-                        StartCoroutine(PlayIntroLoopMusic(gameStartMusic[0], gameStartMusic[1]));
-                    else if (gameStartMusic.Length > 0)
-                        PlayLoopMusic(gameStartMusic[0]);
+                    if (gamePlayMusic != null) PlayLoopMusic(gamePlayMusic[0]);
                 }
                 break;
             case "GameResultScene":
+                audioBgm.Stop();
                 break;
         }
     }
@@ -106,38 +99,30 @@ public class SoundManager : MonoBehaviour
     //시작부분 한번 연주하고, 계속 반복해서 뒷부분 연주
     IEnumerator PlayIntroLoopMusic(AudioClip introMusic, AudioClip loopMusic)
     {
+        audioBgm.Stop();
         //시작부분 한번만 연주
         audioBgm.clip = introMusic;
         audioBgm.loop = false;
         audioBgm.Play();
 
         //시작부분 음악만큼 기다리기
-        yield return new WaitForSeconds(introMusic.length - musicGap);
+        yield return new WaitForSeconds(introMusic.length - 1.2f);
 
         //반복 연주 부분 계속해서 연주하기
-        while (true)
-        {
-            audioBgm.clip = loopMusic;
-            audioBgm.loop = true;
-            audioBgm.Play();
-
-            float loopWaitTime = loopMusic.length;
-            yield return new WaitForSeconds(loopWaitTime > 0 ? loopWaitTime : loopMusic.length);
-        }
+        audioBgm.clip = loopMusic;
+        audioBgm.loop = true;
+        audioBgm.Play();
     }
 
     //시작부분 없이 하나만 반복해서 연주하기
-    IEnumerator PlayLoopMusic(AudioClip clip)
+    void PlayLoopMusic(AudioClip clip)
     {
+        audioBgm.Stop();
         if (clip != null)
         {
-            while (true)
-            {
-                audioBgm.clip = clip;
-                audioBgm.Play();
-                float waitTime = clip.length;
-                yield return new WaitForSeconds(waitTime > 0 ? waitTime : clip.length);
-            }
+            audioBgm.clip = clip;
+            audioBgm.loop = true;
+            audioBgm.Play();
         }
         else Debug.LogWarning("클립이 비어있음!");
     }

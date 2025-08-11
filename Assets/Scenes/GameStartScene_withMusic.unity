@@ -1122,9 +1122,9 @@ MonoBehaviour:
   gameStartMusic:
   - {fileID: 8300000, guid: 3405bd96d331083468ed4a065c7005dc, type: 3}
   - {fileID: 8300000, guid: ebff186b21d998f43811b1e73821aeb5, type: 3}
-  gamePlayMusic: []
+  gamePlayMusic:
+  - {fileID: 8300000, guid: 542249ae97186454c9d6f8567e12fe1c, type: 3}
   gameResultMusic: []
-  musicGap: 1.2
   sfxs: []
   audioSfx: []
   playSoundName: []
