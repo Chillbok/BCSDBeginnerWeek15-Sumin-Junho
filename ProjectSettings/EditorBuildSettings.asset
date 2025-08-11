@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameStartScene.unity
     guid: b85a6150e67c90e4aa5a7e3bd7b1055f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GamePlayScene.unity
     guid: be6d755c907bc064ba9a4fd0c5d42336
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MaxScoreMakingScene.unity
     guid: b806163746b902e4383048ccbe65b8f2
   - enabled: 1
