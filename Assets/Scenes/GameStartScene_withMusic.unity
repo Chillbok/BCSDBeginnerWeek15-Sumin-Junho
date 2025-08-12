@@ -2760,10 +2760,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3944419406816084665, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
-      propertyPath: m_text
-      value: Music Volume
-      objectReference: {fileID: 0}
     - target: {fileID: 4053168933565062065, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

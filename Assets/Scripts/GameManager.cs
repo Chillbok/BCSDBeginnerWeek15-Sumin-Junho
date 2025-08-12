@@ -42,7 +42,6 @@ public class GameManager : Singleton<GameManager>
         if (gameData == null)
         {
             gameData = new GameData();
-            gameData.maxScore = 0;
         }
     }
 
