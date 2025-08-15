@@ -23,6 +23,7 @@ public class SettingManager : Singleton<SettingManager>
     [Header("컴포넌트 참조 변수들")]
     [SerializeField] PlayerController playerController;
     [SerializeField] GameManager gameManager;
+    SettingObjects settingObjects;
 
     string sceneName; //씬 이름 저장하기 위한 변수
 
@@ -75,7 +76,7 @@ public class SettingManager : Singleton<SettingManager>
     {
         if (sceneName != gameManager.nameOfPlayScene)
         {
-            Debug.LogError("Player가 존재하지 않습니다");
+            Debug.Log("Player가 존재하지 않습니다");
         }
         else
         {
@@ -85,20 +86,20 @@ public class SettingManager : Singleton<SettingManager>
         }
     }
 
+    //세팅 오브젝트 찾기
     void FindSettings()
     {
-        if (sceneName == gameManager.nameOfStartScene)
+        if (sceneName == gameManager.nameOfStartScene || sceneName == gameManager.nameOfPlayScene)
         {
-            sfxSlider
-            bgmSlider
-            mouseSens
-        }
+            //설정 게임 오브젝트 찾기
+            GameObject settingsGameObject = GameObject.FindWithTag("Setting Objects");
+            if (settingsGameObject == null) Debug.LogError($"{settingsGameObject.name} 존재하지 않음!");
+            settingObjects = settingsGameObject.GetComponent<SettingObjects>();
 
-        else if (sceneName == gameManager.nameOfPlayScene)
-        {
-            sfxSlider
-            bgmSlider
-            mouseSens
+            //슬라이더 배정
+            sfxSlider = settingObjects.sfxSlider;
+            bgmSlider = settingObjects.bgmSlider;
+            mouseSensSlider = settingObjects.mouseSensitivity;
         }
 
         else return;
