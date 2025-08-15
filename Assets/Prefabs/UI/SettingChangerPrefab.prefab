@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4053168933565062065}
+  - component: {fileID: 4350154519599333696}
   m_Layer: 5
   m_Name: SettingChangerPrefab
   m_TagString: Untagged
@@ -37,6 +38,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4350154519599333696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206407456092489036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4645ea6f369fe1541b5f560243b3f332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 227301832625266325}
+  inputField: {fileID: 804920801622369604}
 --- !u!1 &294390038430026007
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,9 +774,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Setting Name
-
-'
+  m_text: Music Volume
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -879,7 +892,6 @@ GameObject:
   - component: {fileID: 4687646946270253900}
   - component: {fileID: 1816902099530797642}
   - component: {fileID: 7341853267144705830}
-  - component: {fileID: 7196074989793752480}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -946,21 +958,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7196074989793752480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5408065700705795026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4645ea6f369fe1541b5f560243b3f332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 227301832625266325}
-  inputField: {fileID: 804920801622369604}
-  defaultSetting: 100
 --- !u!1 &6784091585937033487
 GameObject:
   m_ObjectHideFlags: 0
