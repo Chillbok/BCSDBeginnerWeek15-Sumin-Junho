@@ -10,8 +10,27 @@ public class GameManager : Singleton<GameManager>
     //데이터 관리
     public GameData gameData;
 
+    //게임 주요 씬들
+    [Header("게임 주요 씬들")]
+
+    [Tooltip("게임 타이틀 화면이 출력될 씬을 작성하세요")]
+    public string nameOfStartScene;
+    public Scene startScene;
+
+    [Tooltip("게임 플레이 화면이 출력될 씬을 작성하세요")]
+    public string nameOfPlayScene;
+    public Scene playScene;
+
+    [Tooltip("게임 결과 화면이 출력될 씬을 작성하세요")]
+    public string nameOfResultScene;
+    public Scene resultScene;
+
+
+
     // 참조 변수
     [Header("참조 변수")]
+    [SerializeField]
+    private SettingManager settingManager;
     private PlayerController player;
     private CountDownController countDown;
     private ScoreManager scoreManager;
@@ -42,8 +61,8 @@ public class GameManager : Singleton<GameManager>
         if (gameData == null)
         {
             gameData = new GameData();
-            gameData.maxScore = 0;
         }
+        SetUsingScene(); //씬 이름 배정
     }
 
     // 첫 시작 시
@@ -62,7 +81,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "GamePlayScene")
+        if (scene.name == playScene.name)
         {
             //씬 불러올 때 참조변수 할당
             player = FindObjectOfType<PlayerController>();
@@ -82,6 +101,13 @@ public class GameManager : Singleton<GameManager>
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void SetUsingScene()
+    {
+        startScene = SceneManager.GetSceneByName(nameOfStartScene);
+        playScene = SceneManager.GetSceneByName(nameOfPlayScene);
+        resultScene = SceneManager.GetSceneByName(nameOfResultScene);
     }
 
     // 카운트 다운 시작
@@ -123,7 +149,7 @@ public class GameManager : Singleton<GameManager>
                 SaveGame.SaveData(gameData);
 
                 //게임 결과 씬 불러오기
-                SceneManager.LoadScene("GameResultScene");
+                SceneManager.LoadScene(nameOfResultScene);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }

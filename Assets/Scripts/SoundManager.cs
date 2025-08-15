@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 [System.Serializable]
@@ -30,15 +32,9 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
     #endregion singleton
-
-    // BGM
-    [SerializeField]
-    Sound[] bgms;
-    // BGM 출력할 오디오 소스
-    [SerializeField]
-    AudioSource audioBgm;
 
     // 효과음
     [SerializeField]
@@ -46,20 +42,6 @@ public class SoundManager : MonoBehaviour
     // 효과음 출력할 오디오 소스
     [SerializeField]
     AudioSource[] audioSfx; // 효과음은 중첩되어 들릴 수 있으므로 배열로 설정
-
-    // BGM 재생
-    public void PlayBGM(string name)
-    {
-        for (int i = 0; i < bgms.Length; i++)
-        {
-            if (name == bgms[i].name)
-            {
-                audioBgm.clip = bgms[i].clip;
-                audioBgm.Play();
-                return;
-            }
-        }
-    }
 
     // 재생 중인 효과음 이름
     public string[] playSoundName;

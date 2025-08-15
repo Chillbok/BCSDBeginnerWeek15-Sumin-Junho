@@ -10,14 +10,14 @@ public class SettingSlideController : MonoBehaviour
     public Slider slider;
     public TMP_InputField inputField;
 
-    [Header("Settings")]
-    public int defaultSetting = 100;
-
     void Start()
     {
         //초기값 설정
-        inputField.text = defaultSetting.ToString();
-        slider.value = defaultSetting;
+        //퍼센티지 기준이라면
+        if (slider.maxValue == 100) inputField.text = "100";
+        //퍼센티지 기준이 아니라면
+        else inputField.text = "1";
+
         //각 UI 요소에 이벤트 리스너 추가
         //슬라이더 값이 변경될 때마다 OnSliderValueChanged 메서드 호출
         slider.onValueChanged.AddListener(OnSliderValueChanged);
