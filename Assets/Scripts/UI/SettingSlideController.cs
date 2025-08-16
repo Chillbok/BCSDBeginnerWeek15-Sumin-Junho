@@ -19,7 +19,7 @@ public class SettingSlideController : MonoBehaviour
     {
         settingType = GetComponent<SettingType>();
         type = settingType.settingType;
-        Debug.Log($"{type} 타입 지정됨");
+        Debug.Log($"{gameObject.name}에 {type} 타입 지정됨");
 
         //세이브데이터 변수에 할당
         gameData = GameManager.Instance.gameData;
@@ -111,6 +111,6 @@ public class SettingSlideController : MonoBehaviour
         if (slider.maxValue == 100)
             inputField.text = Mathf.RoundToInt(value).ToString();
         else
-            inputField.text = value.ToString();
+            inputField.text = value.ToString("F2");
     }
 }

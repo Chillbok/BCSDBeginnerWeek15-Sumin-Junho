@@ -28,9 +28,6 @@ public class GameManager : Singleton<GameManager>
 
 
     // 참조 변수
-    [Header("참조 변수")]
-    [SerializeField]
-    private SettingManager settingManager;
     private PlayerController player;
     private CountDownController countDown;
     private ScoreManager scoreManager;
