@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     [Header("플레이어 시야 관련 변수")]
     [SerializeField]
     float lookSensitivity; //카메라 민감도
+    float lastSensitivity;
     [SerializeField]
     float cameraRotationLimit; //카메라 상하 한계 각도
     float currentCameraRotation = 0; //현재 카메라 상하 각도
@@ -81,6 +82,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        lastSensitivity = 1f;
+        lookSensitivity = GameManager.Instance.gameData.mouseSensitivity;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -109,10 +112,32 @@ public class PlayerController : MonoBehaviour
             CheckIsGround();
             isDead = CheckDead();
 
+            //감도 수정
+            SetCameraSensitivity();
+
+            //카메라 움직이기
             CameraRotation();
             CharacterRotation();
         }
 	}
+
+    //감도 판단하고 감도 수정
+    void SetCameraSensitivity()
+    {
+        GameData gameData = GameManager.Instance.gameData;
+        if (lookSensitivity != lastSensitivity)
+        {
+            ChangeCameraSensitivity();
+            lastSensitivity = lookSensitivity;
+            SaveGame.SaveData(gameData);
+        }
+    }
+
+    //감도 수정
+    void ChangeCameraSensitivity()
+    {
+        lookSensitivity = GameManager.Instance.gameData.mouseSensitivity;
+    }
 
     //새로 버프 적용하는 메서드
     //목표: 새로운 버프 적용하고, 만약 이미 같은 버프 있으면 기존 것 중지시키고 새로 시작해 시간 갱신

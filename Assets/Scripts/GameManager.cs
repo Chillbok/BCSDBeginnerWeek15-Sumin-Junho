@@ -25,8 +25,6 @@ public class GameManager : Singleton<GameManager>
     public string nameOfResultScene;
     public Scene resultScene;
 
-
-
     // 참조 변수
     private PlayerController player;
     private CountDownController countDown;
