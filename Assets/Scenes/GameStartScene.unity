@@ -951,30 +951,6 @@ PrefabInstance:
       propertyPath: settingManager
       value: 
       objectReference: {fileID: 1812847390}
-    - target: {fileID: 9040954717213113755, guid: 80c20457b6f9bab449d3fe40cfa75f9d, type: 3}
-      propertyPath: nameOfPlayScene
-      value: GamePlayScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 9040954717213113755, guid: 80c20457b6f9bab449d3fe40cfa75f9d, type: 3}
-      propertyPath: nameOfStartScene
-      value: GameStartScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 9040954717213113755, guid: 80c20457b6f9bab449d3fe40cfa75f9d, type: 3}
-      propertyPath: nameOfResultScene
-      value: GameResultScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 9040954717213113755, guid: 80c20457b6f9bab449d3fe40cfa75f9d, type: 3}
-      propertyPath: nameOfGamePlayScene
-      value: GamePlayScene_withSetting
-      objectReference: {fileID: 0}
-    - target: {fileID: 9040954717213113755, guid: 80c20457b6f9bab449d3fe40cfa75f9d, type: 3}
-      propertyPath: nameOfGameStartScene
-      value: GameStartScene_withMusic
-      objectReference: {fileID: 0}
-    - target: {fileID: 9040954717213113755, guid: 80c20457b6f9bab449d3fe40cfa75f9d, type: 3}
-      propertyPath: nameOfGameResultScene
-      value: GameResultScene
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
