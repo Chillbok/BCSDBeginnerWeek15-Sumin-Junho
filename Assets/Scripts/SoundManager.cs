@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 
@@ -42,13 +43,49 @@ public class SoundManager : MonoBehaviour
     // 효과음 출력할 오디오 소스
     [SerializeField]
     AudioSource[] audioSfx; // 효과음은 중첩되어 들릴 수 있으므로 배열로 설정
+    [SerializeField]
+    AudioMixer audioMixer;
 
     // 재생 중인 효과음 이름
     public string[] playSoundName;
 
-    //음량
+    //게임데이터
+    GameData gameData;
+
+    //음량 설정용 변수
     private float sfxVolume;
     private float lastVolume;
+
+    void Start()
+    {
+        gameData = GameManager.Instance.gameData;
+        lastVolume = 0f;
+        SetVariableOfSfxVolume();
+    }
+
+    void Update()
+    {
+        SetVariableOfSfxVolume();
+        //볼륨 조절 후 게임 데이터 저장
+        SaveGame.SaveData(gameData);
+    }
+
+    //볼륨 동기화
+    void SetVariableOfSfxVolume()
+    {
+        sfxVolume = -80f + 0.8f * gameData.sfxVolume;
+        if (sfxVolume != lastVolume)
+        {
+            ChangeAudioSourceVolume();
+            lastVolume = sfxVolume;
+        }
+    }
+
+    //실제로 볼륨 수정
+    void ChangeAudioSourceVolume()
+    {
+        audioMixer.SetFloat("sfxVolume", sfxVolume);
+    }
 
     // 효과음 재생
     public void PlaySFX(string name)
