@@ -2,6 +2,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
@@ -13,8 +14,29 @@ public class MusicManager : Singleton<MusicManager>
     private GameManager gameManager;
 
     [Header("음악 목록")]
-
     public AudioClip[] gamePlayMusic;
+
+    [Header("오디오 믹서")]
+    [SerializeField]
+    private AudioMixer audioMixer;
+
+    GameData gameData;
+    private float musicVolume;
+    private float lastVolume;
+
+    void Start()
+    {
+        gameData = GameManager.Instance.gameData;
+        lastVolume = 0f;
+        SetVariableOfMusicVolume();
+    }
+
+    void Update()
+    {
+        SetVariableOfMusicVolume();
+        //볼륨 조절 후 게임 데이터 저장
+        SaveGame.SaveData(gameData);
+    }
 
     //씬 로드 완료 시
     void OnEnable()
@@ -41,6 +63,25 @@ public class MusicManager : Singleton<MusicManager>
             if (gamePlayMusic != null) PlayLoopMusic(gamePlayMusic[0]);
         else if (sceneName == gameManager.nameOfResultScene)
             audioSource.Stop();
+    }
+
+    //볼륨 동기화
+    void SetVariableOfMusicVolume()
+    {
+        musicVolume = -80f + 0.8f * gameData.bgmVolume;
+        //Debug.Log($"현재 gameData.bgmVolume {gameData.bgmVolume}, 계산된 musicVolume {musicVolume}");
+        if (musicVolume != lastVolume)
+        {
+            //Debug.Log("볼륨 값 변경 감지. 관련 함수 호출");
+            ChangeAudioSourceVolume();
+            lastVolume = musicVolume;
+        }
+    }
+
+    //실제로 볼륨 수정
+    void ChangeAudioSourceVolume()
+    {
+        audioMixer.SetFloat("bgmVolume", musicVolume);
     }
 
     //시작부분 한번 연주하고, 계속 반복해서 뒷부분 연주

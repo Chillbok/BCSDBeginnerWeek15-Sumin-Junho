@@ -46,6 +46,10 @@ public class SoundManager : MonoBehaviour
     // 재생 중인 효과음 이름
     public string[] playSoundName;
 
+    //음량
+    private float sfxVolume;
+    private float lastVolume;
+
     // 효과음 재생
     public void PlaySFX(string name)
     {

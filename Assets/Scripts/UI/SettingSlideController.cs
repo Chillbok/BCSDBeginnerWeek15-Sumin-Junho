@@ -19,18 +19,10 @@ public class SettingSlideController : MonoBehaviour
     {
         settingType = GetComponent<SettingType>();
         type = settingType.settingType;
-        Debug.Log($"{gameObject.name}에 {type} 타입 지정됨");
+        //Debug.Log($"{gameObject.name}에 {type} 타입 지정됨");
 
         //세이브데이터 변수에 할당
         gameData = GameManager.Instance.gameData;
-
-        //초기값 설정
-        /*
-        //퍼센티지 기준이라면(최댓값 100)
-        if (slider.maxValue == 100) inputField.text = "100";
-        //퍼센티지 기준이 아니라면(최댓값 20)
-        else inputField.text = "1";
-        */
 
         SetupDefaultSetting(); //초기값 설정
 
@@ -45,11 +37,20 @@ public class SettingSlideController : MonoBehaviour
     private void SetupDefaultSetting()
     {
         if (type == SettingEnum.SFX)
+        {
             slider.value = gameData.sfxVolume;
+            DefinePercentorNot(gameData.sfxVolume);
+        }
         else if (type == SettingEnum.BGM)
+        {
             slider.value = gameData.bgmVolume;
+            DefinePercentorNot(gameData.bgmVolume);
+        }
         else if (type == SettingEnum.MOUSE_SENS)
+        {
             slider.value = gameData.mouseSensitivity;
+            DefinePercentorNot(gameData.mouseSensitivity);
+        }
     }
 
     //슬라이더를 조작했을 때 출력될 메서드
@@ -88,21 +89,33 @@ public class SettingSlideController : MonoBehaviour
     void ChangeSetting()
     {
         if (type == SettingEnum.SFX)
-            DefineSettingChangeAndApply(gameData.sfxVolume, slider.value);
+        {
+            if (DefineSettingChangeAndApply(gameData.sfxVolume, slider.value))
+                gameData.sfxVolume = slider.value;
+        }
         else if (type == SettingEnum.BGM)
-            DefineSettingChangeAndApply(gameData.bgmVolume, slider.value);
+        {
+            if (DefineSettingChangeAndApply(gameData.bgmVolume, slider.value))
+                gameData.bgmVolume = slider.value;
+        }
         else if (type == SettingEnum.MOUSE_SENS)
-            DefineSettingChangeAndApply(gameData.mouseSensitivity, slider.value);
+        {
+            if (DefineSettingChangeAndApply(gameData.mouseSensitivity, slider.value))
+                gameData.mouseSensitivity = slider.value;
+        }
     }
 
     //세팅이 달라졌는지 확인하고 바뀌었으면 적용하는 메서드
-    void DefineSettingChangeAndApply(float saved, float current)
+    bool DefineSettingChangeAndApply(float saved, float current)
     {
         bool isChanged = false;
         if (saved != current) isChanged = true;
 
         if (isChanged)
-            saved = current;
+        {
+            Debug.Log($"{saved}가 {current}로 바뀜");
+        }
+        return isChanged;
     }
 
     //슬라이더의 maxValue를 판단하고 int 또는 float로 변환해 값을 입력하는 메서드
