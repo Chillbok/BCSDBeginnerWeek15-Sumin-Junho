@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4053168933565062065}
-  - component: {fileID: 4350154519599333696}
+  - component: {fileID: 8411219956967915722}
+  - component: {fileID: 4501523330007208276}
   m_Layer: 5
   m_Name: SettingChangerPrefab
   m_TagString: Untagged
@@ -38,7 +39,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4350154519599333696
+--- !u!114 &8411219956967915722
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,6 +53,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 227301832625266325}
   inputField: {fileID: 804920801622369604}
+--- !u!114 &4501523330007208276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206407456092489036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30dca1d5ec4458e45ac174105f12e0d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingType: 2
 --- !u!1 &294390038430026007
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +788,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Music Volume
+  m_text: Mouse Sensitivity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6c33796d72148874c91f6564f7194517, type: 2}
   m_sharedMaterial: {fileID: -2737585691034293806, guid: 6c33796d72148874c91f6564f7194517, type: 2}
@@ -801,8 +815,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1042,9 +1056,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 28237535625963056}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
