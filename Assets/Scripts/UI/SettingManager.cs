@@ -23,7 +23,7 @@ public class SettingManager : Singleton<SettingManager>
     [Header("컴포넌트 참조 변수들")]
     [SerializeField] PlayerController playerController;
     [SerializeField] GameManager gameManager;
-    SettingObjects settingObjects;
+    //SettingObjects settingObjects;
 
     string sceneName; //씬 이름 저장하기 위한 변수
 
@@ -42,7 +42,6 @@ public class SettingManager : Singleton<SettingManager>
 
     private void Update()
     {
-        ChangeSetting();
     }
 
     private void OnEnable()
@@ -67,7 +66,7 @@ public class SettingManager : Singleton<SettingManager>
         if (playerController == null)
         {
             FindPlayerController();
-            FindSettings();
+            //FindSettings();
         }
     }
 
@@ -87,6 +86,7 @@ public class SettingManager : Singleton<SettingManager>
     }
 
     //세팅 오브젝트 찾기
+    /*
     void FindSettings()
     {
         if (sceneName == gameManager.nameOfStartScene || sceneName == gameManager.nameOfPlayScene)
@@ -104,6 +104,7 @@ public class SettingManager : Singleton<SettingManager>
 
         else return;
     }
+    */
 
     //지정한 변수에 씬의 이름을 넣는 메서드
     string SetSceneName(Scene scene, string sceneName)
@@ -114,6 +115,7 @@ public class SettingManager : Singleton<SettingManager>
 
     //슬라이더의 설정 반영하는 메서드
     //설정이 바뀐 경우에만 수정 실행
+    /*
     void ChangeSetting()
     {
         if (DefineSettingChange(sfxVolume, sfxSlider.value))
@@ -123,6 +125,7 @@ public class SettingManager : Singleton<SettingManager>
         if (DefineSettingChange(mouseSens, mouseSensSlider.value))
             mouseSens = mouseSensSlider.value;
     }
+    */
 
     //설정이 바뀌었다면 true 반환
     bool DefineSettingChange(float saved, float current)
@@ -134,6 +137,7 @@ public class SettingManager : Singleton<SettingManager>
     //설정한 내용을 게임 데이터에 저장하는 메서드
     public void SaveSetting()
     {
+        Debug.Log("설정 저장 완료");
         GameData gameData = GameManager.Instance.gameData;
         gameData.sfxVolume = sfxVolume;
         gameData.bgmVolume = bgmVolume;

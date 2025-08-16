@@ -9,13 +9,17 @@ public class SettingSlideController : MonoBehaviour
     [Header("UI 요소들")]
     public Slider slider;
     public TMP_InputField inputField;
+    GameData gameData;
 
     void Start()
     {
+        //세이브데이터 변수에 할당
+        gameData = GameManager.Instance.gameData;
+
         //초기값 설정
-        //퍼센티지 기준이라면
+        //퍼센티지 기준이라면(최댓값 100)
         if (slider.maxValue == 100) inputField.text = "100";
-        //퍼센티지 기준이 아니라면
+        //퍼센티지 기준이 아니라면(최댓값 20)
         else inputField.text = "1";
 
         //각 UI 요소에 이벤트 리스너 추가
@@ -25,15 +29,23 @@ public class SettingSlideController : MonoBehaviour
         inputField.onEndEdit.AddListener(OnInputFieldValueChanged);
     }
 
+    //초기값 설정 메서드
+    private void SetupDefaultSetting()
+    {
+        
+    }
+
     //슬라이더를 조작했을 때 출력될 메서드
     private void OnSliderValueChanged(float value)
     {
         //슬라이더값을 정수로 변환해 인풋 필드의 텍스트 업데이트
-        inputField.text = Mathf.RoundToInt(value).ToString();
+        if (slider.maxValue == 100)
+            inputField.text = Mathf.RoundToInt(value).ToString();
 
         //실제로 값을 조작하는 과정을 아래에 추가
     }
 
+    //텍스트창 입력값이 바뀌면 실행할 메서드
     private void OnInputFieldValueChanged(string value)
     {
         //입력한 텍스트를 float로 변환
