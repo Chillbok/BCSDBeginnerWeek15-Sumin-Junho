@@ -9,12 +9,12 @@ public class MusicManager : Singleton<MusicManager>
 {
     [SerializeField]
     private AudioSource audioSource;
+    [SerializeField]
+    private GameManager gameManager;
 
     [Header("음악 목록")]
 
-    public AudioClip[] gameStartMusic;
     public AudioClip[] gamePlayMusic;
-    public AudioClip[] gameResultMusic;
 
     //씬 로드 완료 시
     void OnEnable()
@@ -37,25 +37,10 @@ public class MusicManager : Singleton<MusicManager>
     // BGM 재생(씬이 로드될 때마다 호출)
     void ChooseBGM(string sceneName)
     {
-        switch (sceneName)
-        {
-            //case "GameStartScene":
-            case "GameStartScene_withMusic":
-                if (gameStartMusic != null)
-                {
-                    if (gameStartMusic.Length >= 2) StartCoroutine(PlayIntroLoopMusic(gameStartMusic[0], gameStartMusic[1]));
-                }
-                break;
-            case "GamePlayScene":
-                if (gameStartMusic != null)
-                {
-                    if (gamePlayMusic != null) PlayLoopMusic(gamePlayMusic[0]);
-                }
-                break;
-            case "GameResultScene":
-                audioSource.Stop();
-                break;
-        }
+        if (sceneName == gameManager.nameOfPlayScene)
+            if (gamePlayMusic != null) PlayLoopMusic(gamePlayMusic[0]);
+        else if (sceneName == gameManager.nameOfResultScene)
+            audioSource.Stop();
     }
 
     //시작부분 한번 연주하고, 계속 반복해서 뒷부분 연주
