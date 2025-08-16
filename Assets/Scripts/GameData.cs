@@ -2,14 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum SettingEnum
-{
-    MAX_SCORE = 0,
-    SFX = 1,
-    BGM = 2,
-    MOUSE_SENS = 3
-}
-
 [System.Serializable]
 public class GameData
 {

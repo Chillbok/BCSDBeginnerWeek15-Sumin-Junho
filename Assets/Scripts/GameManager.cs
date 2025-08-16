@@ -25,12 +25,7 @@ public class GameManager : Singleton<GameManager>
     public string nameOfResultScene;
     public Scene resultScene;
 
-
-
     // 참조 변수
-    [Header("참조 변수")]
-    [SerializeField]
-    private SettingManager settingManager;
     private PlayerController player;
     private CountDownController countDown;
     private ScoreManager scoreManager;
