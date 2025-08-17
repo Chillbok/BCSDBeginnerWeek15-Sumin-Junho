@@ -34,6 +34,6 @@ public class Border : MonoBehaviour
 	void PlayerDamage()
     {
 		if (transform.position.z >= player.transform.position.z)
-			player.DecreaseHP(0.1f);
+			player.DecreaseHP(0.5f);
     }
 }
