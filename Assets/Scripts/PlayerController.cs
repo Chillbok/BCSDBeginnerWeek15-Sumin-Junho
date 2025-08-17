@@ -49,8 +49,8 @@ public class PlayerController : MonoBehaviour
     float currentCameraRotation = 0; //현재 카메라 상하 각도
 
     //상태 변수
-    [Header("플레이어 상태 관련 변수")]
     bool isGround = true; //땅에 닿았는지 여부
+    bool isMove = false;
     bool isWalk = false; // 걷고 있는지 여부
     bool isRun = false; //달리고 있는지 여부
     bool isSpUsed = false; //스테미나 사용 여부
@@ -98,8 +98,6 @@ public class PlayerController : MonoBehaviour
         bool isPaused = GameManager.Instance.isPaused;
         if (!isPaused)
         {
-            TryRun();
-            Move();
             TryFire();
             TryJump();
             TryReload();
@@ -120,6 +118,8 @@ public class PlayerController : MonoBehaviour
         bool isPaused = GameManager.Instance.isPaused;
         if (!isPaused)
         {
+            TryRun();
+            Move();
             CheckMove();
             CheckIsGround();
         }
@@ -248,9 +248,9 @@ public class PlayerController : MonoBehaviour
     //달리기 시도
     void TryRun()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && currentSp > 0 && isWalk)
+        if (Input.GetKey(KeyCode.LeftShift) && currentSp > 0 && isMove)
             Run();
-        else if (Input.GetKeyUp(KeyCode.LeftShift) || currentSp <= 0)
+        else
             RunCancel();
     }
 
@@ -266,7 +266,6 @@ public class PlayerController : MonoBehaviour
 
         if (!isGround)
         {
-            isRun = false;
             SoundManager.Instance.StopLoopSFX();
         }
 
@@ -309,6 +308,15 @@ public class PlayerController : MonoBehaviour
         float moveDirX = Input.GetAxisRaw("Horizontal");
         float moveDirZ = Input.GetAxisRaw("Vertical");
 
+        if (moveDirX == 0 && moveDirZ == 0)
+        {
+            isMove = false;
+        }
+        else
+        {
+            isMove = true;
+        }
+
         Vector3 velocity = (transform.right * moveDirX + transform.forward * moveDirZ).normalized * currentSpeed;
 
 		playerRb.MovePosition(transform.position + velocity * Time.deltaTime);
@@ -319,7 +327,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isRun && isGround)
         {
-            if (Vector3.Distance(lastPos, transform.position) >= 0.0001f)
+            if (isMove)
             {
                 if (!isWalk)
                 {
@@ -384,7 +392,7 @@ public class PlayerController : MonoBehaviour
     //hp가 0이 되면 true 반환
     bool CheckDead()
     {
-        if (Mathf.Round(currentHp) > 0)
+        if (currentHp > 0)
             return false;
         else
             return true;
