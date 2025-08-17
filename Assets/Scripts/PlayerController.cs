@@ -98,6 +98,8 @@ public class PlayerController : MonoBehaviour
         bool isPaused = GameManager.Instance.isPaused;
         if (!isPaused)
         {
+            TryRun();
+            Move();
             TryFire();
             TryJump();
             TryReload();
@@ -118,8 +120,6 @@ public class PlayerController : MonoBehaviour
         bool isPaused = GameManager.Instance.isPaused;
         if (!isPaused)
         {
-            TryRun();
-            Move();
             CheckMove();
             CheckIsGround();
         }
