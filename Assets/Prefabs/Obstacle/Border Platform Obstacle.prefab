@@ -121,5 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c1fba9b0cfff744fb1605896dbdf57b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enterDamage: 0
-  stayDamage: 0.01
+  enterDamage: 10
+  stayDamage: 0.5
