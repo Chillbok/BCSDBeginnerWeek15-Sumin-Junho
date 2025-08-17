@@ -21,7 +21,7 @@ public class MapCreateManager : Singleton<MapCreateManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "GamePlayScene")
+        if (scene.name == GameManager.Instance.nameOfPlayScene)
         {
             pool = new ObjectPool<Map>(CreatingMap, OnGetMap, OnReleaseMap, OnDestroyMap, maxSize: 2);
             var firstMap = CreateMap();

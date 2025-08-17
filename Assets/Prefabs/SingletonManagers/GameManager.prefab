@@ -49,18 +49,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData:
     maxScore: 0
-    sfxVolume: 100
+    sfxVolume: 80
     bgmVolume: 100
-    mouseSensitivity: 1
+    mouseSensitivity: 1.5
   nameOfStartScene: GameStartScene
-  startScene:
-    m_Handle: 0
   nameOfPlayScene: GamePlayScene
-  playScene:
-    m_Handle: 0
   nameOfResultScene: GameResultScene
-  resultScene:
-    m_Handle: 0
   currentPlayTime: 0
   isPlay: 0
   isPaused: 0

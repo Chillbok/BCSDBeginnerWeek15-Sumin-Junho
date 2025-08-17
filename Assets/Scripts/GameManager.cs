@@ -15,15 +15,12 @@ public class GameManager : Singleton<GameManager>
 
     [Tooltip("게임 타이틀 화면이 출력될 씬을 작성하세요")]
     public string nameOfStartScene;
-    public Scene startScene;
 
     [Tooltip("게임 플레이 화면이 출력될 씬을 작성하세요")]
     public string nameOfPlayScene;
-    public Scene playScene;
 
     [Tooltip("게임 결과 화면이 출력될 씬을 작성하세요")]
     public string nameOfResultScene;
-    public Scene resultScene;
 
     // 참조 변수
     private PlayerController player;
@@ -57,7 +54,6 @@ public class GameManager : Singleton<GameManager>
         {
             gameData = new GameData();
         }
-        SetUsingScene(); //씬 이름 배정
     }
 
     // 첫 시작 시
@@ -76,7 +72,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == playScene.name)
+        if (scene.name == nameOfPlayScene)
         {
             //씬 불러올 때 참조변수 할당
             player = FindObjectOfType<PlayerController>();
@@ -95,13 +91,6 @@ public class GameManager : Singleton<GameManager>
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void SetUsingScene()
-    {
-        startScene = SceneManager.GetSceneByName(nameOfStartScene);
-        playScene = SceneManager.GetSceneByName(nameOfPlayScene);
-        resultScene = SceneManager.GetSceneByName(nameOfResultScene);
     }
 
     // 카운트 다운 시작

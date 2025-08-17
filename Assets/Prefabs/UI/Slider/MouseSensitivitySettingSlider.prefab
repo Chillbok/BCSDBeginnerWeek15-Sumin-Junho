@@ -8,9 +8,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 28237535625963056, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 28237535625963056, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 28237535625963056, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 206407456092489036, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
       propertyPath: m_Name
       value: MouseSensitivitySettingSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 227301832625266325, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
+      propertyPath: m_Value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 227301832625266325, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
+      propertyPath: m_MaxValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 804920801622369604, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
+      propertyPath: m_Text
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001039321580227957, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001039321580227957, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1237591564139335818, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
+      propertyPath: m_text
+      value: "1.5\u200B"
       objectReference: {fileID: 0}
     - target: {fileID: 1237591564139335818, guid: 3a58d8a3c6494b6418ec2f73e9f3f42d, type: 3}
       propertyPath: m_fontSize
