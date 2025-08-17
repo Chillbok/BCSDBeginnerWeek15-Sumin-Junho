@@ -86,26 +86,6 @@ public class MusicManager : Singleton<MusicManager>
         audioMixer.SetFloat("bgmVolume", musicVolume);
     }
 
-    //시작부분 한번 연주하고, 계속 반복해서 뒷부분 연주
-    IEnumerator PlayIntroLoopMusic(AudioClip introMusic, AudioClip loopMusic)
-    {
-        audioSource.Stop();
-        //시작부분 한번만 연주
-        Debug.Log("시작 부분 연주 시작");
-        audioSource.clip = introMusic;
-        audioSource.loop = false;
-        audioSource.Play();
-
-        //시작부분 음악만큼 기다리기
-        yield return new WaitForSeconds(introMusic.length - 1.2f);
-
-        //반복 연주 부분 계속해서 연주하기
-        Debug.Log("반복 부분 연주 시작");
-        audioSource.clip = loopMusic;
-        audioSource.loop = true;
-        audioSource.Play();
-    }
-
     //시작부분 없이 하나만 반복해서 연주하기
     void PlayLoopMusic(AudioClip clip)
     {
