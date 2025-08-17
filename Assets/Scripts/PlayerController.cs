@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     private float walkSpeed; // 기본 걷기 속도
     [SerializeField]
     private float runSpeed; // 기본 달리기 속도
-    private float appliedWalkSpeed; //적용된 걷기 속도
-    private float appliedRunSpeed; //적용된 달리기 속도
     private float currentSpeed; //적용할 속도
 
     //플레이어의 점프 강도
@@ -89,8 +87,6 @@ public class PlayerController : MonoBehaviour
 
         //플레이어 스탯 초기화
         currentSpeed = walkSpeed;
-        appliedWalkSpeed = walkSpeed;
-        appliedRunSpeed = runSpeed;
         appliedJumpForce = jumpForce;
         currentSp = sp;
         currentHp = hp;
@@ -269,7 +265,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentSp -= Time.deltaTime;
-        currentSpeed = appliedRunSpeed;
+        currentSpeed = runSpeed;
     }
 
     //달리기 취소
@@ -283,7 +279,7 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.StopLoopSFX();
         }
 
-        currentSpeed = appliedWalkSpeed;
+        currentSpeed = walkSpeed;
     }
     #endregion Run
 
