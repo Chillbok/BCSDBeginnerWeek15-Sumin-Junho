@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
         if (!isPaused)
         {
             TryFire();
+            TryJump();
             TryReload();
             SPRecover();
             isDead = CheckDead();
@@ -117,7 +118,6 @@ public class PlayerController : MonoBehaviour
         bool isPaused = GameManager.Instance.isPaused;
         if (!isPaused)
         {
-            TryJump();
             TryRun();
             Move();
             CheckMove();
@@ -262,6 +262,12 @@ public class PlayerController : MonoBehaviour
             isRun = true;
             gunAnim.SetBool("isRun", isRun);
             SoundManager.Instance.PlayLoopSFX("run");
+        }
+
+        if (!isGround)
+        {
+            isRun = false;
+            SoundManager.Instance.StopLoopSFX();
         }
 
         currentSp -= Time.deltaTime;
