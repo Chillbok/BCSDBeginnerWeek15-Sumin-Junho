@@ -29,8 +29,7 @@ public class StopMenuController : MonoBehaviour
     {
         bool isPaused = GameManager.Instance.isPaused;
         //ESC 누르면 게임 일시정지 후 메뉴 출력
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        if (Input.GetKeyDown(KeyCode.Alpha1)) //이후에 위쪽 주석처리된 if문으로 수정 필요
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
             {
