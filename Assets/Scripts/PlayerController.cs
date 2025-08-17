@@ -384,7 +384,7 @@ public class PlayerController : MonoBehaviour
     //hp가 0이 되면 true 반환
     bool CheckDead()
     {
-        if (currentHp > 0)
+        if (Mathf.Round(currentHp) > 0)
             return false;
         else
             return true;
