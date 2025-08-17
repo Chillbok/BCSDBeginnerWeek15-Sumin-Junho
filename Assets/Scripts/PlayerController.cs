@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     //상태 변수
     bool isGround = true; //땅에 닿았는지 여부
-    bool isMove = false;
+    bool isMove = false; // 움직였는지 여부
     bool isWalk = false; // 걷고 있는지 여부
     bool isRun = false; //달리고 있는지 여부
     bool isSpUsed = false; //스테미나 사용 여부
