@@ -61,7 +61,6 @@ MonoBehaviour:
   nameOfResultScene: GameResultScene
   resultScene:
     m_Handle: 0
-  settingManager: {fileID: 0}
   currentPlayTime: 0
   isPlay: 0
   isPaused: 0

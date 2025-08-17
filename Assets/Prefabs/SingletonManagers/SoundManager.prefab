@@ -47,7 +47,7 @@ AudioSource:
   m_GameObject: {fileID: 3920986309039196783}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1121991394553031395, guid: 9fc5dc5dae335c441a3f89bdb7552195, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -144,7 +144,7 @@ AudioSource:
   m_GameObject: {fileID: 3920986309039196783}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1121991394553031395, guid: 9fc5dc5dae335c441a3f89bdb7552195, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -241,7 +241,7 @@ AudioSource:
   m_GameObject: {fileID: 3920986309039196783}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1121991394553031395, guid: 9fc5dc5dae335c441a3f89bdb7552195, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -338,7 +338,7 @@ AudioSource:
   m_GameObject: {fileID: 3920986309039196783}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1121991394553031395, guid: 9fc5dc5dae335c441a3f89bdb7552195, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -435,7 +435,7 @@ AudioSource:
   m_GameObject: {fileID: 3920986309039196783}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1121991394553031395, guid: 9fc5dc5dae335c441a3f89bdb7552195, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -532,7 +532,7 @@ AudioSource:
   m_GameObject: {fileID: 3920986309039196783}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1121991394553031395, guid: 9fc5dc5dae335c441a3f89bdb7552195, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -643,6 +643,7 @@ MonoBehaviour:
   - {fileID: 4115166733361654066}
   - {fileID: 3015248052088491130}
   - {fileID: 7474831176763708838}
+  audioMixer: {fileID: 24100000, guid: 9fc5dc5dae335c441a3f89bdb7552195, type: 2}
   playSoundName:
   - 
   - 
