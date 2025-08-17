@@ -50,7 +50,7 @@ MonoBehaviour:
   gameData:
     maxScore: 0
     sfxVolume: 90
-    bgmVolume: 100
+    bgmVolume: 90
     mouseSensitivity: 1.5
   nameOfStartScene: GameStartScene
   nameOfPlayScene: GamePlayScene
