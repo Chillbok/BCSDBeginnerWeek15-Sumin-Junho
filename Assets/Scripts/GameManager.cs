@@ -82,7 +82,6 @@ public class GameManager : Singleton<GameManager>
             player = FindObjectOfType<PlayerController>();
             countDown = FindObjectOfType<CountDownController>();
             TryGetComponent<ScoreManager>(out scoreManager);
-            StartCoroutine(StartCount());
 
             //스코어 최적화
             scoreManager.SetCurrentScore(0f);
