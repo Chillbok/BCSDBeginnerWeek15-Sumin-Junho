@@ -123,6 +123,10 @@ public class GameManager : Singleton<GameManager>
                 isGameOver = true;
                 isPlay = false;
 
+                // 모든 효과음 제거
+                SoundManager.Instance.StopAllSFX();
+                SoundManager.Instance.StopLoopSFX();
+
                 //스코어 저장을 위해 ScoreManager에 점수 추가
                 float finalScore = scoreManager.GetCurrentScore();
 

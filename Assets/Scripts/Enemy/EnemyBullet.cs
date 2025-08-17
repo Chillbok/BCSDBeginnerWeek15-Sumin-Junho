@@ -37,7 +37,10 @@ public class EnemyBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
             other.GetComponent<PlayerController>().DecreaseHP(damage);
+            SoundManager.Instance.PlaySFX("hit");
+        }
         else
             DestroyBullet();
     }

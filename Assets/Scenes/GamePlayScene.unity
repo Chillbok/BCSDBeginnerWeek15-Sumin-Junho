@@ -626,6 +626,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 291749208}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
+        m_MethodName: ClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &291749210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,9 +865,49 @@ PrefabInstance:
       value: SoundManager
       objectReference: {fileID: 0}
     - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
-      propertyPath: audioMixer
+      propertyPath: sfxs.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
+      propertyPath: sfxs.Array.data[4].clip
       value: 
-      objectReference: {fileID: 24100000, guid: 9fc5dc5dae335c441a3f89bdb7552195, type: 2}
+      objectReference: {fileID: 8300000, guid: 98500769e0589c44384b7cff9c9acb91, type: 3}
+    - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
+      propertyPath: sfxs.Array.data[4].name
+      value: jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
+      propertyPath: sfxs.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 84de2851efe2093499d3a35bfb4b4fa1, type: 3}
+    - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
+      propertyPath: sfxs.Array.data[5].name
+      value: hit
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
+      propertyPath: sfxs.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: eff4391b7c5e6b3479ff8023a9ebd600, type: 3}
+    - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
+      propertyPath: sfxs.Array.data[6].name
+      value: click
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
+      propertyPath: sfxs.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7601bcc0827b8f64ab7cc8c17642a44e, type: 3}
+    - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
+      propertyPath: sfxs.Array.data[7].name
+      value: jump_land
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
+      propertyPath: sfxs.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3fe23165abeb4754a8899070780a3a43, type: 3}
+    - target: {fileID: 8986403324284998214, guid: b42556bf9bce2a9408065402b31ff31c, type: 3}
+      propertyPath: sfxs.Array.data[8].name
+      value: jump
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1908,6 +1960,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 764879795}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
+        m_MethodName: ClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &764879797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2181,6 +2245,18 @@ MonoBehaviour:
       - m_Target: {fileID: 790425085}
         m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
         m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 790425085}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
+        m_MethodName: ClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2508,6 +2584,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1024011950}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 834603424}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
+        m_MethodName: ClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5413,6 +5501,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 424506704}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1714919809}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
+        m_MethodName: ClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -102,14 +102,9 @@ public class PlayerController : MonoBehaviour
         bool isPaused = GameManager.Instance.isPaused;
         if (!isPaused)
         {
-            TryJump();
-            TryRun();
             TryFire();
             TryReload();
-            Move();
-            CheckMove();
             SPRecover();
-            CheckIsGround();
             isDead = CheckDead();
 
             //감도 수정
@@ -120,6 +115,19 @@ public class PlayerController : MonoBehaviour
             CharacterRotation();
         }
 	}
+
+    void FixedUpdate()
+    {
+        bool isPaused = GameManager.Instance.isPaused;
+        if (!isPaused)
+        {
+            TryJump();
+            TryRun();
+            Move();
+            CheckMove();
+            CheckIsGround();
+        }
+    }
 
     //감도 판단하고 감도 수정
     void SetCameraSensitivity()
@@ -235,6 +243,7 @@ public class PlayerController : MonoBehaviour
     //점프
     void Jump()
     {
+        SoundManager.Instance.PlaySFX("jump");
         playerRb.linearVelocity = transform.up * appliedJumpForce;
     }
     #endregion Jump
@@ -252,18 +261,28 @@ public class PlayerController : MonoBehaviour
     //달리기
     void Run()
     {
-        isRun = true;
-        gunAnim.SetBool("isRun", isRun);
-        currentSp -= Time.deltaTime;
+        if (!isRun)
+        {
+            isRun = true;
+            gunAnim.SetBool("isRun", isRun);
+            SoundManager.Instance.PlayLoopSFX("run");
+        }
 
+        currentSp -= Time.deltaTime;
         currentSpeed = appliedRunSpeed;
     }
 
     //달리기 취소
     void RunCancel()
     {
-        isRun = false;
-        gunAnim.SetBool("isRun", isRun);
+
+        if (isRun)
+        {
+            isRun = false;
+            gunAnim.SetBool("isRun", isRun);
+            SoundManager.Instance.StopLoopSFX();
+        }
+
         currentSpeed = appliedWalkSpeed;
     }
     #endregion Run
@@ -298,15 +317,23 @@ public class PlayerController : MonoBehaviour
     {
         if (!isRun && isGround)
         {
-            if (Vector3.Distance(lastPos, transform.position) >= 0.01f)
+            if (Vector3.Distance(lastPos, transform.position) >= 0.0001f)
             {
-                isWalk = true;
-                gunAnim.SetBool("isWalk", isWalk);
+                if (!isWalk)
+                {
+                    isWalk = true;
+                    gunAnim.SetBool("isWalk", isWalk);
+                    SoundManager.Instance.PlayLoopSFX("walk");
+                }
             }
             else
             {
-                isWalk = false;
-                gunAnim.SetBool("isWalk", isWalk);
+                if (isWalk)
+                {
+                    isWalk = false;
+                    gunAnim.SetBool("isWalk", isWalk);
+                    SoundManager.Instance.StopLoopSFX();
+                }
             }
 
             lastPos = transform.position;

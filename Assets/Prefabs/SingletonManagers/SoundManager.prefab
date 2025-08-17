@@ -538,7 +538,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -637,12 +637,23 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 7a3f6a35fa194f5439eaff908018c37f, type: 3}
   - name: shotgun_reload
     clip: {fileID: 8300000, guid: 7ba29851a8c37ab4b985086d9ee97753, type: 3}
+  - name: walk
+    clip: {fileID: 8300000, guid: 3579762489ee937408e8325083a481e8, type: 3}
+  - name: run
+    clip: {fileID: 8300000, guid: 3fe23165abeb4754a8899070780a3a43, type: 3}
+  - name: jump
+    clip: {fileID: 8300000, guid: 98500769e0589c44384b7cff9c9acb91, type: 3}
+  - name: hit
+    clip: {fileID: 8300000, guid: 84de2851efe2093499d3a35bfb4b4fa1, type: 3}
+  - name: click
+    clip: {fileID: 8300000, guid: eff4391b7c5e6b3479ff8023a9ebd600, type: 3}
   audioSfx:
+  - {fileID: 7903905392430387000}
   - {fileID: 4554203438014409228}
   - {fileID: 2479736687722357339}
   - {fileID: 4115166733361654066}
   - {fileID: 3015248052088491130}
-  - {fileID: 7474831176763708838}
+  audioLoopSfx: {fileID: 7474831176763708838}
   audioMixer: {fileID: 24100000, guid: 9fc5dc5dae335c441a3f89bdb7552195, type: 2}
   playSoundName:
   - 

@@ -17,6 +17,7 @@ public class Obstacle : MonoBehaviour
         {
             var player = other.GetComponent<PlayerController>();
             player.DecreaseHP(enterDamage);
+            SoundManager.Instance.PlaySFX("hit");
         }
     }
 

@@ -44,6 +44,10 @@ public class StopMenuController : MonoBehaviour
                 PauseTime(); //게임 시간 멈춤
                 stopMenu.SetActive(true);
                 DeactivePauseMenus();
+
+                // 모든 루프 효과음 제거
+                SoundManager.Instance.StopLoopSFX();
+
                 UnityEngine.Cursor.lockState = CursorLockMode.None;
                 UnityEngine.Cursor.visible = true;
             }

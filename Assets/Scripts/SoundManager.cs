@@ -17,32 +17,21 @@ public class Sound
 
 
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : Singleton<SoundManager>
 {
-    #region singleton
-    public static SoundManager instance;
-
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-    }
-    #endregion singleton
 
     // 효과음
     [SerializeField]
     Sound[] sfxs;
+
     // 효과음 출력할 오디오 소스
     [SerializeField]
     AudioSource[] audioSfx; // 효과음은 중첩되어 들릴 수 있으므로 배열로 설정
+    // 루프 전용 오디오 소스 (걷기, 달리기 전용)
+    [Header("걷기, 달리기 전용 오디오 소스 (루프)")]
+    [SerializeField]
+    AudioSource audioLoopSfx;
+
     [SerializeField]
     AudioMixer audioMixer;
 
@@ -128,5 +117,30 @@ public class SoundManager : MonoBehaviour
         {
             audioSfx[i].Stop();
         }
+    }
+
+    // 루프 효과음 재생
+    public void PlayLoopSFX(string name)
+    {
+        for (int i = 0; i < sfxs.Length; i++)
+        {
+            if (sfxs[i].name == name)
+            {
+                if (audioLoopSfx.clip == sfxs[i].clip && audioLoopSfx.isPlaying)
+                    return;
+
+                audioLoopSfx.clip = sfxs[i].clip;
+                audioLoopSfx.loop = true;
+                audioLoopSfx.Play();
+                return;
+            }
+        }
+    }
+
+    // 루프 효과음 정지
+    public void StopLoopSFX()
+    {
+        audioLoopSfx.Stop();
+        audioLoopSfx.loop = false;
     }
 }

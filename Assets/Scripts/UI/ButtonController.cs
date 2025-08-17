@@ -46,4 +46,10 @@ public class ButtonController : MonoBehaviour
         else
             obj.SetActive(true);
     }
+
+    // 버튼 효과음 재생
+    public void ClickSound()
+    {
+        SoundManager.Instance.PlaySFX("click");
+    }
 }
