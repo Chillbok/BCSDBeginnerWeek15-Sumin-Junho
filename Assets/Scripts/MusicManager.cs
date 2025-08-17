@@ -60,7 +60,9 @@ public class MusicManager : Singleton<MusicManager>
     void ChooseBGM(string sceneName)
     {
         if (sceneName == gameManager.nameOfPlayScene)
+        {
             if (gamePlayMusic != null) PlayLoopMusic(gamePlayMusic[0]);
+        }
         else if (sceneName == gameManager.nameOfResultScene)
             audioSource.Stop();
     }
