@@ -2006,6 +2006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fcc348e797ed34bbc7d94d0673db2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 16fc3394bdeccdc459d0f06fc6a2549e, type: 2}
   HpBar: {fileID: 660441573}
   HpText: {fileID: 132552316}
   SpBar: {fileID: 1413464422}
@@ -3299,6 +3300,7 @@ GameObject:
   - component: {fileID: 1135766425}
   - component: {fileID: 1135766426}
   - component: {fileID: 1135766423}
+  - component: {fileID: 1135766429}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3318,19 +3320,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c082305c507c34397c1ce7a383b0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 15
-  runSpeed: 22.5
-  jumpForce: 5.5
-  hp: 100
-  currentHp: 0
-  sp: 5
-  spCooldown: 3
-  lookSensitivity: 1.5
-  cameraRotationLimit: 75
+  playerData: {fileID: 11400000, guid: 16fc3394bdeccdc459d0f06fc6a2549e, type: 2}
   playerRb: {fileID: 1135766426}
   playerCol: {fileID: 1135766425}
   theCamera: {fileID: 862106309}
   gunAnim: {fileID: 128026844}
+  currentHP: 0
   theGunController: {fileID: 1631307753}
 --- !u!4 &1135766424
 Transform:
@@ -3451,6 +3446,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135766422}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1135766429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135766422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f822ad2e4dba02498a768e7f072843f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+  jumpForce: 5.5
 --- !u!1 &1165081134
 GameObject:
   m_ObjectHideFlags: 0
