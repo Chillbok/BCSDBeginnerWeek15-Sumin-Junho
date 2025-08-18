@@ -85,6 +85,9 @@ public class GameManager : Singleton<GameManager>
             isPlay = false; isPaused = false; isGameOver = false;
             startBorder.SetActive(true);
             StartCoroutine(StartCount());
+
+            //현재 플레이 시간 초기화
+            currentPlayTime = 0f;
         }
         else
         {
