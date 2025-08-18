@@ -3161,7 +3161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 15
   runSpeed: 22.5
-  jumpForce: 5
+  jumpForce: 5.5
   hp: 100
   currentHp: 0
   sp: 5

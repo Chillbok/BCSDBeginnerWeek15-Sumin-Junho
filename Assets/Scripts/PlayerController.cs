@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
         if (!isPaused)
         {
             TryFire();
+            TryJump();
             TryReload();
             SPRecover();
             isDead = CheckDead();
@@ -118,7 +119,6 @@ public class PlayerController : MonoBehaviour
         if (!isPaused)
         {
             TryRun();
-            TryJump();
             Move();
             CheckMove();
             CheckIsGround();
