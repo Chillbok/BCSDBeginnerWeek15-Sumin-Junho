@@ -319,7 +319,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = (transform.right * moveDirX + transform.forward * moveDirZ).normalized * currentSpeed;
 
-		playerRb.MovePosition(transform.position + velocity * Time.deltaTime);
+        playerRb.linearVelocity = velocity;
 	}
 
     // 움직임 체크
