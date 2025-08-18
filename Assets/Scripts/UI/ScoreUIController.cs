@@ -1,5 +1,7 @@
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreUIController : MonoBehaviour
 {
@@ -17,7 +19,6 @@ public class ScoreUIController : MonoBehaviour
     int playTimeSec; //플레이 시간(초)
     float currentScore; //현재 플레이 점수
     float maxScore; //최대 플레이 점수
-
 
     void Update()
     {

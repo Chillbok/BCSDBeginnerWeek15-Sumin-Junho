@@ -4,57 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
-    //플레이어의 속도
-    [Header("플레이어 이동 관련 변수")]
+    [Header("플레이어 스크립터블 데이터")]
+    [Tooltip("Player Data 연결")]
     [SerializeField]
-    private float walkSpeed; // 기본 걷기 속도
-    [SerializeField]
-    private float runSpeed; // 기본 달리기 속도
-    private float currentSpeed; //적용할 속도
-
-    //플레이어의 점프 강도
-    [Header("플레이어 점프 관련 변수")]
-    [SerializeField]
-    private float jumpForce; //기본 점프 강도
-    private float appliedJumpForce; //적용할 점프 강도
-
-    // 플레이어의 직전 위치 ( 움직임 여부를 체크하기 위해 )
-    private Vector3 lastPos;
-
-    //플레이어의 체력
-    [Header("플레이어 체력 관련 변수")]
-    [SerializeField]
-    float hp; //플레이어 최대 체력
-    public float currentHp; //플레이어 현재 체력
-
-    //플레이어 스태미나
-    [Header("플레이어 스태미나 관련 변수")]
-    [SerializeField]
-    float sp; //플레이어 최대 스태미나 (5일 경우 5초 동안 사용 가능)
-    float currentSp; //현재 스태미나
-
-    //스태미나 회복까지 걸리는 쿨타임
-    [SerializeField]
-    float spCooldown;
-    float currentSpCooldown;
-
-    //시야 관련 변수
-    [Header("플레이어 시야 관련 변수")]
-    [SerializeField]
-    float lookSensitivity; //카메라 민감도
-    float lastSensitivity;
-    [SerializeField]
-    float cameraRotationLimit; //카메라 상하 한계 각도
-    float currentCameraRotation = 0; //현재 카메라 상하 각도
-
-    //상태 변수
-    bool isGround = true; //땅에 닿았는지 여부
-    bool isMove = false; // 움직였는지 여부
-    bool isWalk = false; // 걷고 있는지 여부
-    bool isRun = false; //달리고 있는지 여부
-    bool isSpUsed = false; //스테미나 사용 여부
-    bool isDead = false; //플레이어 죽음 여부
+    private PlayerData playerData;
 
     //필요한 컴포넌트
     [Header("플레이어에게 필요한 컴포넌트")]
@@ -66,6 +19,42 @@ public class PlayerController : MonoBehaviour
     Camera theCamera;
     [SerializeField]
     Animator gunAnim;
+
+    //플레이어의 속도
+    private float walkSpeed;
+    private float runSpeed;
+    private float currentSpeed; //적용할 속도
+
+    //플레이어의 점프 강도
+    private float currentJumpForce; //적용할 점프 강도
+
+    // 플레이어의 직전 위치 ( 움직임 여부를 체크하기 위해 )
+    private Vector3 lastPos;
+
+    //플레이어의 체력
+    [Header("플레이어 체력 관련 변수")]
+    public float currentHP; //플레이어 현재 체력
+
+    //플레이어 스태미나
+    float currentSP; //플레이어 현재 스태미나
+
+    //스태미나 회복까지 걸리는 쿨타임
+    private float currentSpCooldown;
+
+    //시야 관련 변수
+    float lookSensitivity; //카메라 민감도
+    float lastSensitivity; //마지막 카메라 민감도
+
+    float cameraRotationLimit; //카메라 상하 한계 각도
+    float currentCameraRotation = 0; //현재 카메라 상하 각도
+
+    //상태 변수
+    bool isGround = true; //땅에 닿았는지 여부
+    bool isMove = false; // 움직였는지 여부
+    bool isWalk = false; // 걷고 있는지 여부
+    bool isRun = false; //달리고 있는지 여부
+    bool isSpUsed = false; //스테미나 사용 여부
+    bool isDead = false; //플레이어 죽음 여부
     
     //버프 보관용 딕셔너리
     [Header("버프 보관용 딕셔너리")]
@@ -78,18 +67,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GunController theGunController;
 
+    #region EventFunctions
     void Start()
     {
+        //플레이어 데이터에서 값 불러와 변수에 할당하기
+        SetPlayerVariables();
+
+        //감도 설정
         lastSensitivity = 1f;
         lookSensitivity = GameManager.Instance.gameData.mouseSensitivity;
+
+        //마우스 커서 설정
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        //플레이어 스탯 초기화
+        //플레이어 생성 당시 변수로 초기화
         currentSpeed = walkSpeed;
-        appliedJumpForce = jumpForce;
-        currentSp = sp;
-        currentHp = hp;
         lastPos = transform.position;
     }
 
@@ -124,6 +117,26 @@ public class PlayerController : MonoBehaviour
             CheckIsGround();
         }
     }
+    #endregion EventFunctions
+
+    //플레이어 데이터에서 값 불러와서 변수에 할당하는 메서드
+    void SetPlayerVariables()
+    {
+        //플레이어 체력 변수
+        currentHP = playerData.PlayerMaxHP;
+
+        //플레이어 스태미나 변수
+        currentSP = playerData.PlayerMaxSP;
+
+        //플레이어 이동 관련 변수
+        walkSpeed = playerData.PlayerWalkSpeed;
+        runSpeed = playerData.PlayerRunSpeed;
+        currentJumpForce = playerData.PlayerJumpForce;
+
+        //카메라 관련 변수
+        cameraRotationLimit = playerData.PlayerCameraRotationLimit;
+    }
+
 
     //감도 판단하고 감도 수정
     void SetCameraSensitivity()
@@ -169,10 +182,11 @@ public class PlayerController : MonoBehaviour
             case (BuffType.AddSpeed): //속도 증가 버프
                 //appliedRunSpeed = runSpeed * multiplier;
                 //appliedWalkSpeed = walkSpeed * multiplier;
-                currentSp = sp;
+                currentSP = playerData.PlayerMaxSP;
                 break;
             case (BuffType.SuperJump): //점프 높이 증가 버프
-                appliedJumpForce = jumpForce * multiplier;
+                float playerJumpForce = playerData.PlayerMaxSP;
+                currentJumpForce = playerJumpForce * multiplier;
                 break;
             case (BuffType.HealthRegen): //체력 회복 버프
                 break;
@@ -187,7 +201,7 @@ public class PlayerController : MonoBehaviour
             //버프 타입이 addspeed인 경우, 계속해서 스태미나 회복
             if (buffType == BuffType.AddSpeed)
             {
-                currentSp = sp;
+                currentSP = playerData.PlayerMaxSP;
             }
             //버프가 점프인 경우, 한 번 점프 후에 삭제.
             else if (buffType == BuffType.SuperJump) //버프 타입이 슈퍼 점프면 실시
@@ -200,11 +214,11 @@ public class PlayerController : MonoBehaviour
             //버프가 체력 회복인 경우, 초당 10씩 서서히 체력 회복 후 삭제.
             else if (buffType == BuffType.HealthRegen)
             {
-                currentHp += Time.deltaTime * 10; //초당 10씩 회복
+                currentHP += Time.deltaTime * 10; //초당 10씩 회복
 
                 //더해진 체력이 최대 체력을 초과하면
-                if (currentHp > hp)
-                    currentHp = hp;
+                if (currentHP > playerData.PlayerMaxHP)
+                    currentHP = playerData.PlayerMaxHP;
             }
             buffRemainingTimes[buffType] -= Time.deltaTime; //1프레임만큼 시간 차감
             yield return null; //다음 프레임까지 대기
@@ -217,7 +231,7 @@ public class PlayerController : MonoBehaviour
             case (BuffType.AddSpeed): //속도 증가 버프 제거
                 break;
             case (BuffType.SuperJump): //슈퍼 점프 버프 제거
-                appliedJumpForce = jumpForce;
+                currentJumpForce = playerData.PlayerJumpForce;
                 break;
             case (BuffType.HealthRegen): //체력 회복 버프 제거
                 break;
@@ -240,7 +254,7 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         SoundManager.Instance.PlaySFX("jump");
-        playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, appliedJumpForce, playerRb.linearVelocity.z);
+        playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, currentJumpForce, playerRb.linearVelocity.z);
     }
     #endregion Jump
 
@@ -248,7 +262,7 @@ public class PlayerController : MonoBehaviour
     //달리기 시도
     void TryRun()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && currentSp > 0 && isMove)
+        if (Input.GetKey(KeyCode.LeftShift) && currentSP > 0 && isMove)
             Run();
         else
             RunCancel();
@@ -269,7 +283,7 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.StopLoopSFX();
         }
 
-        currentSp -= Time.deltaTime;
+        currentSP -= Time.deltaTime;
         currentSpeed = runSpeed;
     }
 
@@ -357,7 +371,7 @@ public class PlayerController : MonoBehaviour
         {
             if (isSpUsed)
             {
-                if (currentSpCooldown < spCooldown)
+                if (currentSpCooldown < playerData.PlayerSpCooldown)
                 {
                     currentSpCooldown += Time.deltaTime;
                 }
@@ -369,10 +383,10 @@ public class PlayerController : MonoBehaviour
             }
             else if (!isSpUsed)
             {
-                if (currentSp < sp)
-                    currentSp += Time.deltaTime;
+                if (currentSP < playerData.PlayerMaxSP)
+                    currentSP += Time.deltaTime;
                 else
-                    currentSp = sp;
+                    currentSP = playerData.PlayerMaxSP;
             }
         }
         else
@@ -392,7 +406,7 @@ public class PlayerController : MonoBehaviour
     //hp가 0이 되면 true 반환
     bool CheckDead()
     {
-        if (currentHp > 0)
+        if (currentHP > 0)
             return false;
         else
             return true;
@@ -401,17 +415,17 @@ public class PlayerController : MonoBehaviour
     // 체력 회복
     public void IncreaseHP(float recover)
     {
-        if (hp > currentHp + recover)
-            currentHp += recover;
+        if (playerData.PlayerMaxHP > currentHP + recover)
+            currentHP += recover;
         else
-            currentHp = hp;
+            currentHP = playerData.PlayerMaxHP;
     }
 
     // 체력 감소
     public void DecreaseHP(float damage)
     {
         if (!GameManager.Instance.isPaused && GameManager.Instance.isPlay)
-            currentHp -= damage;
+            currentHP -= damage;
     }
 
     // 플레이어 회전을 관리하는 메서드
@@ -440,22 +454,12 @@ public class PlayerController : MonoBehaviour
     #region GetMethods
     public float GetPlayerCurrentHP()
     {
-        return currentHp;
+        return currentHP;
     }
-
-	public float GetPlayerHP()
-	{
-		return hp;
-	}
 
 	public float GetPlayerCurrentSP()
 	{
-		return currentSp;
-	}
-
-	public float GetPlayerSP()
-	{
-		return sp;
+		return currentSP;
 	}
 
     public bool GetIsDead()

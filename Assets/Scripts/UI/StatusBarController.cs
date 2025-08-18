@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class StatusBarController : MonoBehaviour
 {
+	[Header("플레이어 데이터")]
+	[Tooltip("Player Data 삽입")]
+	[SerializeField]
+	private PlayerData playerData;
+
 	// HP 관련 변수
 	[SerializeField]
 	Image HpBar; // HP 바
@@ -20,10 +25,10 @@ public class StatusBarController : MonoBehaviour
 	PlayerController thePlayerController; //PlayerController.cs 참조 변수
 
 	// PlayerController에서 가져올 변수
-	float currentHp;
-	float hp;
-	float currentSp;
-	float sp;
+	float currentHP;
+	float maxHP;
+	float currentSP;
+	float maxSP;
 
 	void Update()
 	{
@@ -36,27 +41,27 @@ public class StatusBarController : MonoBehaviour
 	//플레이어 데이터 가져오기(프레임마다 실행)
 	void UpdatePlayerStatus()
 	{
-		currentHp = thePlayerController.GetPlayerCurrentHP();
-		hp = thePlayerController.GetPlayerHP();
-		currentSp = thePlayerController.GetPlayerCurrentSP();
-		sp = thePlayerController.GetPlayerSP();
+		currentHP = thePlayerController.GetPlayerCurrentHP();
+		maxHP = playerData.PlayerMaxHP;
+		currentSP = thePlayerController.GetPlayerCurrentSP();
+		maxSP = playerData.PlayerMaxSP;
 	}
 
 	// HP 텍스트 업데이트
 	void UpdateHpText()
 	{
-		HpText.text = $"{(int)currentHp} / {(int)hp}";
+		HpText.text = $"{(int)currentHP} / {(int)maxHP}";
 	}
 
 	// HP 바 업데이트
 	void UpdateHpBar()
 	{
-		HpBar.fillAmount = currentHp / hp;
+		HpBar.fillAmount = currentHP / maxHP;
 	}
 
 	// SP 바 업데이트
 	void UpdateSpBar()
 	{
-		SpBar.fillAmount = currentSp / sp;
+		SpBar.fillAmount = currentSP / maxSP;
 	}
 }
