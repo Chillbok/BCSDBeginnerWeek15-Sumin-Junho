@@ -86,6 +86,11 @@ public class GameManager : Singleton<GameManager>
             startBorder.SetActive(true);
             StartCoroutine(StartCount());
         }
+        else
+        {
+            Time.timeScale = 1f;
+            StopAllCoroutines();
+        }
     }
 
     private void OnDisable()

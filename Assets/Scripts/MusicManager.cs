@@ -63,7 +63,7 @@ public class MusicManager : Singleton<MusicManager>
         {
             if (gamePlayMusic != null) PlayLoopMusic(gamePlayMusic[0]);
         }
-        else if (sceneName == gameManager.nameOfResultScene)
+        else
             audioSource.Stop();
     }
 

@@ -410,7 +410,7 @@ public class PlayerController : MonoBehaviour
     // 체력 감소
     public void DecreaseHP(float damage)
     {
-        if (!GameManager.Instance.isPaused)
+        if (!GameManager.Instance.isPaused && GameManager.Instance.isPlay)
             currentHp -= damage;
     }
 
