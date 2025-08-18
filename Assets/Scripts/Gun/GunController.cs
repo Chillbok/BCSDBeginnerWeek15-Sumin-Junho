@@ -10,7 +10,7 @@ public class GunController : MonoBehaviour
     public int currentBulletCount; // 현재 탄창 총알 개수
 
     // 상태 변수
-    public static bool isReload = false; // 재장전 여부
+    public static bool isReload; // 재장전 여부
 
     // 필요한 컴포넌트
     [SerializeField]
@@ -25,6 +25,7 @@ public class GunController : MonoBehaviour
 
     private void Awake()
     {
+        isReload = false;
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize:16);
     }
 
