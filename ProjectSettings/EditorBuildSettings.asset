@@ -11,18 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GamePlayScene.unity
     guid: be6d755c907bc064ba9a4fd0c5d42336
-  - enabled: 0
-    path: Assets/Scenes/MaxScoreMakingScene.unity
-    guid: b806163746b902e4383048ccbe65b8f2
   - enabled: 1
     path: Assets/Scenes/GameResultScene.unity
     guid: d1b41bc3f5f1c6a448b32d23c03dfb11
-  - enabled: 1
-    path: Assets/Scenes/GameStartScene_withMusic.unity
-    guid: c825f6c4d334a3b4c809fe5aa84cf595
-  - enabled: 1
-    path: Assets/Scenes/GamePlayScene_withSetting.unity
-    guid: 90b65bd0c3479e44589775cb79e2fdff
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
