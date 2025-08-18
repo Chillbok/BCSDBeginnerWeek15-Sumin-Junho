@@ -99,7 +99,6 @@ public class PlayerController : MonoBehaviour
         if (!isPaused)
         {
             TryFire();
-            TryJump();
             TryReload();
             SPRecover();
             isDead = CheckDead();
@@ -119,6 +118,7 @@ public class PlayerController : MonoBehaviour
         if (!isPaused)
         {
             TryRun();
+            TryJump();
             Move();
             CheckMove();
             CheckIsGround();
@@ -240,7 +240,7 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         SoundManager.Instance.PlaySFX("jump");
-        playerRb.linearVelocity = transform.up * appliedJumpForce;
+        playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, appliedJumpForce, playerRb.linearVelocity.z);
     }
     #endregion Jump
 
@@ -319,7 +319,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = (transform.right * moveDirX + transform.forward * moveDirZ).normalized * currentSpeed;
 
-        playerRb.linearVelocity = velocity;
+        playerRb.linearVelocity = new Vector3(velocity.x, playerRb.linearVelocity.y, velocity.z);
 	}
 
     // 움직임 체크
