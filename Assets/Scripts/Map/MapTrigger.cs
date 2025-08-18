@@ -4,7 +4,7 @@ public class MapTrigger : MonoBehaviour
 {
     private static Map previousMap;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
