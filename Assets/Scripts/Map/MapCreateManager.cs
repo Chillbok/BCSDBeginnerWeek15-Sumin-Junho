@@ -54,6 +54,7 @@ public class MapCreateManager : Singleton<MapCreateManager>
     private void OnGetMap(Map map)
     {
         map.gameObject.SetActive(true);
+        map.GetComponentInChildren<MapTrigger>().gameObject.SetActive(true);
     }
 
     // 풀에서 오브젝트를 돌려줄 함수
