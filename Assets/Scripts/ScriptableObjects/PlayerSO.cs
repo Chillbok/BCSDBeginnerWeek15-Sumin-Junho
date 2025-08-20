@@ -1,8 +1,8 @@
 using UnityEngine;
 
 //에디터에서 에셋으로 만들기 위한 속성
-[CreateAssetMenu(fileName = "Player ScriptableObject", menuName = "Scriptable Object/Player ScriptableObject", order = int.MaxValue)]
-public class PlayerScriptableObject : ScriptableObject //monobehaviour 대신 상속받는 속성
+[CreateAssetMenu(fileName = "PlayerScriptableObject", menuName = "Scriptable Object/PlayerScriptableObject", order = int.MaxValue)]
+public class PlayerSO : ScriptableObject //monobehaviour 대신 상속받는 속성
 {
     //플레이어 스테이터스
     [Header("플레이어 스테이터스")]

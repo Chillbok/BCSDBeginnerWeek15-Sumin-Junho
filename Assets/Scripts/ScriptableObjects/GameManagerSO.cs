@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameManager ScriptableObject", menuName = "Scriptable Object/GameManager ScriptableObject", order = int.MaxValue)]
+[CreateAssetMenu(fileName = "GameManagerScriptableObject", menuName = "Scriptable Object/GameManagerScriptableObject", order = int.MaxValue)]
 public class GameManagerSO : ScriptableObject
 {
     [Header("게임 주요 씬들")]

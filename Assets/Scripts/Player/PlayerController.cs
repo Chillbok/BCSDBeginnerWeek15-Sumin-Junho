@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("플레이어 스크립터블 데이터")]
     [Tooltip("Player Data 연결")]
     [SerializeField]
-    private PlayerScriptableObject playerData;
+    private PlayerSO playerData;
 
     //필요한 컴포넌트
     [Header("플레이어에게 필요한 컴포넌트")]
