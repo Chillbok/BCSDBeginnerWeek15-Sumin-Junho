@@ -232,5 +232,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568d232067f815b49875660120acf074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffType: 2
-  buffDuration: 3
+  buffSO: {fileID: 11400000, guid: 53f6671ab0a6d7746b2af52122f8c5ef, type: 2}

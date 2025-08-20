@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
     //새로 버프 적용하는 메서드
     //목표: 새로운 버프 적용하고, 만약 이미 같은 버프 있으면 기존 것 중지시키고 새로 시작해 시간 갱신
-    public void ApplyBuff(BuffType buffType, float buffDuration, float multiplier)
+    public void ApplyBuff(BuffType buffType, float buffDuration, float adder, float multiplier)
     {
         if (activeBuffs.ContainsKey(buffType)) //만약 같은 종류의버프가 이미 활성화되었다면
         {
@@ -167,28 +167,25 @@ public class PlayerController : MonoBehaviour
         }
 
         //새로운 버프 효과를 적용하고 지속시간을 관리할 코루틴 시작
-        Coroutine buffCoroutine = StartCoroutine(BuffCoroutine(buffType, buffDuration, multiplier));
+        Coroutine buffCoroutine = StartCoroutine(BuffCoroutine(buffType, buffDuration, adder, multiplier));
         //딕셔너리에 새로운 코루틴 저장(또는 갱신)
         activeBuffs[buffType] = buffCoroutine;
     }
 
-    private IEnumerator BuffCoroutine(BuffType buffType, float buffDuration, float multiplier)
+    private IEnumerator BuffCoroutine(BuffType buffType, float buffDuration, float adder, float multiplier)
     {
         //버프 효과 적용
         Debug.Log($"{buffType} 버프 적용 시작! 지속 시간: {buffDuration}초");
 
         switch (buffType)
         {
-            case (BuffType.AddSpeed): //속도 증가 버프
-                //appliedRunSpeed = runSpeed * multiplier;
-                //appliedWalkSpeed = walkSpeed * multiplier;
+            case BuffType.AddSpeed: //속도 증가 버프
                 currentSP = playerData.PlayerMaxSP;
                 break;
-            case (BuffType.SuperJump): //점프 높이 증가 버프
-                float playerJumpForce = playerData.PlayerMaxSP;
-                currentJumpForce = playerJumpForce * multiplier;
+            case BuffType.SuperJump: //점프 높이 증가 버프
+                currentJumpForce = playerData.PlayerJumpForce * multiplier;
                 break;
-            case (BuffType.HealthRegen): //체력 회복 버프
+            case BuffType.HealthRegen: //체력 회복 버프
                 break;
         }
 
@@ -214,7 +211,7 @@ public class PlayerController : MonoBehaviour
             //버프가 체력 회복인 경우, 초당 10씩 서서히 체력 회복 후 삭제.
             else if (buffType == BuffType.HealthRegen)
             {
-                currentHP += Time.deltaTime * 10; //초당 10씩 회복
+                currentHP += Time.deltaTime * adder; //합연산 값씩 회복
 
                 //더해진 체력이 최대 체력을 초과하면
                 if (currentHP > playerData.PlayerMaxHP)
@@ -228,12 +225,12 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"{buffType} 버프 종료!");
         switch (buffType)
         {
-            case (BuffType.AddSpeed): //속도 증가 버프 제거
+            case BuffType.AddSpeed: //속도 증가 버프 제거
                 break;
-            case (BuffType.SuperJump): //슈퍼 점프 버프 제거
-                currentJumpForce = playerData.PlayerJumpForce;
+            case BuffType.SuperJump: //슈퍼 점프 버프 제거
+                currentJumpForce = playerData.PlayerJumpForce; //점프 높이 원래대로 돌리기
                 break;
-            case (BuffType.HealthRegen): //체력 회복 버프 제거
+            case BuffType.HealthRegen: //체력 회복 버프 제거
                 break;
         }
 

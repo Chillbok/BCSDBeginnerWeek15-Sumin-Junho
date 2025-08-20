@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79765574fd47ac449abf270fb33a8c87, type: 3}
-  m_Name: TurretScriptableObject
+  m_Script: {fileID: 11500000, guid: edf0abaa677ec1c4a8d14c2d3fc728c2, type: 3}
+  m_Name: HealthRegen
   m_EditorClassIdentifier: 
-  _hp: 4
-  _attackSpeed: 1.5
-  _towerRotationSpeed: 30
-  _bulletSpeed: 5
-  _attackRange: 0.5
+  _buffType: 0
+  _buffTime: 0
+  _buffMultiplier: 0
