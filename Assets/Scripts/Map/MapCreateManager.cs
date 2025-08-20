@@ -5,15 +5,20 @@ using UnityEngine.Pool;
 
 public class MapCreateManager : Singleton<MapCreateManager>
 {
-    // ¿ÀºêÁ§Æ® Ç®¸µ º¯¼ö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ç®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private IObjectPool<Map> pool;
 
-    // ¸Ê ÇÁ¸®ÆÕ
-    [Header("¸Ê")]
+    [Header("ìŠ¤í¬ë¦½í„°ë¸” ì˜¤ë¸Œì íŠ¸")]
+    [Tooltip("ê²Œì„ íˆ´íŒ")]
+    [SerializeField]
+    private GameManagerSO gameManagerSO;
+
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [Header("ï¿½ï¿½")]
     [SerializeField]
     private GameObject[] mapPrefab;
 
-    // ¾ÀÀÌ ·ÎµåµÈ ÈÄ
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ ï¿½ï¿½
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -21,7 +26,7 @@ public class MapCreateManager : Singleton<MapCreateManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == GameManager.Instance.nameOfPlayScene)
+        if (scene.name == gameManagerSO.NameOfPlayScene)
         {
             pool = new ObjectPool<Map>(CreatingMap, OnGetMap, OnReleaseMap, OnDestroyMap, maxSize: 2);
             var firstMap = CreateMap();
@@ -34,36 +39,36 @@ public class MapCreateManager : Singleton<MapCreateManager>
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // ¸Ê »ı¼º
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public Map CreateMap()
     {
         var map = pool.Get();
         return map;
     }
 
-    // Ç®¿¡¼­ ¸Ê »ı¼ºÇÏ´Â ÇÔ¼ö
+    // Ç®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
     private Map CreatingMap()
     {
-        // ·£´ıÇÑ ¸Ê »ı¼º
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Map map = Instantiate(mapPrefab[Random.Range(0, mapPrefab.Length)]).GetComponent<Map>();
         map.SetManagedPool(pool);
         return map;
     }
 
-    // Ç®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ ºô¸®´Â ÇÔ¼ö
+    // Ç®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     private void OnGetMap(Map map)
     {
         map.gameObject.SetActive(true);
         map.GetComponentInChildren<MapTrigger>().gameObject.SetActive(true);
     }
 
-    // Ç®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ µ¹·ÁÁÙ ÇÔ¼ö
+    // Ç®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     private void OnReleaseMap(Map map)
     {
         map.gameObject.SetActive(false);
     }
 
-    // Ç®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ ÆÄ±«ÇÏ´Â ÇÔ¼ö
+    // Ç®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ä±ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
     private void OnDestroyMap(Map map)
     {
         Destroy(map.gameObject);
