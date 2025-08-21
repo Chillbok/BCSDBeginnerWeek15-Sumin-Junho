@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AddSpeed
   m_EditorClassIdentifier: 
   _type: 0
-  _duration: 0
+  _duration: 4
   _adder: 0
-  _multiplier: 0
+  _multiplier: 1

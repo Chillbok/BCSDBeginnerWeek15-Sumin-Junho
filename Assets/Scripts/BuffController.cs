@@ -10,7 +10,8 @@ public class BuffController : MonoBehaviour
 
     void Start()
     {
-
+        if (buffSO == null)
+            Debug.LogError($"{this.name}에 버프 데이터 비어있음!");
     }
 
     private void OnTriggerEnter(Collider other)

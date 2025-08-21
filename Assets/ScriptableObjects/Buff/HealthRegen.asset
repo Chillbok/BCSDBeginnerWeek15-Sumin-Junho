@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf0abaa677ec1c4a8d14c2d3fc728c2, type: 3}
   m_Name: HealthRegen
   m_EditorClassIdentifier: 
-  _buffType: 0
-  _buffTime: 0
-  _buffMultiplier: 0
+  _type: 2
+  _duration: 4
+  _adder: 10
+  _multiplier: 1

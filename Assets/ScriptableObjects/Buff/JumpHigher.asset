@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf0abaa677ec1c4a8d14c2d3fc728c2, type: 3}
   m_Name: JumpHigher
   m_EditorClassIdentifier: 
-  _type: 0
-  _duration: 0
+  _type: 1
+  _duration: 7
   _adder: 0
-  _multiplier: 0
+  _multiplier: 1.5
