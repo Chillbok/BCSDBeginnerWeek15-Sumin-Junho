@@ -47,13 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27ca775d9d1bce419eb676ab99d30eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManagerSO: {fileID: 11400000, guid: d4f2ec39bf53e9f44b56f088d0659c58, type: 2}
   gameData:
     maxScore: 0
     sfxVolume: 90
     bgmVolume: 90
     mouseSensitivity: 1.5
-  nameOfStartScene: GameStartScene
-  nameOfPlayScene: GamePlayScene
   nameOfResultScene: GameResultScene
   currentPlayTime: 0
   isPlay: 0
@@ -72,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac75a14f68397c42a4213cf2c70b4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManagerSO: {fileID: 11400000, guid: d4f2ec39bf53e9f44b56f088d0659c58, type: 2}
   mapPrefab:
   - {fileID: 8070266586102741066, guid: c2f854b675f52f2438dfe1ca2dcacd2b, type: 3}
   - {fileID: 7919088768271584352, guid: 2a10721a706b02f4a81e23cc9dd01c8a, type: 3}
