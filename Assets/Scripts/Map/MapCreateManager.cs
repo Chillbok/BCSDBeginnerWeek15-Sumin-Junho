@@ -18,12 +18,12 @@ public class MapCreateManager : Singleton<MapCreateManager>
     [SerializeField]
     private GameObject[] mapPrefab;
 
-    // ���� �ε�� ��
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    //씬이 로드되면 호출될 메서드
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == gameManagerSO.NameOfPlayScene)
@@ -39,14 +39,14 @@ public class MapCreateManager : Singleton<MapCreateManager>
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // �� ����
+    //오브젝트 풀에서 맵을 하나 가져와서 생성하고 반환
     public Map CreateMap()
     {
         var map = pool.Get();
         return map;
     }
 
-    // Ǯ���� �� �����ϴ� �Լ�
+    //오브젝트 풀에 생성된 맵이 없을 경우, 새로운 맵 프리팹을 랜덤으로 생성해 풀에 제공
     private Map CreatingMap()
     {
         // ������ �� ����
@@ -55,20 +55,21 @@ public class MapCreateManager : Singleton<MapCreateManager>
         return map;
     }
 
-    // Ǯ���� ������Ʈ�� ������ �Լ�
+    //오브젝트 풀에서 맵을 가져올 때, 해당 맵 오브젝트 활성화
     private void OnGetMap(Map map)
     {
         map.gameObject.SetActive(true);
-        map.GetComponentInChildren<MapTrigger>().gameObject.SetActive(true);
+        //비활성화된 오브젝트 중에서도 찾을 수 있도록 true로 수정
+        map.GetComponentInChildren<MapTrigger>(true).gameObject.SetActive(true);
     }
 
-    // Ǯ���� ������Ʈ�� ������ �Լ�
+    //사용이 끝난 맵을 오브젝트 풀에 반환할 때, 해당 맵 오브젝트를 비활성화
     private void OnReleaseMap(Map map)
     {
         map.gameObject.SetActive(false);
     }
 
-    // Ǯ���� ������Ʈ�� �ı��ϴ� �Լ�
+    //오브젝트 풀이 가득차거나 소멸될 때, 풀 안의 맵 오브젝트를 파괴
     private void OnDestroyMap(Map map)
     {
         Destroy(map.gameObject);
