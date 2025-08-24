@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
     //목표: 새로운 버프 적용하고, 만약 이미 같은 버프 있으면 기존 것 중지시키고 새로 시작해 시간 갱신
     public void ApplyBuff(BuffType buffType, float buffDuration, float adder, float multiplier)
     {
-        if (activeBuffs.ContainsKey(buffType)) //만약 같은 종류의버프가 이미 활성화되었다면
+        if (activeBuffs.ContainsKey(buffType) && activeBuffs[buffType] != null) //만약 같은 종류의버프가 이미 활성화되었다면, 그리고 그 코루틴이 null이 아니라면
         {
             //기존 버프의 코루틴 멈추기
             StopCoroutine(activeBuffs[buffType]);
