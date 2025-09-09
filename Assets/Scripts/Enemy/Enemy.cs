@@ -4,26 +4,27 @@ using UnityEngine.Pool;
 
 public class Enemy : MonoBehaviour
 {
-    // 체력
+
+    //포탑 데이터 들어있는 스크립터블 오브젝트
+    [Header("포탑 데이터 Scriptable Object")]
     [SerializeField]
-    private float hp;
+    private TurretSO turretSO;
+    
+    [Header("참조 변수")]
+    // 참조 변수
+    [SerializeField]
+    private GameObject bulletPrefab;
+    private GunController gun;
+    [SerializeField]
+    private LayerMask layer;
+
+    //현재 체력
     private float currentHp;
-    // 공격 속도
-    [SerializeField]
-    private float attackSpeed;
-    // 감지 범위
-    [SerializeField]
-    private float radius;
-    // 회전 속도
-    [SerializeField]
-    private float rotationSpeed;
-    //총알 속도
-    [SerializeField]
-    float speed;
 
     // 공격 방향
     Vector3 attackDirection;
 
+    [Header("터렛 부품 변수들")]
     // 터렛이 회전할 부위 (Rotation y 값)
     [SerializeField]
     private GameObject turretHead;
@@ -38,12 +39,6 @@ public class Enemy : MonoBehaviour
     // 상태 변수
     private bool isPlayerDetected;
 
-    // 참조 변수
-    [SerializeField]
-    private GameObject bulletPrefab;
-    private GunController gun;
-    [SerializeField]
-    private LayerMask layer;
 
     // 오브젝트 풀링 변수
     private IObjectPool<EnemyBullet> pool;
@@ -57,7 +52,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        currentHp = hp;
+        currentHp = turretSO.HP;
     }
 
     void Update()
@@ -77,7 +72,7 @@ public class Enemy : MonoBehaviour
     {
         isPlayerDetected = false;
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, turretSO.AttackRange);
 
         foreach (Collider col in colliders)
         {
@@ -95,7 +90,7 @@ public class Enemy : MonoBehaviour
     {
         attackDirection = (target.transform.position - turretHead.transform.position).normalized;
 
-        turretHead.transform.rotation = Quaternion.Lerp(turretHead.transform.rotation, Quaternion.LookRotation(attackDirection), rotationSpeed * Time.deltaTime);
+        turretHead.transform.rotation = Quaternion.Lerp(turretHead.transform.rotation, Quaternion.LookRotation(attackDirection), turretSO.TowerRotationSpeed * Time.deltaTime);
     }
 
     // 발사 시도
@@ -125,9 +120,9 @@ public class Enemy : MonoBehaviour
         {
             var bullet = pool.Get();
             bullet.transform.position = muzzle.position;
-            bullet.GetComponent<Rigidbody>().AddForce(attackDirection * speed, ForceMode.Impulse);
+            bullet.GetComponent<Rigidbody>().AddForce(attackDirection * turretSO.BulletSpeed, ForceMode.Impulse);
 
-            yield return new WaitForSeconds(attackSpeed);
+            yield return new WaitForSeconds(turretSO.AttackSpeed);
         }
     }
 

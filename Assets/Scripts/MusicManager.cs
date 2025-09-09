@@ -8,6 +8,12 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : Singleton<MusicManager>
 {
+    [Header("스크립터블 오브젝트")]
+    [Tooltip("게임매니저 데이터")]
+    [SerializeField]
+    private GameManagerSO gameManagerSO;
+
+    [Header("참조 변수")]
     [SerializeField]
     private AudioSource audioSource;
     [SerializeField]
@@ -59,7 +65,7 @@ public class MusicManager : Singleton<MusicManager>
     // BGM 재생(씬이 로드될 때마다 호출)
     void ChooseBGM(string sceneName)
     {
-        if (sceneName == gameManager.nameOfPlayScene)
+        if (sceneName == gameManagerSO.NameOfPlayScene)
         {
             if (gamePlayMusic != null) PlayLoopMusic(gamePlayMusic[0]);
         }

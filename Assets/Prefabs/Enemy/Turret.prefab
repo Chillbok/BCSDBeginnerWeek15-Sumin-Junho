@@ -355,18 +355,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379ca985b347b2a44b575033876ff714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 4
-  attackSpeed: 1.5
-  radius: 30
-  rotationSpeed: 5
-  speed: 0.5
-  turretHead: {fileID: 8191472077001266609}
-  muzzle: {fileID: 904206908919454927}
+  turretSO: {fileID: 11400000, guid: ff1e81af8a0cb544c8a37650f0383351, type: 2}
   bulletPrefab: {fileID: 6416110688088556407, guid: 0c38aa33a30ebfe478861cd2795f8e33, type: 3}
-  gun: {fileID: 0}
   layer:
     serializedVersion: 2
     m_Bits: 8
+  turretHead: {fileID: 8191472077001266609}
+  muzzle: {fileID: 904206908919454927}
 --- !u!1 &1000012338640140
 GameObject:
   m_ObjectHideFlags: 0

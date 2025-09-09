@@ -7,25 +7,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    //데이터 관리
-    public GameData gameData;
-
-    //게임 주요 씬들
-    [Header("게임 주요 씬들")]
-
-    [Tooltip("게임 타이틀 화면이 출력될 씬을 작성하세요")]
-    public string nameOfStartScene;
-
-    [Tooltip("게임 플레이 화면이 출력될 씬을 작성하세요")]
-    public string nameOfPlayScene;
-
-    [Tooltip("게임 결과 화면이 출력될 씬을 작성하세요")]
-    public string nameOfResultScene;
+    [Header("스크립터블 오브젝트")]
+    [Tooltip("게임 매니저 데이터")]
+    [SerializeField]
+    private GameManagerSO gameManagerSO;
 
     // 참조 변수
     private PlayerController player;
     private CountDownController countDown;
     private ScoreManager scoreManager;
+
+    //데이터 관리
+    public GameData gameData;
+
+    //게임 주요 씬들
+    [Tooltip("게임 결과 화면이 출력될 씬을 작성하세요")]
+    public string nameOfResultScene;
 
     [Header("플레이 점수")]
     [SerializeField]
@@ -44,6 +41,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject startBorder;
 
+    #region EventFunctions
     protected override void Awake()
     {
         base.Awake();
@@ -72,7 +70,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == nameOfPlayScene)
+        if (scene.name == gameManagerSO.NameOfPlayScene)
         {
             //씬 불러올 때 참조변수 할당
             player = FindObjectOfType<PlayerController>();
@@ -99,21 +97,6 @@ public class GameManager : Singleton<GameManager>
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    // 카운트 다운 시작
-    private IEnumerator StartCount()
-    {
-        countDown.ChangeTxt("3");
-        yield return new WaitForSeconds(1);
-        countDown.ChangeTxt("2");
-        yield return new WaitForSeconds(1);
-        countDown.ChangeTxt("1");
-        yield return new WaitForSeconds(1);
-        countDown.Deactive();
-        isPlay = true;
-        startBorder.SetActive(false);
-        yield return null;
     }
 
     void Update()
@@ -144,11 +127,27 @@ public class GameManager : Singleton<GameManager>
                 SaveGame.SaveData(gameData);
 
                 //게임 결과 씬 불러오기
-                SceneManager.LoadScene(nameOfResultScene);
+                SceneManager.LoadScene(gameManagerSO.NameOfResultScene);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
         }
+    }
+    #endregion EventFunctions
+
+    // 카운트 다운 시작
+    private IEnumerator StartCount()
+    {
+        countDown.ChangeTxt("3");
+        yield return new WaitForSeconds(1);
+        countDown.ChangeTxt("2");
+        yield return new WaitForSeconds(1);
+        countDown.ChangeTxt("1");
+        yield return new WaitForSeconds(1);
+        countDown.Deactive();
+        isPlay = true;
+        startBorder.SetActive(false);
+        yield return null;
     }
 
     //Get 메서드 모음

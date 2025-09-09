@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 public class SettingManager : Singleton<SettingManager>
 {
+    [Header("스크립터블 오브젝트")]
+    [Tooltip("게임매니저 데이터")]
+    [SerializeField]
+    GameManagerSO gameManagerSO;
+
     [Header("음성 설정을 위한 오브젝트들")]
     [SerializeField] GameObject sfxManager;
     [SerializeField] GameObject bgmManager;
@@ -42,7 +47,7 @@ public class SettingManager : Singleton<SettingManager>
         SetSceneName(scene);
 
         //플레이어 컨트롤러가 인스펙터에서 비어있는 경우
-        if (gameManager != null && sceneName == gameManager.nameOfPlayScene && playerController == null)
+        if (gameManager != null && sceneName == gameManagerSO.NameOfPlayScene && playerController == null)
         {
             FindPlayerController();
         }
@@ -51,7 +56,7 @@ public class SettingManager : Singleton<SettingManager>
     //플레이어가 없는 경우, 플레이어를 찾아 배정하는 메서드
     void FindPlayerController()
     {
-        if (gameManager != null && sceneName != gameManager.nameOfPlayScene)
+        if (gameManager != null && sceneName != gameManagerSO.NameOfPlayScene)
         {
             Debug.Log("Player가 존재하지 않습니다");
         }

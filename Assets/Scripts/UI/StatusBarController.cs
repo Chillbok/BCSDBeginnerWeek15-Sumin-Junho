@@ -8,7 +8,7 @@ public class StatusBarController : MonoBehaviour
 	[Header("플레이어 데이터")]
 	[Tooltip("Player Data 삽입")]
 	[SerializeField]
-	private PlayerData playerData;
+	private PlayerSO playerData;
 
 	// HP 관련 변수
 	[SerializeField]
