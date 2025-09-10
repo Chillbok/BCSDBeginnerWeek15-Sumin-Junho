@@ -15,5 +15,5 @@ MonoBehaviour:
   _hp: 4
   _attackSpeed: 1.5
   _towerRotationSpeed: 5
-  _bulletSpeed: 5
+  _bulletSpeed: 1.5
   _attackRange: 30
