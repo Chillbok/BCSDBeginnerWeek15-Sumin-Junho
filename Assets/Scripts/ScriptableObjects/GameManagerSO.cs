@@ -18,6 +18,6 @@ public class GameManagerSO : ScriptableObject
     [Tooltip("타이틀 화면 씬 이름")]
     [SerializeField]
     private string _nameOfResultScene;
-    public string NameOfResultScene { get { return _nameOfTitleScene; } }
+    public string NameOfResultScene { get { return _nameOfResultScene; } }
 
 }
