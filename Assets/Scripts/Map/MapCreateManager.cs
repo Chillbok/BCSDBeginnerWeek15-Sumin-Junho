@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class MapCreateManager : Singleton<MapCreateManager>
 {
-    // ������Ʈ Ǯ�� ����
+    // 오브젝트 풀링 풀
     private IObjectPool<Map> pool;
 
     [Header("스크립터블 오브젝트")]
@@ -13,8 +13,7 @@ public class MapCreateManager : Singleton<MapCreateManager>
     [SerializeField]
     private GameManagerSO gameManagerSO;
 
-    // �� ������
-    [Header("��")]
+    [Header("맵")]
     [SerializeField]
     private GameObject[] mapPrefab;
 
@@ -49,7 +48,7 @@ public class MapCreateManager : Singleton<MapCreateManager>
     //오브젝트 풀에 생성된 맵이 없을 경우, 새로운 맵 프리팹을 랜덤으로 생성해 풀에 제공
     private Map CreatingMap()
     {
-        // ������ �� ����
+        // 랜덤한 맵 생성
         Map map = Instantiate(mapPrefab[Random.Range(0, mapPrefab.Length)]).GetComponent<Map>();
         map.SetManagedPool(pool);
         return map;
@@ -59,6 +58,8 @@ public class MapCreateManager : Singleton<MapCreateManager>
     private void OnGetMap(Map map)
     {
         map.gameObject.SetActive(true);
+        // 활성화가 필요한 오브젝트들 활성화
+        map.Initialize();
         //비활성화된 오브젝트 중에서도 찾을 수 있도록 true로 수정
         map.GetComponentInChildren<MapTrigger>(true).gameObject.SetActive(true);
     }
