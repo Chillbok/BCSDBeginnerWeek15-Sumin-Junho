@@ -2006,7 +2006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fcc348e797ed34bbc7d94d0673db2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: a7b33bf43dab96b4f9f8d421a8107d54, type: 2}
+  playerData: {fileID: 11400000, guid: 497d80f4424724a3ea3cebc7c20ec8ce, type: 2}
   HpBar: {fileID: 660441573}
   HpText: {fileID: 132552316}
   SpBar: {fileID: 1413464422}
@@ -3324,7 +3324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c082305c507c34397c1ce7a383b0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: a7b33bf43dab96b4f9f8d421a8107d54, type: 2}
+  playerData: {fileID: 11400000, guid: 497d80f4424724a3ea3cebc7c20ec8ce, type: 2}
   playerRb: {fileID: 1135766426}
   playerCol: {fileID: 1135766425}
   theCamera: {fileID: 862106309}
@@ -3378,7 +3378,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135766422}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
