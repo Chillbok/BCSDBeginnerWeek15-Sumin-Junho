@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Pool;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class Enemy : MonoBehaviour
     // 참조 변수
     [SerializeField]
     private GameObject bulletPrefab;
+    [SerializeField]
+    private TextMeshProUGUI scoreTxt;
     private GunController gun;
     [SerializeField]
     private LayerMask layer;
@@ -33,11 +37,16 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Transform muzzle;
 
+    // 터렛
+    [SerializeField]
+    private GameObject turret;
+
     // 중복 발사 방지용 코루틴 변수
     private Coroutine fire_coroutine;
 
     // 상태 변수
     private bool isPlayerDetected;
+    private bool flag; // 중복 죽음 방지
 
 
     // 오브젝트 풀링 변수
@@ -53,6 +62,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         currentHp = turretSO.HP;
+        flag = true;
     }
 
     void Update()
@@ -60,11 +70,10 @@ public class Enemy : MonoBehaviour
         DetectPlayer();
         TryFire();
 
-        if (CheckDead())
+        if (CheckDead() && flag)
         {
-            gun.leftBulletCount += 10;
-            GameManager.Instance.GetComponent<ScoreManager>().AddScore(250);
-            Destroy(gameObject);
+            StartCoroutine(Dead());
+            flag = false;
         }
     }
 
@@ -97,7 +106,7 @@ public class Enemy : MonoBehaviour
     // 발사 시도
     private void TryFire()
     {
-        if (isPlayerDetected)
+        if (isPlayerDetected && turret.activeSelf)
         {
             if (fire_coroutine == null)
             {
@@ -127,12 +136,31 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // 죽음 감지
     private bool CheckDead()
     {
         if (currentHp > 0)
             return false;
         else
             return true;
+    }
+
+    // 죽음
+    private IEnumerator Dead()
+    {
+        gun.leftBulletCount += 10;
+        turret.SetActive(false);
+
+        GameManager.Instance.GetComponent<ScoreManager>().AddScore(250);
+        scoreTxt.gameObject.SetActive(true);
+        scoreTxt.gameObject.transform.rotation = Quaternion.LookRotation(-attackDirection);
+
+        yield return new WaitForSeconds(1f);
+
+        turret.SetActive(true);
+        scoreTxt.gameObject.SetActive(false);
+        gameObject.SetActive(false);
+
     }
 
     // 공격 방향 가져오기
