@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79765574fd47ac449abf270fb33a8c87, type: 3}
   m_Name: TurretScriptableObject
   m_EditorClassIdentifier: 
-  _hp: 4
+  _hp: 3
   _attackSpeed: 1.5
   _towerRotationSpeed: 5
-  _bulletSpeed: 1.5
+  _bulletSpeed: 1.25
   _attackRange: 30
