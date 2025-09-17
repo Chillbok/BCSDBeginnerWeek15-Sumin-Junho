@@ -5874,7 +5874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   borderSpeed: 1.5
-  speedIncreaseRate: 0.25
+  speedIncreaseRate: 0.125
   player: {fileID: 1135766423}
 --- !u!65 &1767417069
 BoxCollider:
