@@ -63,6 +63,7 @@ public class Enemy : MonoBehaviour
         if (CheckDead())
         {
             gun.leftBulletCount += 10;
+            GameManager.Instance.GetComponent<ScoreManager>().AddScore(250);
             Destroy(gameObject);
         }
     }
