@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerScriptableObject
   m_EditorClassIdentifier: 
   _playerMaxHP: 100
-  _playerMaxSP: 5
-  _playerSpCooldown: 3
-  _playerWalkSpeed: 10
-  _playerRunSpeed: 15
+  _playerMaxSP: 6
+  _playerSpCooldown: 2
+  _playerWalkSpeed: 7
+  _playerRunSpeed: 14
   _playerJumpForce: 5.5
   _playerCameraRotationLimit: 80
