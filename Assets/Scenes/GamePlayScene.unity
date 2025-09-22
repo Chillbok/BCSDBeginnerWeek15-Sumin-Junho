@@ -1202,6 +1202,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9040954717213113755, guid: 80c20457b6f9bab449d3fe40cfa75f9d, type: 3}
+      propertyPath: gameData.sfxVolume
+      value: 80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2006,7 +2010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fcc348e797ed34bbc7d94d0673db2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 497d80f4424724a3ea3cebc7c20ec8ce, type: 2}
+  playerData: {fileID: 11400000, guid: 3f458fd49ec22434ba532424f0ceef73, type: 2}
   HpBar: {fileID: 660441573}
   HpText: {fileID: 132552316}
   SpBar: {fileID: 1413464422}
@@ -3324,7 +3328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c082305c507c34397c1ce7a383b0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 497d80f4424724a3ea3cebc7c20ec8ce, type: 2}
+  playerData: {fileID: 11400000, guid: 3f458fd49ec22434ba532424f0ceef73, type: 2}
   playerRb: {fileID: 1135766426}
   playerCol: {fileID: 1135766425}
   theCamera: {fileID: 862106309}
@@ -5873,8 +5877,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9c3f7ee9cc23a41a778a1251131fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  borderSpeed: 8
-  speedIncreaseRate: 0
+  borderSpeed: 7.5
+  speedIncreaseRate: 0.01
   player: {fileID: 1135766423}
 --- !u!65 &1767417069
 BoxCollider:
